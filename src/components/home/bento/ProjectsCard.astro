@@ -1,0 +1,198 @@
+---
+import { Code, ExternalLink, X } from "lucide-react";
+import { projects } from "../../../data/projectData.js";
+
+const featured = projects.slice(0, 3);
+const categories = [
+  "all",
+  ...Array.from(
+    new Set(projects.map((project) => project.category).filter(Boolean)),
+  ),
+];
+---
+
+<div class="space-y-5">
+  {
+    featured.map((project) => (
+      <article>
+        <h3 class="text-base font-black text-[var(--app-accent)]">
+          {project.title}
+        </h3>
+        <p class="mt-1 line-clamp-2 text-sm leading-snug text-[var(--app-text-muted)]">
+          {project.description}
+        </p>
+        <p class="mt-1 text-xs text-[var(--app-text-soft)]">
+          {project.technologies.slice(0, 4).join(" / ")}
+        </p>
+      </article>
+    ))
+  }
+  <button
+    type="button"
+    data-open-projects
+    class="text-link"
+    aria-haspopup="dialog"
+    aria-controls="projects-modal"
+  >
+    View all projects
+  </button>
+</div>
+
+<dialog
+  id="projects-modal"
+  class="modal-shell"
+  aria-labelledby="projects-modal-title"
+  aria-describedby="projects-modal-description"
+>
+  <div class="modal-header">
+    <div class="min-w-0 flex-1">
+      <h2 id="projects-modal-title" class="modal-title">Projects</h2>
+      <p id="projects-modal-description" class="modal-description">
+        Filter the portfolio by project category.
+      </p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {
+          categories.map((category) => (
+            <button
+              type="button"
+              data-project-filter={category}
+              class="modal-filter"
+              data-active={category === "all" ? "true" : "false"}
+            >
+              {category}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+    <button
+      type="button"
+      data-close-projects
+      class="icon-button"
+      aria-label="Close projects modal"
+    >
+      <X aria-hidden="true" className="h-4 w-4" />
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="grid gap-3 md:grid-cols-2">
+      {
+        projects.map((project) => (
+          <article
+            data-project-card
+            data-category={project.category}
+            class="modal-card"
+          >
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              loading="lazy"
+              class="h-32 w-full object-cover"
+            />
+            <div class="space-y-3 p-4">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-wide text-[var(--app-accent)]">
+                  {project.category}
+                </p>
+                <h3 class="mt-1 text-base font-black text-[var(--app-text)]">
+                  {project.title}
+                </h3>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--app-text-muted)]">
+                {project.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span class="tag">{tech}</span>
+                ))}
+              </div>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="modal-action modal-action--primary"
+                >
+                  <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                  Demo
+                </a>
+                <a
+                  href={project.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="modal-action"
+                >
+                  <Code aria-hidden="true" className="h-4 w-4" />
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const projectsModal = document.getElementById("projects-modal");
+  const openProjectsButton = document.querySelector("[data-open-projects]");
+  const closeProjectsButton = document.querySelector("[data-close-projects]");
+  const filterButtons = Array.from(
+    document.querySelectorAll("[data-project-filter]"),
+  );
+  const projectCards = Array.from(
+    document.querySelectorAll("[data-project-card]"),
+  );
+  let projectsTrigger: HTMLElement | null = null;
+
+  openProjectsButton?.addEventListener("click", (event) => {
+    if (projectsModal instanceof HTMLDialogElement) {
+      projectsTrigger =
+        event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
+      document.documentElement.classList.add("modal-open");
+      projectsModal.showModal();
+      closeProjectsButton instanceof HTMLElement && closeProjectsButton.focus();
+    }
+  });
+
+  closeProjectsButton?.addEventListener("click", () => {
+    if (projectsModal instanceof HTMLDialogElement) {
+      projectsModal.close();
+    }
+  });
+
+  projectsModal?.addEventListener("click", (event) => {
+    if (
+      event.target === projectsModal &&
+      projectsModal instanceof HTMLDialogElement
+    ) {
+      projectsModal.close();
+    }
+  });
+
+  projectsModal?.addEventListener("close", () => {
+    document.documentElement.classList.remove("modal-open");
+    projectsTrigger?.focus();
+    projectsTrigger = null;
+  });
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = button.getAttribute("data-project-filter") || "all";
+
+      filterButtons.forEach((item) => {
+        item.setAttribute("data-active", item === button ? "true" : "false");
+      });
+
+      projectCards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+        card.classList.toggle(
+          "hidden",
+          selected !== "all" && category !== selected,
+        );
+      });
+    });
+  });
+</script>

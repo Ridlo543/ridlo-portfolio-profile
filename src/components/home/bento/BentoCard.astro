@@ -1,0 +1,20 @@
+---
+interface Props {
+  title?: string;
+  span?: string;
+  className?: string;
+}
+
+const {
+  title,
+  span = "md:col-span-1 lg:col-span-3",
+  className = "",
+} = Astro.props;
+---
+
+<section class={`bento-card p-5 ${span} ${className}`}>
+  <div class="relative z-10 h-full">
+    {title && <h2 class="bento-card-title">{title}</h2>}
+    <slot />
+  </div>
+</section>

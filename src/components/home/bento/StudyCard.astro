@@ -1,0 +1,13 @@
+---
+const certificates = [
+  "Astro Portfolio Template",
+  "Frontend Engineering",
+  "Full-Stack Foundations",
+  "Accessible UI",
+  "Product Delivery",
+];
+---
+
+<div class="flex h-full flex-wrap content-center justify-center gap-2">
+  {certificates.map((certificate) => <span class="tag">{certificate}</span>)}
+</div>

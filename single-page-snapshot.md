@@ -1,0 +1,61 @@
+- main [ref=e2] [box=0,0,375,3320]:
+  - generic [ref=e3] [box=12,12,351,3296]:
+    - generic [ref=e6] [box=33,33,309,518]:
+      - generic [ref=e7] [box=33,33,309,318]:
+        - paragraph [ref=e8] [box=33,33,309,28]
+        - list [ref=e10] [box=33,81,309,206]
+        - generic [ref=e15] [box=33,311,309,40]
+      - img "Template profile portrait" [ref=e28] [box=99,375,176,176]
+    - generic [ref=e30] [box=33,604,309,581]:
+      - heading "About me" [level=2] [ref=e31] [box=33,604,309,28]
+      - generic [ref=e32] [box=33,648,309,537]:
+        - paragraph [ref=e33] [box=33,648,309,23]: Build, learn, ship, and improve.
+        - paragraph [ref=e34] [box=33,687,309,46]: I enjoy turning product ideas into clean web experiences and practical software systems.
+        - paragraph [ref=e35] [box=33,748,309,68]: "Use this card to summarize your strongest value: how you think, what you build, and how you help teams move from idea to working product."
+        - generic [ref=e36] [box=33,833,309,304]
+        - paragraph [ref=e49] [box=33,1153,309,32]: Use the project and experience cards to open focused modal views without leaving this page.
+    - generic [ref=e51] [box=33,1238,309,388]:
+      - heading "Projects" [level=2] [ref=e52] [box=33,1238,309,28]
+      - generic [ref=e53] [box=33,1282,309,344]:
+        - article [ref=e54] [box=33,1282,309,87]
+        - article [ref=e58] [box=33,1389,309,87]
+        - article [ref=e62] [box=33,1495,309,87]
+        - button "View all projects" [ref=e67] [box=33,1604,108,20]
+    - generic [ref=e69] [box=33,1679,309,136]:
+      - heading "Your time" [level=2] [ref=e70] [box=33,1679,309,28]
+      - generic [ref=e71] [box=33,1723,309,92]:
+        - paragraph [ref=e72] [box=33,1723,309,20]: Local time
+        - paragraph [ref=e73] [box=33,1755,309,32]: 01:21:01
+        - paragraph [ref=e74] [box=33,1799,309,16]: Your browser timezone
+    - generic [ref=e76] [box=33,1868,309,136]:
+      - heading "Portfolio time" [level=2] [ref=e77] [box=33,1868,309,28]
+      - generic [ref=e78] [box=33,1912,309,92]:
+        - paragraph [ref=e79] [box=33,1912,309,20]: Jakarta time
+        - paragraph [ref=e80] [box=33,1944,309,32]: 01:21:01
+        - paragraph [ref=e81] [box=33,1988,309,16]: Asia/Jakarta
+    - blockquote [ref=e85] [box=33,2058,309,68]: “Good software starts with clear problems, thoughtful constraints, and a bias toward shipping.”
+    - generic [ref=e87] [box=33,2179,309,169]:
+      - heading "Education and Certificates" [level=2] [ref=e88] [box=33,2179,309,28]
+      - generic [ref=e89] [box=33,2223,309,169]:
+        - generic [ref=e90] [box=105,2245,165,25]: Astro Portfolio Template
+        - generic [ref=e91] [box=114,2278,148,25]: Frontend Engineering
+        - generic [ref=e92] [box=57,2312,154,25]: Full-Stack Foundations
+        - generic [ref=e93] [box=219,2312,99,25]: Accessible UI
+        - generic [ref=e94] [box=127,2345,120,25]: Product Delivery
+    - generic [ref=e96] [box=33,2402,309,420]:
+      - heading "Experiences" [level=2] [ref=e97] [box=33,2402,309,28]
+      - generic [ref=e98] [box=33,2446,309,376]:
+        - article [ref=e99] [box=33,2446,309,104]
+        - article [ref=e103] [box=33,2570,309,104]
+        - article [ref=e107] [box=33,2694,309,84]
+        - button "View full experience" [ref=e112] [box=33,2800,133,20]
+    - generic [ref=e114] [box=33,2875,309,222]:
+      - heading "Field Notes" [level=2] [ref=e115] [box=33,2875,309,28]
+      - generic [ref=e116] [box=33,2919,309,178]:
+        - paragraph [ref=e117] [box=33,2919,309,46]: Placeholder notes for writing, reading, or learning highlights.
+        - list [ref=e118] [box=33,2981,309,116]
+    - generic [ref=e123] [box=33,3150,309,137]:
+      - heading "Contact" [level=2] [ref=e124] [box=33,3150,309,28]
+      - generic [ref=e125] [box=33,3194,309,137]:
+        - paragraph [ref=e126] [box=33,3216,309,40]: Reach out for collaboration, freelance work, or to adapt this template into a personal portfolio.
+        - generic [ref=e127] [box=33,3272,309,37]

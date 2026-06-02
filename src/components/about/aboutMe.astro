@@ -1,0 +1,46 @@
+---
+import profilePhoto from "../../assets/img/profile-photo.png";
+---
+
+<!-- Main container -->
+<div
+  class="mx-auto mt-20 flex max-w-6xl flex-col items-center gap-8 px-6 lg:flex-row "
+>
+  <!-- Image -->
+  <div
+    class="border-primary h-64 w-64 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-96 drop-shadow-[4px_4px_0_#7836cf]"
+  >
+    <img
+      src={profilePhoto.src}
+      alt="Template profile portrait"
+      class="h-full w-full object-cover"
+    />
+  </div>
+
+  <!-- Text -->
+  <div class="flex-1 text-center text-gray-300 lg:text-left">
+    <h2 class="text-3xl font-bold text-white">
+      Meet <span class="text-white text-shadow">Alex Developer</span>
+    </h2>
+    <p class="mt-4">
+      This portfolio template is written for a full-stack software developer
+      with a focus on <span class="text-primary font-semibold"
+        >front-end engineering</span
+      > and
+      <span class="text-primary font-semibold">user experience</span>. Use this
+      space to describe how you connect interfaces, business logic, APIs, and
+      databases to ship useful products.
+    </p>
+    <p class="mt-2">
+      Replace this paragraph with your background. Mention the moment you became
+      interested in <span class="text-primary font-semibold">technology</span>,
+      the tools you learned first, and the kind of
+      <span class="text-primary font-semibold">software problems</span> you
+      enjoy solving.
+    </p>
+    <p class="mt-2">
+      Close with your current goals, preferred collaboration style, and the
+      value you bring to a team. Keep it specific, honest, and easy to scan.
+    </p>
+  </div>
+</div>

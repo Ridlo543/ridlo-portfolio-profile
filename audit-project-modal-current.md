@@ -1,0 +1,61 @@
+- dialog [ref=e158] [box=0,0,1100,768]:
+  - generic [ref=e159] [box=1,1,1099,767]:
+    - generic [ref=e160] [box=1,1,1099,85]:
+      - generic [ref=e161] [box=17,17,238,52]:
+        - heading "Projects" [level=2] [ref=e162] [box=17,17,238,28]
+        - paragraph [ref=e163] [box=17,49,238,20]: Filter the portfolio by project category.
+      - button "Close projects modal" [active] [ref=e164] [box=1047,17,36,36]: X
+    - generic [ref=e166] [box=17,97,1067,25]:
+      - button "all" [ref=e167] [box=17,97,41,25]
+      - button "fullstack" [ref=e168] [box=65,97,75,25]
+      - button "frontend" [ref=e169] [box=148,97,77,25]
+      - button "backend" [ref=e170] [box=233,97,73,25]
+    - generic [ref=e172] [box=17,-2444,1051,3196]:
+      - article [ref=e173] [box=17,-2444,518,386]:
+        - img "Commerce Platform preview" [ref=e174] [box=17,-2443,516,160]
+        - generic [ref=e175] [box=17,-2283,516,224]
+      - article [ref=e188] [box=550,-2444,518,386]:
+        - img "React Storefront preview" [ref=e189] [box=551,-2443,516,160]
+        - generic [ref=e190] [box=551,-2283,516,224]
+      - article [ref=e203] [box=17,-2042,518,386]:
+        - img "Productivity Dashboard preview" [ref=e204] [box=17,-2042,516,160]
+        - generic [ref=e205] [box=17,-1882,516,224]
+      - article [ref=e218] [box=550,-2042,518,386]:
+        - img "AI Chat Interface preview" [ref=e219] [box=551,-2042,516,160]
+        - generic [ref=e220] [box=551,-1882,516,224]
+      - article [ref=e233] [box=17,-1641,518,386]:
+        - img "Astro Ecommerce preview" [ref=e234] [box=17,-1640,516,160]
+        - generic [ref=e235] [box=17,-1480,516,224]
+      - article [ref=e248] [box=550,-1641,518,386]:
+        - img "Task Board App preview" [ref=e249] [box=551,-1640,516,160]
+        - generic [ref=e250] [box=551,-1480,516,224]
+      - article [ref=e263] [box=17,-1239,518,386]:
+        - img "CV Builder preview" [ref=e264] [box=17,-1239,516,160]
+        - generic [ref=e265] [box=17,-1079,516,224]
+      - article [ref=e278] [box=550,-1239,518,386]:
+        - img "Urban Shop Concept preview" [ref=e279] [box=551,-1239,516,160]
+        - generic [ref=e280] [box=551,-1079,516,224]
+      - article [ref=e292] [box=17,-838,518,386]:
+        - img "Developer Portfolio preview" [ref=e293] [box=17,-837,516,160]
+        - generic [ref=e294] [box=17,-677,516,224]
+      - article [ref=e306] [box=550,-838,518,386]:
+        - img "Service Landing Page preview" [ref=e307] [box=551,-837,516,160]
+        - generic [ref=e308] [box=551,-677,516,224]
+      - article [ref=e320] [box=17,-436,518,386]:
+        - img "Healthcare Landing Page preview" [ref=e321] [box=17,-436,516,160]
+        - generic [ref=e322] [box=17,-276,516,224]
+      - article [ref=e334] [box=550,-436,518,386]:
+        - img "Fitness Landing Page preview" [ref=e335] [box=551,-436,516,160]
+        - generic [ref=e336] [box=551,-276,516,224]
+      - article [ref=e348] [box=17,-35,518,386]:
+        - img "Commerce REST API preview" [ref=e349] [box=17,-34,516,160]
+        - generic [ref=e350] [box=17,126,516,224]
+      - article [ref=e363] [box=550,-35,518,386]:
+        - img "AI Chat API preview" [ref=e364] [box=551,-34,516,160]
+        - generic [ref=e365] [box=551,126,516,224]
+      - article [ref=e378] [box=17,367,518,386]:
+        - img "Planning App preview" [ref=e379] [box=17,367,516,160]
+        - generic [ref=e380] [box=17,527,516,224]
+      - article [ref=e393] [box=550,367,518,386]:
+        - img "Startup Challenge Page preview" [ref=e394] [box=551,367,516,160]
+        - generic [ref=e395] [box=551,527,516,224]

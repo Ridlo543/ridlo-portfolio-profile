@@ -1,0 +1,36 @@
+---
+interface Props {
+  timezone?: string;
+  label: string;
+  helper: string;
+}
+
+const { timezone, label, helper } = Astro.props;
+const id = `time-${Math.random().toString(36).slice(2)}`;
+---
+
+<div class="space-y-3">
+  <p class="text-sm font-bold text-[var(--app-text)]">{label}</p>
+  <p id={id} class="font-mono text-2xl text-[var(--app-text)]">--:--:--</p>
+  <p class="text-xs text-[var(--app-text-soft)]">{helper}</p>
+</div>
+
+<script is:inline define:vars={{ id, timezone }}>
+  function updateTime() {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+      timeZone: timezone || undefined,
+    });
+
+    target.textContent = formatter.format(new Date());
+  }
+
+  updateTime();
+  setInterval(updateTime, 1000);
+</script>

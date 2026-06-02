@@ -1,0 +1,62 @@
+---
+import { Monitor, Moon, Sun } from "lucide-react";
+---
+
+<button
+  type="button"
+  class="icon-button theme-toggle"
+  data-theme-toggle
+  aria-label="Theme: system"
+  title="Theme: system"
+>
+  <Monitor aria-hidden="true" className="theme-icon theme-icon-system" />
+  <Sun aria-hidden="true" className="theme-icon theme-icon-light" />
+  <Moon aria-hidden="true" className="theme-icon theme-icon-dark" />
+</button>
+
+<script>
+  const storageKey = "portfolio-theme";
+  const modes = ["system", "light", "dark"];
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const button = document.querySelector("[data-theme-toggle]");
+
+  function getStoredMode() {
+    const stored = localStorage.getItem(storageKey);
+    return stored && modes.includes(stored) ? stored : "system";
+  }
+
+  function resolveTheme(mode: string) {
+    if (mode === "light" || mode === "dark") return mode;
+    return mediaQuery.matches ? "dark" : "light";
+  }
+
+  function applyTheme(mode: string) {
+    const theme = resolveTheme(mode);
+    const root = document.documentElement;
+
+    root.dataset.themeMode = mode;
+    root.dataset.theme = theme;
+    root.classList.toggle("dark", theme === "dark");
+    root.classList.toggle("light", theme === "light");
+
+    button?.setAttribute("data-theme-mode", mode);
+    button?.setAttribute("aria-label", `Theme: ${mode}`);
+    button?.setAttribute("title", `Theme: ${mode}`);
+  }
+
+  button?.addEventListener("click", () => {
+    const currentMode = getStoredMode();
+    const nextMode =
+      modes[(modes.indexOf(currentMode) + 1) % modes.length] || "system";
+    localStorage.setItem(storageKey, nextMode);
+    applyTheme(nextMode);
+  });
+
+  mediaQuery.addEventListener("change", () => {
+    if (getStoredMode() === "system") {
+      applyTheme("system");
+    }
+  });
+
+  applyTheme(getStoredMode());
+</script>

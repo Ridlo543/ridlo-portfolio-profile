@@ -1,0 +1,59 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/commons/navbar/navbar.astro";
+import Footer from "../components/commons/footer/footer.astro";
+
+const {
+  title = "Developer Portfolio Template",
+  description = "A modern portfolio template built with Astro, React, and Tailwind CSS.",
+  showChrome = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <script is:inline>
+      (() => {
+        const storageKey = "portfolio-theme";
+        const modes = ["system", "light", "dark"];
+
+        const getStoredMode = () => {
+          try {
+            const stored = localStorage.getItem(storageKey);
+            return modes.includes(stored) ? stored : "system";
+          } catch {
+            return "system";
+          }
+        };
+
+        const getResolvedTheme = (mode) => {
+          if (mode === "light" || mode === "dark") return mode;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        };
+
+        const mode = getStoredMode();
+        const theme = getResolvedTheme(mode);
+        const root = document.documentElement;
+
+        root.dataset.themeMode = mode;
+        root.dataset.theme = theme;
+        root.classList.toggle("dark", theme === "dark");
+        root.classList.toggle("light", theme === "light");
+      })();
+    </script>
+    <title>{title}</title>
+  </head>
+  <body class="bg-[var(--app-bg)] text-[var(--app-text)]">
+    {showChrome && <Navbar />}
+    <slot />
+    {showChrome && <Footer />}
+  </body>
+</html>

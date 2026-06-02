@@ -1,0 +1,79 @@
+---
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { HiOutlineMail } from "react-icons/hi";
+import profilePhoto from "../../../assets/img/profile-photo.png";
+import ThemeSwitch from "./ThemeSwitch.astro";
+
+const socials = [
+  {
+    label: "GitHub",
+    href: "https://github.com/Lautaro-R-collins",
+    icon: FaGithub,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/lautaro-rodr%C3%ADguez-collins-40505624a/",
+    icon: FaLinkedinIn,
+  },
+  {
+    label: "Twitter",
+    href: "https://x.com/lautarodevelops/",
+    icon: FaXTwitter,
+  },
+  { label: "Email", href: "mailto:hello@example.com", icon: HiOutlineMail },
+];
+---
+
+<div class="flex h-full flex-col gap-6">
+  <div class="flex items-start justify-between gap-4">
+    <p class="text-xl font-light text-[var(--app-text)]">
+      Hi, I am <strong class="font-black text-[var(--app-accent)]"
+        >Alex Developer</strong
+      >.
+    </p>
+    <ThemeSwitch />
+  </div>
+
+  <div
+    class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="max-w-2xl">
+      <ul
+        class="mt-5 space-y-2 text-sm font-semibold leading-relaxed text-[var(--app-text-muted)]"
+      >
+        <li>Software engineer focused on useful, maintainable web products.</li>
+        <li>
+          Frontend, backend, product thinking, and accessible interface craft.
+        </li>
+        <li>
+          Template-ready portfolio built with Astro, React, and Tailwind CSS.
+        </li>
+        <li>
+          Open to client work, product teams, and practical collaboration.
+        </li>
+      </ul>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        {
+          socials.map(({ label, href, icon: Icon }) => (
+            <a
+              href={href}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              aria-label={label}
+              class="icon-button"
+            >
+              <Icon className="h-5 w-5" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <img
+      src={profilePhoto.src}
+      alt="Template profile portrait"
+      class="mx-auto h-44 w-44 shrink-0 rounded-lg border border-[var(--app-border)] object-cover md:mx-0 md:h-52 md:w-52"
+    />
+  </div>
+</div>
