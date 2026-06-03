@@ -1,0 +1,108 @@
+---
+import {
+  SiAndroid,
+  SiAstro,
+  SiFilament,
+  SiFlask,
+  SiGithub,
+  SiGithubpages,
+  SiGooglecloud,
+  SiJavascript,
+  SiJetpackcompose,
+  SiJupyter,
+  SiKotlin,
+  SiLaravel,
+  SiMysql,
+  SiNextdotjs,
+  SiPandas,
+  SiPhp,
+  SiPostgresql,
+  SiPrisma,
+  SiPython,
+  SiReact,
+  SiStreamlit,
+  SiTailwindcss,
+  SiTensorflow,
+  SiTypescript,
+  SiVuedotjs,
+  SiWhatsapp,
+  SiYolo,
+} from "react-icons/si";
+import { Braces, FlaskConical } from "lucide-react";
+
+const technologies = [
+  { label: "Laravel", icon: SiLaravel, color: "#e32917" },
+  { label: "PHP", icon: SiPhp, color: "#777bb4" },
+  { label: "MySQL", icon: SiMysql, color: "#4479a1" },
+  { label: "Filament", icon: SiFilament, color: "#f59e0b" },
+  { label: "REST API", icon: Braces, color: "#0f766e" },
+  { label: "Feature Testing", icon: FlaskConical, color: "#7c3aed" },
+  { label: "WhatsApp API", icon: SiWhatsapp, color: "#128c7e" },
+  { label: "React", icon: SiReact, color: "#087ea4" },
+  { label: "Vue.js", icon: SiVuedotjs, color: "#42b883" },
+  { label: "Next.js", icon: SiNextdotjs, color: "var(--app-text)" },
+  { label: "TypeScript", icon: SiTypescript, color: "#3178c6" },
+  { label: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+  { label: "Astro", icon: SiAstro, color: "#bc52ee" },
+  { label: "Tailwind CSS", icon: SiTailwindcss, color: "#0f766e" },
+  { label: "Python", icon: SiPython, color: "#3776ab" },
+  { label: "TensorFlow", icon: SiTensorflow, color: "#ff6f00" },
+  { label: "YOLO", icon: SiYolo, color: "#00d1d1" },
+  { label: "Flask API", icon: SiFlask, color: "var(--app-text)" },
+  { label: "Vertex AI", icon: SiGooglecloud, color: "#4285f4" },
+  { label: "Kotlin", icon: SiKotlin, color: "#7f52ff" },
+  { label: "Android", icon: SiAndroid, color: "#3ddc84" },
+  { label: "Jetpack Compose", icon: SiJetpackcompose, color: "#4285f4" },
+  { label: "Prisma", icon: SiPrisma, color: "var(--app-text)" },
+  { label: "PostgreSQL", icon: SiPostgresql, color: "#4169e1" },
+  { label: "Streamlit", icon: SiStreamlit, color: "#d92626" },
+  { label: "Pandas", icon: SiPandas, color: "#150458" },
+  { label: "Jupyter", icon: SiJupyter, color: "#f37626" },
+  { label: "GitHub", icon: SiGithub, color: "var(--app-text)" },
+  { label: "GitHub Pages", icon: SiGithubpages, color: "var(--app-text)" },
+];
+
+const technologyRows = [
+  technologies.filter((_, index) => index % 2 === 0),
+  technologies.filter((_, index) => index % 2 === 1),
+];
+---
+
+<div class="technology-rail" aria-label="Technology stack">
+  {
+    technologyRows.map((row, rowIndex) => (
+      <div
+        class:list={[
+          "technology-row",
+          rowIndex === 1 && "technology-row--offset",
+        ]}
+      >
+        <div class="technology-track">
+          <div class="technology-set">
+            {row.map(({ label, icon: Icon, color }) => (
+              <div
+                class="technology-tile"
+                style={`--technology-color: ${color}`}
+              >
+                <Icon aria-hidden="true" className="technology-icon" />
+                <span class="technology-label">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="technology-set" aria-hidden="true">
+            {row.map(({ label, icon: Icon, color }) => (
+              <div
+                class="technology-tile technology-tile--clone"
+                style={`--technology-color: ${color}`}
+              >
+                <Icon aria-hidden="true" className="technology-icon" />
+                <span class="technology-label">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

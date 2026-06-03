@@ -1,180 +1,249 @@
-import imgNote from "../assets/img-projects/note-app.png";
-import urbanStyle from "../assets/img-projects/urbanStyle.png";
-import legalWeb from "../assets/img-projects/legalweb.webp";
-import mediCare from "../assets/img-projects/medicare.jpg";
-import astroFit from "../assets/img-projects/Astrofit.jpg";
-import Verbenas from "../assets/img-projects/challenge-newyze.png";
-import ReactEcommerce from "../assets/img-projects/ecommers.jpg";
-import PortfolioDev from "../assets/img-projects/PortfolioDev.jpg";
-import VintageTone from "../assets/img-projects/vintageToneApp.jpg";
-import AstroEcommers from "../assets/img-projects/astroEcommers.jpg";
-import CvBuilder from "../assets/img-projects/CvBuilder.png";
-import ChatAi from "../assets/img-projects/ChatAI.png";
-import ProductivityApp from "../assets/img-projects/productivityApp.png";
+export const projectFilters = [
+  { label: "All", value: "all" },
+  { label: "Professional", value: "professional" },
+  { label: "Web", value: "web" },
+  { label: "Mobile", value: "mobile" },
+  { label: "Data & ML", value: "data-ml" },
+];
 
 export const projects = [
   {
-    title: "Commerce Platform",
+    title: "Neo Edukasi Education Platform",
+    year: "2024 - Present",
     description:
-      "A full-stack commerce template with product browsing, cart flows, authentication, admin tools, and content sections.",
-    image: VintageTone.src,
-    technologies: ["Vue.js", "Tailwind", "Express", "MongoDB"],
-    demo: "https://vintage-tone-front-vue.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/VintageTone-Front-Vue.git",
-    category: "fullstack",
+      "Production Laravel platform for education operations, billing, reporting, WhatsApp notifications, tutor workflows, and admin dashboards.",
+    impact: [
+      "Worked on 177 merged PRs across billing, reporting, notifications, dashboards, and data maintenance.",
+      "Fixed prepaid, postpaid, and per-meet invoice reconciliation flows for operational reporting.",
+      "Wrote feature tests, refactored critical flows, and optimized MySQL queries to cut load time by up to 40%.",
+    ],
+    technologies: [
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "Feature Testing",
+      "WhatsApp API",
+    ],
+    categories: ["professional", "web"],
+    visualLabel: "Production Platform",
+    accent: "#5eead4",
+    featured: true,
+    privateCase: true,
+    links: [],
   },
   {
-    title: "React Storefront",
+    title: "StunBy Machine Learning Capstone",
+    year: "2024",
     description:
-      "A React ecommerce storefront with search, categories, reviews, cart interactions, and reusable UI components.",
-    image: ReactEcommerce.src,
-    technologies: ["React", "Tailwind", "Express", "MongoDB"],
-    demo: "https://react-e-commerce-three-phi.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/React-E-commerce.git",
-    category: "fullstack",
+      "Bangkit capstone ML/API workflows for baby height detection, nutrition prediction, WHO Z-score checks, food tracking, and chatbot support.",
+    impact: [
+      "Integrated Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows for stunting-related product features.",
+      "Documented API endpoints for nutrition prediction, growth classification, tracking, and recommendations.",
+      "Improved model and chatbot integration through team PRs in the public Bangkit organization repositories.",
+    ],
+    technologies: ["Python", "TensorFlow", "YOLO", "Flask API", "Vertex AI"],
+    categories: ["professional", "data-ml"],
+    visualLabel: "ML/API Capstone",
+    accent: "#a78bfa",
+    featured: true,
+    links: [
+      {
+        label: "ML Repo",
+        href: "https://github.com/StunBy-Bangkit-Capstone/Machine-Learning",
+        type: "code",
+      },
+      {
+        label: "API Repo",
+        href: "https://github.com/StunBy-Bangkit-Capstone/ai-integrated",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "Productivity Dashboard",
+    title: "Recycle Reward Web Application",
+    year: "2024",
     description:
-      "A productivity app concept with tasks, calendar events, focus sessions, AI assistance, and admin metrics.",
-    image: ProductivityApp.src,
-    technologies: ["React", "Tailwind", "Express", "MongoDB"],
-    demo: "https://productivity-app-tau-virid.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/productivity-App.git",
-    category: "fullstack",
+      "Laravel and Filament web application for recyclable waste management, rewards, complaint handling, profile editing, notifications, and dashboard charts.",
+    impact: [
+      "Built reward and complaint modules, dashboard charts, profile flows, notifications, and user panel setup.",
+      "Contributed nine merged PRs and project setup documentation for maintainable Laravel development.",
+      "Used MySQL-backed Laravel workflows with Filament administration patterns.",
+    ],
+    technologies: ["Laravel", "Filament", "PHP", "MySQL", "Tailwind CSS"],
+    categories: ["web"],
+    visualLabel: "Laravel / Filament",
+    accent: "#34d399",
+    featured: true,
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/recycle-reward-app",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "AI Chat Interface",
+    title: "Share Task App Suite",
+    year: "2024",
     description:
-      "A multi-model chat interface template for automated assistance, conversation history, and API-driven responses.",
-    image: ChatAi.src,
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
-    demo: "https://multi-model-ai-chat-platform.vercel.app",
-    code:
-      "https://github.com/Lautaro-R-collins/Multi-Model-AI-Chat-Platform.git",
-    category: "fullstack",
+      "Android Kotlin task-sharing application with a Next.js API, Prisma, PostgreSQL, and a deployed API surface.",
+    impact: [
+      "Built a mobile-first task workflow backed by a TypeScript API service.",
+      "Connected Android features to a Prisma and PostgreSQL backend deployed on Vercel.",
+      "Kept app and API repositories separated for clearer mobile/backend responsibilities.",
+    ],
+    technologies: ["Kotlin", "Android", "Next.js", "Prisma", "PostgreSQL"],
+    categories: ["mobile", "web"],
+    visualLabel: "Android + API",
+    accent: "#38bdf8",
+    links: [
+      {
+        label: "Mobile Repo",
+        href: "https://github.com/Ridlo543/share-task-app",
+        type: "code",
+      },
+      {
+        label: "API Repo",
+        href: "https://github.com/Ridlo543/share-task-app-api",
+        type: "code",
+      },
+      {
+        label: "API",
+        href: "https://share-task-app.vercel.app",
+        type: "demo",
+      },
+    ],
   },
   {
-    title: "Astro Ecommerce",
+    title: "Mobile Laundry Android Contribution",
+    year: "2025",
     description:
-      "A frontend ecommerce concept built with Astro and React, including category views and cart-ready product cards.",
-    image: AstroEcommers.src,
-    technologies: ["React", "Astro", "Tailwind", "daisyUI"],
-    demo: "https://e-commer-astro.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/E-commer-Astro.git",
-    category: "frontend",
+      "Jetpack Compose Android contribution for laundry order management, authentication flow, splash screen, and customer dashboard cards.",
+    impact: [
+      "Contributed merged PRs for customer dashboard order cards, navigation logic, and order detail improvements.",
+      "Worked with Compose UI, ViewModel flow, and Android order-management screens.",
+      "Supported a team codebase in the Laundry Almada organization.",
+    ],
+    technologies: ["Kotlin", "Jetpack Compose", "Android", "ViewModel"],
+    categories: ["professional", "mobile"],
+    visualLabel: "Compose App",
+    accent: "#60a5fa",
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/mobile-laundry-mbkm25",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "Task Board App",
+    title: "Unitip Mobile and API Contribution",
+    year: "2025",
     description:
-      "A full-stack task management template with CRUD flows, boards, lists, and authenticated user sessions.",
-    image: imgNote.src,
-    technologies: ["React", "Tailwind", "Express", "MongoDB"],
-    demo: "https://front-react-todo.onrender.com",
-    code: "https://github.com/Lautaro-R-collins/Front-react-todo",
-    category: "fullstack",
+      "Team contribution across a Jetpack Compose mobile app and TypeScript API for the Unitip application.",
+    impact: [
+      "Contributed to mobile and API repositories in the Unitip organization.",
+      "Worked with Kotlin, Jetpack Compose, TypeScript, and API documentation workflows.",
+      "Kept public source links available while omitting the unavailable API demo from the portfolio.",
+    ],
+    technologies: ["Kotlin", "Jetpack Compose", "TypeScript", "API"],
+    categories: ["professional", "mobile", "web"],
+    visualLabel: "Mobile/API Team",
+    accent: "#f59e0b",
+    links: [
+      {
+        label: "Mobile Repo",
+        href: "https://github.com/Ridlo543/unitip-mobile-native",
+        type: "code",
+      },
+      {
+        label: "API Repo",
+        href: "https://github.com/Ridlo543/unitip-nextjs-api",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "CV Builder",
+    title: "Air Quality Dashboard",
+    year: "2024",
     description:
-      "A multilingual resume builder concept with structured sections, export-friendly layouts, and ATS-aware content.",
-    image: CvBuilder.src,
-    technologies: ["React", "Context API", "Tailwind", "i18n"],
-    demo: "https://cv-builder-pi-three.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/CV-Builder.git",
-    category: "frontend",
+      "Streamlit dashboard and notebook analysis for Wanshouxigong air quality data, built for a Python data analysis project.",
+    impact: [
+      "Prepared a reproducible Python environment for analysis and dashboard execution.",
+      "Published a live Streamlit dashboard for interactive exploration.",
+      "Used notebook-driven analysis to turn air quality data into a deployable dashboard.",
+    ],
+    technologies: ["Python", "Streamlit", "Pandas", "Jupyter Notebook"],
+    categories: ["data-ml", "web"],
+    visualLabel: "Data Dashboard",
+    accent: "#22d3ee",
+    links: [
+      {
+        label: "Dashboard",
+        href: "https://dashboard-air-quality-wanshouxigong-ridlo.streamlit.app/",
+        type: "demo",
+      },
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/analytic-data-air-quality",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "Urban Shop Concept",
+    title: "News Recommendation and NER",
+    year: "2024",
     description:
-      "A frontend shop template for apparel and accessories with product cards, cart interactions, and payment-ready flows.",
-    image: urbanStyle.src,
-    technologies: ["React", "Tailwind", "Firebase"],
-    demo: "https://proyecto-final-rodriguez-sable.vercel.app/",
-    code: "https://github.com/Lautaro-R-collins/ProyectoFinal-Rodriguez.git",
-    category: "frontend",
+      "Indonesian news recommendation, search, sentiment, and named entity recognition notebook using TF-IDF, cosine similarity, and NER models.",
+    impact: [
+      "Explored an Indonesian news dataset with nearly 500k rows.",
+      "Implemented recommendation and search workflows with TF-IDF vectorization and cosine similarity.",
+      "Integrated Indonesian NER model usage for entity extraction.",
+    ],
+    technologies: ["Python", "NLP", "TF-IDF", "NER", "Jupyter Notebook"],
+    categories: ["data-ml"],
+    visualLabel: "NLP Notebook",
+    accent: "#c084fc",
+    links: [
+      {
+        label: "Notebook",
+        href: "https://github.com/Ridlo543/news-recommendation-NER/blob/main/sistem-rekomendasi-ner-news.ipynb",
+        type: "code",
+      },
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/news-recommendation-NER",
+        type: "code",
+      },
+    ],
   },
   {
-    title: "Developer Portfolio",
+    title: "Turing Machine Simulator",
+    year: "2024",
     description:
-      "A modern portfolio starter built with Astro, Tailwind CSS, and JavaScript for reusable developer profiles.",
-    image: PortfolioDev.src,
-    technologies: ["Astro", "Tailwind", "JavaScript"],
-    demo: "https://portfolio-developers-astro.vercel.app/",
-    code:
-      "https://github.com/Lautaro-R-collins/Portfolio-developers-astro.git",
-    category: "frontend",
-  },
-  {
-    title: "Service Landing Page",
-    description:
-      "A responsive Astro landing page template for professional services, lead capture, and conversion-focused sections.",
-    image: legalWeb.src,
-    technologies: ["Astro", "Tailwind", "JavaScript"],
-    demo: "https://legal-staff.vercel.app/",
-    code: "https://github.com/Lautaro-R-collins/legal-staff",
-    category: "frontend",
-  },
-  {
-    title: "Healthcare Landing Page",
-    description:
-      "A polished static website template for healthcare-style services with clear sections and responsive layouts.",
-    image: mediCare.src,
-    technologies: ["Astro", "Tailwind", "JavaScript"],
-    demo: "https://obra-social-landing.vercel.app/",
-    code: "https://github.com/Lautaro-R-collins/obra-social-landing.git",
-    category: "frontend",
-  },
-  {
-    title: "Fitness Landing Page",
-    description:
-      "A high-energy marketing page template for fitness services, plans, calls to action, and visual project sections.",
-    image: astroFit.src,
-    technologies: ["Astro", "Tailwind", "JavaScript"],
-    demo: "https://gym-page-sandy.vercel.app/",
-    code: "https://github.com/Lautaro-R-collins/GymPage.git",
-    category: "frontend",
-  },
-  {
-    title: "Commerce REST API",
-    description:
-      "A REST API template with product, user, authentication, and CRUD patterns for ecommerce-style applications.",
-    image: "https://miro.medium.com/1*47S4iWVwTicFkFL4-Z4uAA.png",
-    technologies: ["Express", "Node.js", "MongoDB", "Mongoose"],
-    demo: "https://react-e-commerce-three-phi.vercel.app",
-    code: "https://github.com/Lautaro-R-collins/ApiRest-Ecommerce.git",
-    category: "backend",
-  },
-  {
-    title: "AI Chat API",
-    description:
-      "An Express API concept for authenticated chat workflows, model routing, and persistent conversation data.",
-    image: "https://miro.medium.com/1*47S4iWVwTicFkFL4-Z4uAA.png",
-    technologies: ["Express", "Node.js", "MongoDB", "Mongoose"],
-    demo: "https://multi-model-ai-chat-platform.vercel.app",
-    code:
-      "https://github.com/Lautaro-R-collins/Multi-Model-AI-Chat-Platform/tree/main/backend",
-    category: "backend",
-  },
-  {
-    title: "Planning App",
-    description:
-      "A planning dashboard template with project lists, responsive layouts, and a clean React plus TypeScript stack.",
-    image:
-      "https://i.pinimg.com/736x/8f/f0/bb/8ff0bbd0e5844ed254bede44522c8338.jpg",
-    technologies: ["React", "Vite", "TypeScript", "Tailwind"],
-    demo: "https://planify-1tu6.onrender.com/",
-    code: "https://github.com/Lautaro-R-collins/PlaniFy-organization-app",
-    category: "frontend",
-  },
-  {
-    title: "Startup Challenge Page",
-    description:
-      "A static Astro page created as a startup-style challenge with simple sections, responsive styling, and reusable blocks.",
-    image: Verbenas.src,
-    technologies: ["Astro", "Tailwind", "JavaScript"],
-    demo: "https://challenge-neowyze.onrender.com/",
-    code: "https://github.com/Lautaro-R-collins/challenge-Neowyze.git",
-    category: "frontend",
+      "Astro-based simulator for exploring Turing machine behavior through an interactive web interface.",
+    impact: [
+      "Built and deployed an educational simulator with Astro.",
+      "Published a GitHub Pages demo for quick access and testing.",
+      "Used a focused interface to make formal language concepts easier to inspect.",
+    ],
+    technologies: ["Astro", "JavaScript", "GitHub Pages"],
+    categories: ["web"],
+    visualLabel: "Astro Simulator",
+    accent: "#fb7185",
+    links: [
+      {
+        label: "Demo",
+        href: "https://ridlo543.github.io/turing-machine-astro/",
+        type: "demo",
+      },
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/turing-machine-astro",
+        type: "code",
+      },
+    ],
   },
 ];
+
+export const featuredProjects = projects.filter((project) => project.featured);

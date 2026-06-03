@@ -5,15 +5,11 @@ interface Props {
   className?: string;
 }
 
-const {
-  title,
-  span = "md:col-span-1 lg:col-span-3",
-  className = "",
-} = Astro.props;
+const { title, span = "", className = "" } = Astro.props;
 ---
 
-<section class={`bento-card p-5 ${span} ${className}`}>
-  <div class="relative z-10 h-full">
+<section class={`bento-card p-3 md:p-3.5 ${span} ${className}`}>
+  <div class="relative z-10">
     {title && <h2 class="bento-card-title">{title}</h2>}
     <slot />
   </div>

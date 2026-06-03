@@ -1,13 +1,237 @@
 ---
-const certificates = [
-  "Astro Portfolio Template",
-  "Frontend Engineering",
-  "Full-Stack Foundations",
-  "Accessible UI",
-  "Product Delivery",
-];
+import { Download, GraduationCap, X } from "lucide-react";
+import {
+  certificateFilters,
+  certificates,
+  education,
+  featuredCertificates,
+} from "../../../data/certificateData.js";
 ---
 
-<div class="flex h-full flex-wrap content-center justify-center gap-2">
-  {certificates.map((certificate) => <span class="tag">{certificate}</span>)}
+<div class="space-y-3 text-sm text-[var(--app-text-muted)]">
+  <div class="space-y-3">
+    <div>
+      <p class="flex items-center gap-2 font-black text-[var(--app-text)]">
+        <GraduationCap
+          aria-hidden="true"
+          className="h-4 w-4 text-[var(--app-accent)]"
+        />
+        <span>{education.title}</span>
+      </p>
+      <p class="mt-1">
+        {education.institution} - {education.gpa}
+      </p>
+      <p class="text-xs text-[var(--app-text-soft)]">
+        {education.period}, {education.location}
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      {
+        featuredCertificates.slice(0, 2).map((certificate) => (
+          <a class="tag" href={certificate.href} download>
+            {certificate.title}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <button
+    type="button"
+    data-open-certificates
+    class="text-link"
+    aria-haspopup="dialog"
+    aria-controls="certificates-modal"
+  >
+    View all certificates
+  </button>
 </div>
+
+<dialog
+  id="certificates-modal"
+  class="modal-shell modal-shell--certificates"
+  aria-labelledby="certificates-modal-title"
+  aria-describedby="certificates-modal-description"
+>
+  <div class="modal-header">
+    <div class="min-w-0 flex-1">
+      <h2 id="certificates-modal-title" class="modal-title">
+        Education and Certificates
+      </h2>
+      <p id="certificates-modal-description" class="modal-description">
+        Degree, professional letters, technical certificates, and organization
+        records from the certificate archive.
+      </p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {
+          certificateFilters.map((filter) => (
+            <button
+              type="button"
+              data-certificate-filter={filter.value}
+              class="modal-filter"
+              data-active={filter.value === "all" ? "true" : "false"}
+            >
+              {filter.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+    <button
+      type="button"
+      data-close-certificates
+      class="icon-button"
+      aria-label="Close certificates modal"
+    >
+      <X aria-hidden="true" className="h-4 w-4" />
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="mb-3 modal-card p-4">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p
+            class="text-xs font-bold uppercase tracking-wide text-[var(--app-accent)]"
+          >
+            Degree
+          </p>
+          <h3 class="mt-2 text-base font-black text-[var(--app-text)]">
+            {education.title}
+          </h3>
+          <p class="mt-1 text-sm font-semibold text-[var(--app-text-muted)]">
+            {education.institution}
+          </p>
+          <p class="mt-1 text-xs text-[var(--app-text-soft)]">
+            {education.period} - {education.location}
+          </p>
+        </div>
+        <span class="tag">{education.gpa}</span>
+      </div>
+      <p class="mt-3 text-sm leading-relaxed text-[var(--app-text-muted)]">
+        {education.description}
+      </p>
+    </div>
+
+    <div class="grid gap-3 md:grid-cols-2">
+      {
+        certificates.map((certificate) => (
+          <article
+            data-certificate-card
+            data-categories={certificate.categories.join("|")}
+            class="modal-card p-4"
+          >
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <p class="text-xs font-bold uppercase tracking-wide text-[var(--app-accent)]">
+                  {certificate.issuer}
+                </p>
+                <h3 class="mt-2 text-base font-black leading-snug text-[var(--app-text)]">
+                  {certificate.title}
+                </h3>
+              </div>
+              <span class="shrink-0 text-xs font-bold text-[var(--app-text-soft)]">
+                {certificate.date}
+              </span>
+            </div>
+            <p class="mt-3 text-sm leading-relaxed text-[var(--app-text-muted)]">
+              {certificate.description}
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {certificate.categories.map((category) => {
+                const filter = certificateFilters.find(
+                  (item) => item.value === category,
+                );
+                return <span class="tag">{filter?.label || category}</span>;
+              })}
+              <span class="tag">{certificate.fileType}</span>
+            </div>
+            <a
+              href={certificate.href}
+              download
+              class="modal-action mt-4"
+              aria-label={`Download ${certificate.title}`}
+            >
+              <Download aria-hidden="true" className="h-4 w-4" />
+              Download
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const certificatesModal = document.getElementById("certificates-modal");
+  const openCertificatesButton = document.querySelector(
+    "[data-open-certificates]",
+  );
+  const closeCertificatesButton = document.querySelector(
+    "[data-close-certificates]",
+  );
+  const certificatesModalContent =
+    certificatesModal?.querySelector(".modal-content");
+  const certificateFilterButtons = Array.from(
+    document.querySelectorAll("[data-certificate-filter]"),
+  );
+  const certificateCards = Array.from(
+    document.querySelectorAll("[data-certificate-card]"),
+  );
+  let certificatesTrigger: HTMLElement | null = null;
+
+  openCertificatesButton?.addEventListener("click", (event) => {
+    if (certificatesModal instanceof HTMLDialogElement) {
+      certificatesTrigger =
+        event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
+      document.documentElement.classList.add("modal-open");
+      certificatesModal.showModal();
+      if (certificatesModalContent instanceof HTMLElement) {
+        certificatesModalContent.scrollTop = 0;
+      }
+      closeCertificatesButton instanceof HTMLElement &&
+        closeCertificatesButton.focus();
+    }
+  });
+
+  closeCertificatesButton?.addEventListener("click", () => {
+    if (certificatesModal instanceof HTMLDialogElement) {
+      certificatesModal.close();
+    }
+  });
+
+  certificatesModal?.addEventListener("click", (event) => {
+    if (
+      event.target === certificatesModal &&
+      certificatesModal instanceof HTMLDialogElement
+    ) {
+      certificatesModal.close();
+    }
+  });
+
+  certificatesModal?.addEventListener("close", () => {
+    document.documentElement.classList.remove("modal-open");
+    certificatesTrigger?.focus();
+    certificatesTrigger = null;
+  });
+
+  certificateFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = button.getAttribute("data-certificate-filter") || "all";
+
+      certificateFilterButtons.forEach((item) => {
+        item.setAttribute("data-active", item === button ? "true" : "false");
+      });
+
+      certificateCards.forEach((card) => {
+        const categories =
+          card.getAttribute("data-categories")?.split("|") || [];
+        card.classList.toggle(
+          "hidden",
+          selected !== "all" && !categories.includes(selected),
+        );
+      });
+    });
+  });
+</script>

@@ -1,12 +1,10 @@
 ---
 import "../styles/global.css";
-import Navbar from "../components/commons/navbar/navbar.astro";
-import Footer from "../components/commons/footer/footer.astro";
 
 const {
-  title = "Developer Portfolio Template",
-  description = "A modern portfolio template built with Astro, React, and Tailwind CSS.",
-  showChrome = true,
+  title = "Ridlo Abdullah Ulinnuha - Software Engineer",
+  description = "Software engineering portfolio for Ridlo Abdullah Ulinnuha.",
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -15,20 +13,23 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <script is:inline>
       (() => {
         const storageKey = "portfolio-theme";
+        const defaultMode = "dark";
         const modes = ["system", "light", "dark"];
 
         const getStoredMode = () => {
           try {
             const stored = localStorage.getItem(storageKey);
-            return modes.includes(stored) ? stored : "system";
+            return modes.includes(stored) ? stored : defaultMode;
           } catch {
-            return "system";
+            return defaultMode;
           }
         };
 
@@ -52,8 +53,6 @@ const {
     <title>{title}</title>
   </head>
   <body class="bg-[var(--app-bg)] text-[var(--app-text)]">
-    {showChrome && <Navbar />}
     <slot />
-    {showChrome && <Footer />}
   </body>
 </html>

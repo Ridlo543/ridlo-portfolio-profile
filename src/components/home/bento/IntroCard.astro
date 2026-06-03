@@ -1,59 +1,55 @@
 ---
-import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import profilePhoto from "../../../assets/img/profile-photo.png";
+import CvDownloadMenu from "./CvDownloadMenu.astro";
 import ThemeSwitch from "./ThemeSwitch.astro";
 
 const socials = [
   {
     label: "GitHub",
-    href: "https://github.com/Lautaro-R-collins",
+    href: "https://github.com/Ridlo543",
     icon: FaGithub,
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/lautaro-rodr%C3%ADguez-collins-40505624a/",
+    href: "https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/",
     icon: FaLinkedinIn,
   },
   {
-    label: "Twitter",
-    href: "https://x.com/lautarodevelops/",
-    icon: FaXTwitter,
+    label: "Email",
+    href: "mailto:ridloabdullahulinnuha543@gmail.com",
+    icon: HiOutlineMail,
   },
-  { label: "Email", href: "mailto:hello@example.com", icon: HiOutlineMail },
 ];
 ---
 
-<div class="flex h-full flex-col gap-6">
-  <div class="flex items-start justify-between gap-4">
-    <p class="text-xl font-light text-[var(--app-text)]">
+<div class="relative flex h-full flex-col gap-4">
+  <div class="relative z-10 flex items-start justify-between gap-4">
+    <p class="text-lg font-light text-[var(--app-text)] md:text-xl">
       Hi, I am <strong class="font-black text-[var(--app-accent)]"
-        >Alex Developer</strong
+        >Ridlo Abdullah Ulinnuha</strong
       >.
     </p>
     <ThemeSwitch />
   </div>
 
-  <div
-    class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between"
-  >
-    <div class="max-w-2xl">
-      <ul
-        class="mt-5 space-y-2 text-sm font-semibold leading-relaxed text-[var(--app-text-muted)]"
+  <div class="relative z-10 grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+    <div class="max-w-3xl">
+      <div
+        class="grid gap-2 text-sm font-semibold leading-snug text-[var(--app-text-muted)] sm:grid-cols-2"
       >
-        <li>Software engineer focused on useful, maintainable web products.</li>
-        <li>
-          Frontend, backend, product thinking, and accessible interface craft.
-        </li>
-        <li>
-          Template-ready portfolio built with Astro, React, and Tailwind CSS.
-        </li>
-        <li>
-          Open to client work, product teams, and practical collaboration.
-        </li>
-      </ul>
+        <p>
+          Software Engineer working across web applications, APIs, databases,
+          product interfaces, and machine learning integration.
+        </p>
+        <p>
+          I like practical systems: code that ships, tests that catch
+          regressions, and documentation that helps the next person move faster.
+        </p>
+      </div>
 
-      <div class="mt-6 flex flex-wrap gap-3">
+      <div class="mt-3 flex flex-wrap items-center gap-2">
         {
           socials.map(({ label, href, icon: Icon }) => (
             <a
@@ -67,13 +63,14 @@ const socials = [
             </a>
           ))
         }
+        <CvDownloadMenu />
       </div>
     </div>
 
     <img
       src={profilePhoto.src}
-      alt="Template profile portrait"
-      class="mx-auto h-44 w-44 shrink-0 rounded-lg border border-[var(--app-border)] object-cover md:mx-0 md:h-52 md:w-52"
+      alt="Ridlo Abdullah Ulinnuha logo"
+      class="mx-auto h-32 w-32 shrink-0 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] object-cover md:mx-0 lg:h-40 lg:w-40"
     />
   </div>
 </div>

@@ -1,0 +1,84 @@
+---
+import { ChevronDown, FileDown, FileText } from "lucide-react";
+---
+
+<div class="relative inline-flex" data-cv-menu>
+  <button
+    type="button"
+    class="modal-action modal-action--primary"
+    data-cv-toggle
+    aria-haspopup="menu"
+    aria-expanded="false"
+  >
+    <FileDown aria-hidden="true" className="h-4 w-4" />
+    Download CV
+    <ChevronDown aria-hidden="true" className="h-4 w-4" />
+  </button>
+
+  <div
+    class="absolute left-0 top-[calc(100%+0.5rem)] z-20 hidden w-44 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface)] p-1 shadow-[var(--app-shadow)]"
+    data-cv-panel
+    role="menu"
+  >
+    <a
+      href="/cv/ridlo-software-engineer-en.pdf"
+      download
+      class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)]"
+      role="menuitem"
+    >
+      <FileText aria-hidden="true" className="h-4 w-4" />
+      English CV
+    </a>
+    <a
+      href="/cv/ridlo-software-engineer-id.pdf"
+      download
+      class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)]"
+      role="menuitem"
+    >
+      <FileText aria-hidden="true" className="h-4 w-4" />
+      Indonesian CV
+    </a>
+  </div>
+</div>
+
+<script>
+  const cvMenus = document.querySelectorAll("[data-cv-menu]");
+
+  cvMenus.forEach((menu) => {
+    const toggle = menu.querySelector("[data-cv-toggle]");
+    const panel = menu.querySelector("[data-cv-panel]");
+
+    if (
+      !(toggle instanceof HTMLButtonElement) ||
+      !(panel instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const toggleButton = toggle;
+    const panelElement = panel;
+
+    function setOpen(isOpen: boolean) {
+      panelElement.classList.toggle("hidden", !isOpen);
+      toggleButton.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    toggleButton.addEventListener("click", () => {
+      setOpen(panelElement.classList.contains("hidden"));
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Node) || !menu.contains(target)) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleButton.focus();
+      }
+    });
+  });
+</script>

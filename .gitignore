@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local source archives and audit artifacts
+docs/exports/
+docs/sertifikat/
+tmp/
+audit-*.md
+audit-*.png
+single-page-snapshot.md

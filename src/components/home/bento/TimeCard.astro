@@ -9,10 +9,14 @@ const { timezone, label, helper } = Astro.props;
 const id = `time-${Math.random().toString(36).slice(2)}`;
 ---
 
-<div class="space-y-3">
-  <p class="text-sm font-bold text-[var(--app-text)]">{label}</p>
-  <p id={id} class="font-mono text-2xl text-[var(--app-text)]">--:--:--</p>
-  <p class="text-xs text-[var(--app-text-soft)]">{helper}</p>
+<div class="space-y-1">
+  <p class="text-xs font-bold text-[var(--app-text)]">{label}</p>
+  <p id={id} class="font-mono text-lg leading-none text-[var(--app-text)]">
+    --:--:--
+  </p>
+  <p class="text-[0.68rem] leading-none text-[var(--app-text-soft)]">
+    {helper}
+  </p>
 </div>
 
 <script is:inline define:vars={{ id, timezone }}>

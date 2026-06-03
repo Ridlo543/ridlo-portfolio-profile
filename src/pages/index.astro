@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import BentoCard from "../components/home/bento/BentoCard.astro";
 import IntroCard from "../components/home/bento/IntroCard.astro";
 import AboutCard from "../components/home/bento/AboutCard.astro";
+import TechnologyCard from "../components/home/bento/TechnologyCard.astro";
 import ProjectsCard from "../components/home/bento/ProjectsCard.astro";
 import TimeCard from "../components/home/bento/TimeCard.astro";
 import QuoteCard from "../components/home/bento/QuoteCard.astro";
@@ -13,82 +14,68 @@ import ContactCard from "../components/home/bento/ContactCard.astro";
 ---
 
 <Layout
-  title="Developer Portfolio Bento"
-  description="A bento-style developer portfolio homepage built with Astro, React, and Tailwind CSS."
-  showChrome={false}
+  title="Ridlo Abdullah Ulinnuha - Software Engineer"
+  description="Ridlo Abdullah Ulinnuha's software engineering portfolio covering web applications, APIs, databases, product interfaces, ML integration, and selected projects."
 >
-  <main class="bento-theme min-h-screen px-3 py-10 sm:px-4 md:px-6 md:py-12">
-    <div
-      class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-12"
-    >
-      <BentoCard
-        span="sm:col-span-2 lg:col-span-9 lg:row-span-4"
-        className="min-h-[260px]"
-      >
-        <IntroCard />
+  <main class="bento-theme min-h-screen px-3 py-4 sm:px-4 md:px-6 md:py-6">
+    <div class="bento-shell mx-auto w-full max-w-7xl">
+      <div class="bento-top">
+        <BentoCard className="bento-card--menu">
+          <IntroCard />
+        </BentoCard>
+
+        <BentoCard title="About me">
+          <AboutCard />
+        </BentoCard>
+      </div>
+
+      <BentoCard title="Technologies">
+        <TechnologyCard />
       </BentoCard>
 
-      <BentoCard
-        title="About me"
-        span="sm:col-span-1 lg:col-span-3 lg:row-span-6"
-      >
-        <AboutCard />
-      </BentoCard>
+      <div class="bento-board">
+        <div class="bento-stack">
+          <BentoCard title="Projects">
+            <ProjectsCard />
+          </BentoCard>
+        </div>
 
-      <BentoCard
-        title="Projects"
-        span="sm:col-span-1 lg:col-span-3 lg:row-span-4"
-      >
-        <ProjectsCard />
-      </BentoCard>
+        <div class="bento-stack">
+          <BentoCard title="Your time">
+            <TimeCard label="Local time" helper="Your browser timezone" />
+          </BentoCard>
 
-      <BentoCard
-        title="Your time"
-        span="sm:col-span-1 lg:col-span-3 lg:row-span-2"
-      >
-        <TimeCard label="Local time" helper="Your browser timezone" />
-      </BentoCard>
+          <BentoCard title="Experience">
+            <ExperienceCard />
+          </BentoCard>
+        </div>
 
-      <BentoCard
-        title="Portfolio time"
-        span="sm:col-span-1 lg:col-span-3 lg:row-span-2"
-      >
-        <TimeCard
-          label="Jakarta time"
-          helper="Asia/Jakarta"
-          timezone="Asia/Jakarta"
-        />
-      </BentoCard>
+        <div class="bento-stack">
+          <BentoCard title="My time">
+            <TimeCard
+              label="Jakarta time"
+              helper="Asia/Jakarta"
+              timezone="Asia/Jakarta"
+            />
+          </BentoCard>
 
-      <BentoCard span="sm:col-span-1 lg:col-span-4 lg:row-span-2">
-        <QuoteCard />
-      </BentoCard>
+          <BentoCard title="Education and Certifications">
+            <StudyCard />
+          </BentoCard>
+        </div>
 
-      <BentoCard
-        title="Education and Certificates"
-        span="sm:col-span-1 lg:col-span-5 lg:row-span-2"
-      >
-        <StudyCard />
-      </BentoCard>
+        <div class="bento-stack">
+          <BentoCard>
+            <QuoteCard />
+          </BentoCard>
 
-      <BentoCard
-        title="Experiences"
-        span="sm:col-span-1 lg:col-span-3 lg:row-span-3"
-      >
-        <ExperienceCard />
-      </BentoCard>
+          <BentoCard title="Current Focus">
+            <ReadsCard />
+          </BentoCard>
+        </div>
+      </div>
 
-      <BentoCard
-        title="Field Notes"
-        span="sm:col-span-1 lg:col-span-6 lg:row-span-2"
-      >
-        <ReadsCard />
-      </BentoCard>
-
-      <BentoCard
-        title="Contact"
-        span="sm:col-span-1 lg:col-span-6 lg:row-span-1"
-      >
+      <BentoCard title="Contact">
         <ContactCard />
       </BentoCard>
     </div>

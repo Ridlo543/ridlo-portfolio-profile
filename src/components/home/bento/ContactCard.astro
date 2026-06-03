@@ -1,31 +1,40 @@
 ---
-import { FaGithub } from "react-icons/fa6";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { Mail } from "lucide-react";
 ---
 
 <div
-  class="flex h-full flex-col justify-center gap-4 text-center text-sm text-[var(--app-text-muted)]"
+  class="flex flex-col items-center gap-3 text-center text-sm text-[var(--app-text-muted)] md:flex-row md:justify-between md:text-left"
 >
-  <p>
-    Reach out for collaboration, freelance work, or to adapt this template into
-    a personal portfolio.
+  <p class="max-w-2xl">
+    Available for software engineering roles, web and API work, data
+    collaboration, ML integration, or portfolio review.
   </p>
-  <div class="flex flex-wrap justify-center gap-2">
+  <div class="flex shrink-0 flex-wrap justify-center gap-2">
     <a
-      href="mailto:hello@example.com"
+      href="mailto:ridloabdullahulinnuha543@gmail.com"
       class="modal-action modal-action--primary"
     >
       <Mail aria-hidden="true" className="h-4 w-4" />
       Email
     </a>
     <a
-      href="https://github.com/Lautaro-R-collins"
+      href="https://github.com/Ridlo543"
       target="_blank"
       rel="noopener noreferrer"
       class="modal-action"
     >
       <FaGithub aria-hidden="true" className="h-4 w-4" />
       GitHub
+    </a>
+    <a
+      href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="modal-action"
+    >
+      <FaLinkedinIn aria-hidden="true" className="h-4 w-4" />
+      LinkedIn
     </a>
   </div>
 </div>

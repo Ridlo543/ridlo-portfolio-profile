@@ -6,8 +6,9 @@ import { Monitor, Moon, Sun } from "lucide-react";
   type="button"
   class="icon-button theme-toggle"
   data-theme-toggle
-  aria-label="Theme: system"
-  title="Theme: system"
+  data-theme-mode="dark"
+  aria-label="Theme: dark"
+  title="Theme: dark"
 >
   <Monitor aria-hidden="true" className="theme-icon theme-icon-system" />
   <Sun aria-hidden="true" className="theme-icon theme-icon-light" />
@@ -16,13 +17,14 @@ import { Monitor, Moon, Sun } from "lucide-react";
 
 <script>
   const storageKey = "portfolio-theme";
+  const defaultMode = "dark";
   const modes = ["system", "light", "dark"];
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
   const button = document.querySelector("[data-theme-toggle]");
 
   function getStoredMode() {
     const stored = localStorage.getItem(storageKey);
-    return stored && modes.includes(stored) ? stored : "system";
+    return stored && modes.includes(stored) ? stored : defaultMode;
   }
 
   function resolveTheme(mode: string) {
