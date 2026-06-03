@@ -240,6 +240,38 @@ a {
   padding: 0.22rem 0.4rem;
 }
 
+.visitor-badge {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--app-border);
+  border-radius: 0.5rem;
+  background: var(--app-surface-raised);
+  color: var(--app-text-muted);
+  padding: 0.32rem 0.55rem;
+}
+
+.visitor-badge__icon {
+  width: 0.92rem;
+  height: 0.92rem;
+  color: var(--app-accent);
+}
+
+.visitor-badge__value {
+  color: var(--app-text);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.visitor-badge__label {
+  color: var(--app-text-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .technology-rail {
   display: grid;
   gap: 0.26rem;

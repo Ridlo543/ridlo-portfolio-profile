@@ -1,0 +1,52 @@
+---
+import { Eye } from "lucide-react";
+
+const baseCount = "1,099+";
+---
+
+<div
+  class="visitor-badge"
+  data-visitor-badge
+  aria-label="Portfolio visitors"
+  aria-live="polite"
+>
+  <Eye aria-hidden="true" className="visitor-badge__icon" />
+  <span class="visitor-badge__value" data-visitor-count>{baseCount}</span>
+  <span class="visitor-badge__label">visitors</span>
+</div>
+
+<script>
+  const badges = document.querySelectorAll("[data-visitor-badge]");
+
+  if (badges.length > 0) {
+    const formatter = new Intl.NumberFormat("en-US");
+
+    fetch("/api/visitor", {
+      cache: "no-store",
+      credentials: "same-origin",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Visitor counter request failed.");
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        if (typeof data.count !== "number") {
+          return;
+        }
+
+        for (const badge of badges) {
+          const value = badge.querySelector("[data-visitor-count]");
+
+          if (value) {
+            value.textContent = formatter.format(data.count);
+          }
+        }
+      })
+      .catch(() => {
+        // Keep the static fallback visible when the Vercel function is unavailable.
+      });
+  }
+</script>
