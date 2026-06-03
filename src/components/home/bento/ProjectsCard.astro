@@ -35,6 +35,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
     class="text-link"
     aria-haspopup="dialog"
     aria-controls="projects-modal"
+    aria-expanded="false"
   >
     View all projects
   </button>
@@ -45,6 +46,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
   class="modal-shell"
   aria-labelledby="projects-modal-title"
   aria-describedby="projects-modal-description"
+  aria-modal="true"
 >
   <div class="modal-header">
     <div class="min-w-0 flex-1">
@@ -60,6 +62,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
               data-project-filter={filter.value}
               class="modal-filter"
               data-active={filter.value === "all" ? "true" : "false"}
+              aria-pressed={filter.value === "all" ? "true" : "false"}
             >
               {filter.label}
             </button>
@@ -193,6 +196,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
       if (projectsModalContent instanceof HTMLElement) {
         projectsModalContent.scrollTop = 0;
       }
+      openProjectsButton?.setAttribute("aria-expanded", "true");
       closeProjectsButton instanceof HTMLElement && closeProjectsButton.focus();
     }
   });
@@ -214,6 +218,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
 
   projectsModal?.addEventListener("close", () => {
     document.documentElement.classList.remove("modal-open");
+    openProjectsButton?.setAttribute("aria-expanded", "false");
     projectsTrigger?.focus();
     projectsTrigger = null;
   });
@@ -224,6 +229,7 @@ const featured = projects.filter((project) => project.featured).slice(0, 3);
 
       filterButtons.forEach((item) => {
         item.setAttribute("data-active", item === button ? "true" : "false");
+        item.setAttribute("aria-pressed", item === button ? "true" : "false");
       });
 
       projectCards.forEach((card) => {

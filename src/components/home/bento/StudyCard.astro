@@ -43,6 +43,7 @@ import {
     class="text-link"
     aria-haspopup="dialog"
     aria-controls="certificates-modal"
+    aria-expanded="false"
   >
     View all certificates
   </button>
@@ -53,6 +54,7 @@ import {
   class="modal-shell modal-shell--certificates"
   aria-labelledby="certificates-modal-title"
   aria-describedby="certificates-modal-description"
+  aria-modal="true"
 >
   <div class="modal-header">
     <div class="min-w-0 flex-1">
@@ -71,6 +73,7 @@ import {
               data-certificate-filter={filter.value}
               class="modal-filter"
               data-active={filter.value === "all" ? "true" : "false"}
+              aria-pressed={filter.value === "all" ? "true" : "false"}
             >
               {filter.label}
             </button>
@@ -190,6 +193,7 @@ import {
       if (certificatesModalContent instanceof HTMLElement) {
         certificatesModalContent.scrollTop = 0;
       }
+      openCertificatesButton?.setAttribute("aria-expanded", "true");
       closeCertificatesButton instanceof HTMLElement &&
         closeCertificatesButton.focus();
     }
@@ -212,6 +216,7 @@ import {
 
   certificatesModal?.addEventListener("close", () => {
     document.documentElement.classList.remove("modal-open");
+    openCertificatesButton?.setAttribute("aria-expanded", "false");
     certificatesTrigger?.focus();
     certificatesTrigger = null;
   });
@@ -222,6 +227,7 @@ import {
 
       certificateFilterButtons.forEach((item) => {
         item.setAttribute("data-active", item === button ? "true" : "false");
+        item.setAttribute("aria-pressed", item === button ? "true" : "false");
       });
 
       certificateCards.forEach((card) => {

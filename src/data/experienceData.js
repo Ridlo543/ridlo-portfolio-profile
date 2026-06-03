@@ -18,9 +18,9 @@ export const experiences = [
     location: "Bandung, Indonesia",
     time: ["Sep 2024 - Present"],
     description:
-      "Worked on StunBy's ML/API integration for nutrition prediction, tracking, chatbot/model updates, and API documentation.",
+      "Built StunBy machine learning workflows for nutrition prediction, tracking, chatbot/model updates, and API documentation.",
     list: [
-      "Integrated Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows.",
+      "Developed Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows.",
       "Documented API endpoints for nutrition prediction, growth checks, food tracking, and recommendations.",
       "Collaborated through public organization repositories and merged team PRs.",
     ],

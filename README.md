@@ -1,8 +1,10 @@
 # Ridlo Abdullah Ulinnuha Portfolio
 
 Single-page bento portfolio for Ridlo Abdullah Ulinnuha, a Software Engineer
-focused on Laravel production systems, education operations, MySQL query
-optimization, feature testing, and ML/API integration.
+working across web applications, APIs, databases, mobile interfaces, testing,
+machine learning models, design tools, and AI-assisted engineering workflows.
+The content is backed by CV data, selected GitHub projects, and a downloadable
+certificate archive.
 
 ## Highlights
 

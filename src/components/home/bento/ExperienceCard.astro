@@ -30,6 +30,7 @@ const recentJobs = featuredExperiences;
     class="text-link"
     aria-haspopup="dialog"
     aria-controls="experience-modal"
+    aria-expanded="false"
   >
     View full experience
   </button>
@@ -40,12 +41,14 @@ const recentJobs = featuredExperiences;
   class="modal-shell modal-shell--experience"
   aria-labelledby="experience-modal-title"
   aria-describedby="experience-modal-description"
+  aria-modal="true"
 >
   <div class="modal-header">
     <div>
       <h2 id="experience-modal-title" class="modal-title">Experience</h2>
       <p id="experience-modal-description" class="modal-description">
-        CV-backed roles, production work, teaching, and ML/API experience.
+        CV-backed roles, production work, teaching, mobile projects, and machine
+        learning experience.
       </p>
     </div>
     <button
@@ -107,6 +110,7 @@ const recentJobs = featuredExperiences;
       if (experienceModalContent instanceof HTMLElement) {
         experienceModalContent.scrollTop = 0;
       }
+      openExperienceButton?.setAttribute("aria-expanded", "true");
       closeExperienceButton instanceof HTMLElement &&
         closeExperienceButton.focus();
     }
@@ -129,6 +133,7 @@ const recentJobs = featuredExperiences;
 
   experienceModal?.addEventListener("close", () => {
     document.documentElement.classList.remove("modal-open");
+    openExperienceButton?.setAttribute("aria-expanded", "false");
     experienceTrigger?.focus();
     experienceTrigger = null;
   });

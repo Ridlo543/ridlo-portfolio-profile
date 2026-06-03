@@ -4,8 +4,18 @@ import "../styles/global.css";
 const {
   title = "Ridlo Abdullah Ulinnuha - Software Engineer",
   description = "Software engineering portfolio for Ridlo Abdullah Ulinnuha.",
+  siteUrl = "https://ridlo543.github.io/ridlo-portfolio-profile/",
+  socialImage = "/android-chrome-512x512.png",
   noindex = false,
 } = Astro.props;
+
+const normalizedSiteUrl = siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`;
+const toAbsoluteUrl = (path: string) => {
+  if (/^https?:\/\//.test(path)) return path;
+  return new URL(path.replace(/^\/+/, ""), normalizedSiteUrl).toString();
+};
+const canonicalUrl = toAbsoluteUrl(Astro.url.pathname);
+const socialImageUrl = toAbsoluteUrl(socialImage);
 ---
 
 <!doctype html>
@@ -13,10 +23,42 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="author" content="Ridlo Abdullah Ulinnuha" />
+    <meta
+      name="theme-color"
+      content="#111827"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f6f7fb"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Ridlo Abdullah Ulinnuha Portfolio" />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta
+      property="og:image:alt"
+      content="Ridlo Abdullah Ulinnuha portfolio icon"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     {noindex && <meta name="robots" content="noindex" />}
     <script is:inline>
       (() => {

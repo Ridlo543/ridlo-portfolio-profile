@@ -3,6 +3,11 @@
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --app-font-sans:
+    "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --app-font-mono:
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --app-bg: #111827;
   --app-surface: #151a23;
   --app-surface-raised: #1b2230;
@@ -55,9 +60,26 @@ body {
   min-height: 100vh;
   background: var(--app-bg);
   color: var(--app-text);
+  font-family: var(--app-font-sans);
+  font-feature-settings:
+    "cv02" 1,
+    "cv03" 1,
+    "cv04" 1;
+  text-rendering: geometricprecision;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.font-mono {
+  font-family: var(--app-font-mono);
 }
 
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
@@ -220,12 +242,30 @@ a {
 
 .technology-rail {
   display: grid;
-  gap: 0.32rem;
+  gap: 0.26rem;
   margin-inline: -0.1rem;
 }
 
 .technology-row {
+  display: grid;
+  align-items: center;
+  gap: 0.48rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.technology-row-label {
+  min-width: 4.9rem;
+  color: var(--app-accent);
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.technology-window {
   position: relative;
+  min-width: 0;
   overflow: hidden;
   mask-image: linear-gradient(
     90deg,
@@ -239,7 +279,7 @@ a {
 .technology-track {
   display: flex;
   width: max-content;
-  gap: 0.32rem;
+  gap: 0.28rem;
   animation: technologyRailScroll 52s linear infinite;
   will-change: transform;
 }
@@ -249,6 +289,11 @@ a {
   animation-duration: 58s;
 }
 
+.technology-row--tools .technology-track {
+  animation-delay: -14s;
+  animation-duration: 66s;
+}
+
 .technology-rail:hover .technology-track,
 .technology-rail:focus-within .technology-track {
   animation-play-state: paused;
@@ -256,20 +301,20 @@ a {
 
 .technology-set {
   display: flex;
-  gap: 0.32rem;
+  gap: 0.28rem;
 }
 
 .technology-tile {
   display: flex;
   min-width: 0;
-  min-height: 1.72rem;
+  min-height: 1.56rem;
   align-items: center;
-  gap: 0.34rem;
+  gap: 0.3rem;
   border: 1px solid var(--app-border);
   border-radius: 999px;
   background: color-mix(in srgb, var(--app-surface-raised) 92%, transparent);
   color: var(--app-text-muted);
-  padding: 0.27rem 0.48rem;
+  padding: 0.22rem 0.42rem;
   white-space: nowrap;
   transition:
     border-color 0.15s ease,
@@ -292,14 +337,22 @@ a {
 }
 
 .technology-icon {
-  width: 0.78rem;
-  height: 0.78rem;
+  width: 0.72rem;
+  height: 0.72rem;
   flex: none;
   color: var(--technology-color);
 }
 
+.technology-logo {
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: none;
+  border-radius: 0.16rem;
+  object-fit: contain;
+}
+
 .technology-label {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 750;
   line-height: 1.2;
 }
@@ -315,7 +368,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .technology-row {
+  .technology-window {
     overflow-x: auto;
     mask-image: none;
     scrollbar-width: thin;
@@ -503,6 +556,15 @@ a {
 }
 
 @media (max-width: 640px) {
+  .technology-row {
+    gap: 0.38rem;
+  }
+
+  .technology-row-label {
+    min-width: 4.15rem;
+    font-size: 0.56rem;
+  }
+
   .modal-shell,
   .modal-shell--certificates,
   .modal-shell--experience {

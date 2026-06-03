@@ -35,11 +35,11 @@ export const projects = [
     title: "StunBy Machine Learning Capstone",
     year: "2024",
     description:
-      "Bangkit capstone ML/API workflows for baby height detection, nutrition prediction, WHO Z-score checks, food tracking, and chatbot support.",
+      "Bangkit capstone machine learning workflows for baby height detection, nutrition prediction, WHO Z-score checks, food tracking, and chatbot support.",
     impact: [
-      "Integrated Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows for stunting-related product features.",
+      "Developed Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows for stunting-related product features.",
       "Documented API endpoints for nutrition prediction, growth classification, tracking, and recommendations.",
-      "Improved model and chatbot integration through team PRs in the public Bangkit organization repositories.",
+      "Improved model behavior, chatbot flows, and API handoff through team PRs in the public Bangkit organization repositories.",
     ],
     technologies: ["Python", "TensorFlow", "YOLO", "Flask API", "Vertex AI"],
     categories: ["professional", "data-ml"],
