@@ -33,7 +33,7 @@ const baseCount = "1,099+";
         return response.json();
       })
       .then((data) => {
-        if (typeof data.count !== "number") {
+        if (typeof data.count !== "number" || data.fallback === true) {
           return;
         }
 

@@ -52,79 +52,201 @@ type TechnologyRow = {
   items: TechnologyItem[];
 };
 
-const technologyRows: TechnologyRow[] = [
+const webApiItems: TechnologyItem[] = [
+  { label: "Laravel", icon: SiLaravel, color: "#e32917" },
+  { label: "PHP", icon: SiPhp, color: "#777bb4" },
+  { label: "Filament", icon: SiFilament, color: "#f59e0b" },
+  { label: "MySQL", icon: SiMysql, color: "#4479a1" },
+  { label: "PostgreSQL", icon: SiPostgresql, color: "#4169e1" },
+  { label: "Prisma", icon: SiPrisma, color: "var(--app-text)" },
+  { label: "REST API", icon: Braces, color: "#0f766e" },
+  { label: "Postman", icon: SiPostman, color: "#ff6c37" },
+  { label: "WhatsApp API", icon: SiWhatsapp, color: "#128c7e" },
+];
+
+const frontendItems: TechnologyItem[] = [
+  { label: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+  { label: "TypeScript", icon: SiTypescript, color: "#3178c6" },
+  { label: "React", icon: SiReact, color: "#087ea4" },
+  { label: "Vue.js", icon: SiVuedotjs, color: "#42b883" },
+  { label: "Next.js", icon: SiNextdotjs, color: "var(--app-text)" },
+  { label: "Astro", icon: SiAstro, color: "#bc52ee" },
+  { label: "Tailwind CSS", icon: SiTailwindcss, color: "#0f766e" },
+  { label: "GitHub Pages", icon: SiGithubpages, color: "var(--app-text)" },
+];
+
+const dataMlItems: TechnologyItem[] = [
+  { label: "Python", icon: SiPython, color: "#3776ab" },
+  { label: "Machine Learning", icon: BrainCircuit, color: "#a78bfa" },
+  { label: "TensorFlow", icon: SiTensorflow, color: "#ff6f00" },
+  { label: "YOLO", icon: SiYolo, color: "#00d1d1" },
+  { label: "Vertex AI", icon: SiGooglecloud, color: "#4285f4" },
+  { label: "Pandas", icon: SiPandas, color: "#150458" },
+  { label: "Jupyter", icon: SiJupyter, color: "#f37626" },
+];
+
+const aiWorkflowItems: TechnologyItem[] = [
+  { label: "Flask API", icon: SiFlask, color: "var(--app-text)" },
+  { label: "Streamlit", icon: SiStreamlit, color: "#d92626" },
+  { label: "MCP Server", icon: Network, color: "#5eead4" },
+  { label: "Context Engineering", icon: Route, color: "#7c3aed" },
+];
+
+const mobileItems: TechnologyItem[] = [
+  { label: "Flutter", icon: SiFlutter, color: "#02569b" },
+  { label: "Dart", icon: SiDart, color: "#0175c2" },
+  { label: "Kotlin", icon: SiKotlin, color: "#7f52ff" },
+  { label: "Android", icon: SiAndroid, color: "#3ddc84" },
+  { label: "Jetpack Compose", icon: SiJetpackcompose, color: "#4285f4" },
+];
+
+const toolItems: TechnologyItem[] = [
+  { label: "Figma", icon: SiFigma, color: "#f24e1e" },
+  { label: "CorelDRAW", icon: SiCoreldraw, color: "#47a141" },
   {
-    label: "Web",
+    label: "Affinity Designer",
+    icon: SiAffinitydesigner,
+    color: "#134881",
+  },
+  { label: "Codex", icon: SiOpenai, color: "#10a37f" },
+  { label: "Claude Code", icon: SiClaude, color: "#d97757" },
+  { label: "GitHub", icon: SiGithub, color: "var(--app-text)" },
+  { label: "skills.sh", logo: "/logos/skills.ico", color: "#f8fafc" },
+  { label: "9Router", logo: "/logos/9router.svg", color: "#e68a6e" },
+];
+
+const desktopRows: TechnologyRow[] = [
+  {
+    label: "Web/API",
     ariaLabel: "Web and application technologies",
     className: "",
-    items: [
-      { label: "Laravel", icon: SiLaravel, color: "#e32917" },
-      { label: "PHP", icon: SiPhp, color: "#777bb4" },
-      { label: "Filament", icon: SiFilament, color: "#f59e0b" },
-      { label: "MySQL", icon: SiMysql, color: "#4479a1" },
-      { label: "PostgreSQL", icon: SiPostgresql, color: "#4169e1" },
-      { label: "Prisma", icon: SiPrisma, color: "var(--app-text)" },
-      { label: "REST API", icon: Braces, color: "#0f766e" },
-      { label: "Postman", icon: SiPostman, color: "#ff6c37" },
-      { label: "WhatsApp API", icon: SiWhatsapp, color: "#128c7e" },
-      { label: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
-      { label: "TypeScript", icon: SiTypescript, color: "#3178c6" },
-      { label: "React", icon: SiReact, color: "#087ea4" },
-      { label: "Vue.js", icon: SiVuedotjs, color: "#42b883" },
-      { label: "Next.js", icon: SiNextdotjs, color: "var(--app-text)" },
-      { label: "Astro", icon: SiAstro, color: "#bc52ee" },
-      { label: "Tailwind CSS", icon: SiTailwindcss, color: "#0f766e" },
-      { label: "GitHub Pages", icon: SiGithubpages, color: "var(--app-text)" },
-    ],
+    items: [...webApiItems, ...frontendItems],
   },
   {
     label: "Data/AI",
     ariaLabel: "Data, machine learning, and AI technologies",
     className: "technology-row--offset",
-    items: [
-      { label: "Python", icon: SiPython, color: "#3776ab" },
-      { label: "Machine Learning", icon: BrainCircuit, color: "#a78bfa" },
-      { label: "TensorFlow", icon: SiTensorflow, color: "#ff6f00" },
-      { label: "YOLO", icon: SiYolo, color: "#00d1d1" },
-      { label: "Flask API", icon: SiFlask, color: "var(--app-text)" },
-      { label: "Vertex AI", icon: SiGooglecloud, color: "#4285f4" },
-      { label: "Streamlit", icon: SiStreamlit, color: "#d92626" },
-      { label: "Pandas", icon: SiPandas, color: "#150458" },
-      { label: "Jupyter", icon: SiJupyter, color: "#f37626" },
-      { label: "Codex", icon: SiOpenai, color: "#10a37f" },
-      { label: "Claude Code", icon: SiClaude, color: "#d97757" },
-      { label: "MCP Server", icon: Network, color: "#5eead4" },
-      { label: "Context Engineering", icon: Route, color: "#7c3aed" },
-    ],
+    items: [...dataMlItems, ...aiWorkflowItems],
   },
   {
-    label: "Tooling",
+    label: "Mobile/Tool",
     ariaLabel: "Mobile, design, and workflow tools",
     className: "technology-row--tools",
-    items: [
-      { label: "Flutter", icon: SiFlutter, color: "#02569b" },
-      { label: "Dart", icon: SiDart, color: "#0175c2" },
-      { label: "Kotlin", icon: SiKotlin, color: "#7f52ff" },
-      { label: "Android", icon: SiAndroid, color: "#3ddc84" },
-      { label: "Jetpack Compose", icon: SiJetpackcompose, color: "#4285f4" },
-      { label: "Figma", icon: SiFigma, color: "#f24e1e" },
-      { label: "CorelDRAW", icon: SiCoreldraw, color: "#47a141" },
-      {
-        label: "Affinity Designer",
-        icon: SiAffinitydesigner,
-        color: "#134881",
-      },
-      { label: "GitHub", icon: SiGithub, color: "var(--app-text)" },
-      { label: "skills.sh", logo: "/logos/skills.ico", color: "#f8fafc" },
-      { label: "9Router", logo: "/logos/9router.svg", color: "#e68a6e" },
-    ],
+    items: [...mobileItems, ...toolItems],
+  },
+];
+
+const mobileRows: TechnologyRow[] = [
+  {
+    label: "Web/API",
+    ariaLabel: "Backend, database, and API technologies",
+    className: "",
+    items: webApiItems,
+  },
+  {
+    label: "Frontend",
+    ariaLabel: "Frontend application technologies",
+    className: "technology-row--offset",
+    items: frontendItems,
+  },
+  {
+    label: "Data/ML",
+    ariaLabel: "Data and machine learning technologies",
+    className: "technology-row--alt",
+    items: dataMlItems,
+  },
+  {
+    label: "AI Flow",
+    ariaLabel: "AI workflow and integration tools",
+    className: "technology-row--slow",
+    items: aiWorkflowItems,
+  },
+  {
+    label: "Mobile",
+    ariaLabel: "Mobile development technologies",
+    className: "technology-row--tools",
+    items: mobileItems,
+  },
+  {
+    label: "Tools",
+    ariaLabel: "Design and developer tools",
+    className: "technology-row--wide",
+    items: toolItems,
   },
 ];
 ---
 
-<div class="technology-rail" aria-label="Technology stack">
+<div
+  class="technology-rail technology-rail--desktop"
+  aria-label="Technology stack"
+>
   {
-    technologyRows.map((row) => (
+    desktopRows.map((row) => (
+      <div
+        class:list={["technology-row", row.className]}
+        aria-label={row.ariaLabel}
+      >
+        <span class="technology-row-label">{row.label}</span>
+        <div class="technology-window">
+          <div class="technology-track">
+            <div class="technology-set">
+              {row.items.map(({ label, icon: Icon, logo, color }) => (
+                <div
+                  class="technology-tile"
+                  style={`--technology-color: ${color}`}
+                >
+                  {logo ? (
+                    <img
+                      src={logo}
+                      alt=""
+                      loading="lazy"
+                      class="technology-logo"
+                    />
+                  ) : (
+                    Icon && (
+                      <Icon aria-hidden="true" className="technology-icon" />
+                    )
+                  )}
+                  <span class="technology-label">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="technology-set" aria-hidden="true">
+              {row.items.map(({ label, icon: Icon, logo, color }) => (
+                <div
+                  class="technology-tile technology-tile--clone"
+                  style={`--technology-color: ${color}`}
+                >
+                  {logo ? (
+                    <img
+                      src={logo}
+                      alt=""
+                      loading="lazy"
+                      class="technology-logo"
+                    />
+                  ) : (
+                    Icon && (
+                      <Icon aria-hidden="true" className="technology-icon" />
+                    )
+                  )}
+                  <span class="technology-label">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<div
+  class="technology-rail technology-rail--mobile"
+  aria-label="Technology stack"
+>
+  {
+    mobileRows.map((row) => (
       <div
         class:list={["technology-row", row.className]}
         aria-label={row.ariaLabel}
