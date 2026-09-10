@@ -1,13 +1,13 @@
 ---
 import {
   SiAndroid,
-  SiAffinitydesigner,
   SiAstro,
   SiClaude,
   SiCoreldraw,
   SiDart,
-  SiFilament,
+  SiDocker,
   SiFigma,
+  SiFilament,
   SiFlask,
   SiFlutter,
   SiGithub,
@@ -20,9 +20,9 @@ import {
   SiLaravel,
   SiMysql,
   SiNextdotjs,
-  SiOpenai,
   SiPandas,
   SiPhp,
+  SiPodman,
   SiPostgresql,
   SiPostman,
   SiPrisma,
@@ -36,7 +36,8 @@ import {
   SiWhatsapp,
   SiYolo,
 } from "react-icons/si";
-import { BrainCircuit, Braces, Network, Route } from "lucide-react";
+import { RiOpenaiFill } from "react-icons/ri";
+import { BrainCircuit, Braces, Network, Terminal, Workflow, Zap } from "lucide-react";
 
 type TechnologyItem = {
   label: string;
@@ -52,7 +53,8 @@ type TechnologyRow = {
   items: TechnologyItem[];
 };
 
-const webApiItems: TechnologyItem[] = [
+// 1. Web, Backend, Database & Frontend
+const webBackendItems: TechnologyItem[] = [
   { label: "Laravel", icon: SiLaravel, color: "#e32917" },
   { label: "PHP", icon: SiPhp, color: "#777bb4" },
   { label: "Filament", icon: SiFilament, color: "#f59e0b" },
@@ -62,9 +64,6 @@ const webApiItems: TechnologyItem[] = [
   { label: "REST API", icon: Braces, color: "#0f766e" },
   { label: "Postman", icon: SiPostman, color: "#ff6c37" },
   { label: "WhatsApp API", icon: SiWhatsapp, color: "#128c7e" },
-];
-
-const frontendItems: TechnologyItem[] = [
   { label: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
   { label: "TypeScript", icon: SiTypescript, color: "#3178c6" },
   { label: "React", icon: SiReact, color: "#087ea4" },
@@ -75,64 +74,62 @@ const frontendItems: TechnologyItem[] = [
   { label: "GitHub Pages", icon: SiGithubpages, color: "var(--app-text)" },
 ];
 
-const dataMlItems: TechnologyItem[] = [
+// 2. Data, Machine Learning, AI Agents & Tooling (Context Engineering removed!)
+const dataAiItems: TechnologyItem[] = [
+  { label: "Claude Code", icon: SiClaude, color: "#d97757" },
+  { label: "Oh My Pi", logo: "/logos/oh-my-pi.svg", color: "#ed4abf" },
+  { label: "OpenCode", logo: "/logos/opencode.svg", color: "#22d3ee" },
+  { label: "AI Agent Orchestration", icon: Workflow, color: "#c084fc" },
+  { label: "Custom LLM Router", icon: Zap, color: "#38bdf8" },
+  { label: "CLI Proxy API", icon: Terminal, color: "#34d399" },
+  { label: "MCP Server", icon: Network, color: "#5eead4" },
+  { label: "Codex", icon: RiOpenaiFill, color: "#10a37f" },
+  { label: "skills.sh", logo: "/logos/skills.ico", color: "#f8fafc" },
+  { label: "9Router", logo: "/logos/9router.svg", color: "#e68a6e" },
   { label: "Python", icon: SiPython, color: "#3776ab" },
   { label: "Machine Learning", icon: BrainCircuit, color: "#a78bfa" },
   { label: "TensorFlow", icon: SiTensorflow, color: "#ff6f00" },
   { label: "YOLO", icon: SiYolo, color: "#00d1d1" },
   { label: "Vertex AI", icon: SiGooglecloud, color: "#4285f4" },
-  { label: "Pandas", icon: SiPandas, color: "#150458" },
+  { label: "Pandas", icon: SiPandas, color: "#38bdf8" },
   { label: "Jupyter", icon: SiJupyter, color: "#f37626" },
-];
-
-const aiWorkflowItems: TechnologyItem[] = [
   { label: "Flask API", icon: SiFlask, color: "var(--app-text)" },
   { label: "Streamlit", icon: SiStreamlit, color: "#d92626" },
-  { label: "MCP Server", icon: Network, color: "#5eead4" },
-  { label: "Context Engineering", icon: Route, color: "#7c3aed" },
 ];
 
-const mobileItems: TechnologyItem[] = [
-  { label: "Flutter", icon: SiFlutter, color: "#02569b" },
-  { label: "Dart", icon: SiDart, color: "#0175c2" },
+// 3. Mobile, DevOps, Containers & Creative Design
+const mobileDevopsToolsItems: TechnologyItem[] = [
   { label: "Kotlin", icon: SiKotlin, color: "#7f52ff" },
   { label: "Android", icon: SiAndroid, color: "#3ddc84" },
   { label: "Jetpack Compose", icon: SiJetpackcompose, color: "#4285f4" },
-];
-
-const toolItems: TechnologyItem[] = [
+  { label: "Flutter", icon: SiFlutter, color: "#02569b" },
+  { label: "Dart", icon: SiDart, color: "#0175c2" },
+  { label: "Docker", icon: SiDocker, color: "#2496ed" },
+  { label: "Podman", icon: SiPodman, color: "#892ca0" },
+  { label: "Git / GitHub", icon: SiGithub, color: "var(--app-text)" },
   { label: "Figma", icon: SiFigma, color: "#f24e1e" },
   { label: "CorelDRAW", icon: SiCoreldraw, color: "#47a141" },
-  {
-    label: "Affinity Designer",
-    icon: SiAffinitydesigner,
-    color: "#134881",
-  },
-  { label: "Codex", icon: SiOpenai, color: "#10a37f" },
-  { label: "Claude Code", icon: SiClaude, color: "#d97757" },
-  { label: "GitHub", icon: SiGithub, color: "var(--app-text)" },
-  { label: "skills.sh", logo: "/logos/skills.ico", color: "#f8fafc" },
-  { label: "9Router", logo: "/logos/9router.svg", color: "#e68a6e" },
+  { label: "Affinity Designer", logo: "/logos/affinity-designer.svg", color: "#38bdf8" },
 ];
 
 const desktopRows: TechnologyRow[] = [
   {
-    label: "Web/API",
-    ariaLabel: "Web and application technologies",
+    label: "Web / API",
+    ariaLabel: "Web, backend, and API technologies",
     className: "",
-    items: [...webApiItems, ...frontendItems],
+    items: webBackendItems,
   },
   {
-    label: "Data/AI",
-    ariaLabel: "Data, machine learning, and AI technologies",
+    label: "Data / AI",
+    ariaLabel: "Machine learning, data, and AI agent technologies",
     className: "technology-row--offset",
-    items: [...dataMlItems, ...aiWorkflowItems],
+    items: dataAiItems,
   },
   {
-    label: "Mobile/Tool",
-    ariaLabel: "Mobile, design, and workflow tools",
+    label: "Mobile / Tool",
+    ariaLabel: "Mobile, DevOps, containers, and design tools",
     className: "technology-row--tools",
-    items: [...mobileItems, ...toolItems],
+    items: mobileDevopsToolsItems,
   },
 ];
 
@@ -141,37 +138,37 @@ const mobileRows: TechnologyRow[] = [
     label: "Web/API",
     ariaLabel: "Backend, database, and API technologies",
     className: "",
-    items: webApiItems,
+    items: webBackendItems.slice(0, 9),
   },
   {
     label: "Frontend",
     ariaLabel: "Frontend application technologies",
     className: "technology-row--offset",
-    items: frontendItems,
-  },
-  {
-    label: "Data/ML",
-    ariaLabel: "Data and machine learning technologies",
-    className: "technology-row--alt",
-    items: dataMlItems,
+    items: webBackendItems.slice(9),
   },
   {
     label: "AI Flow",
-    ariaLabel: "AI workflow and integration tools",
+    ariaLabel: "AI tools, orchestration, and proxy routers",
     className: "technology-row--slow",
-    items: aiWorkflowItems,
+    items: dataAiItems.slice(0, 10),
+  },
+  {
+    label: "Data/ML",
+    ariaLabel: "Data science and machine learning technologies",
+    className: "technology-row--alt",
+    items: dataAiItems.slice(10),
   },
   {
     label: "Mobile",
     ariaLabel: "Mobile development technologies",
     className: "technology-row--tools",
-    items: mobileItems,
+    items: mobileDevopsToolsItems.slice(0, 5),
   },
   {
     label: "Tools",
-    ariaLabel: "Design and developer tools",
+    ariaLabel: "DevOps, containers, and design tools",
     className: "technology-row--wide",
-    items: toolItems,
+    items: mobileDevopsToolsItems.slice(5),
   },
 ];
 ---

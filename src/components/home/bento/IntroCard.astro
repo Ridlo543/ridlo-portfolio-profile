@@ -1,79 +1,85 @@
 ---
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
-import { HiOutlineMail } from "react-icons/hi";
+import { Mail, MapPin } from "lucide-react";
 import profilePhoto from "../../../assets/img/profile-photo.png";
 import CvDownloadMenu from "./CvDownloadMenu.astro";
 import ThemeSwitch from "./ThemeSwitch.astro";
+import LanguageSwitch from "./LanguageSwitch.astro";
 import VisitorBadge from "./VisitorBadge.astro";
+import { ui, defaultLang } from "../../../i18n/ui";
 
-const socials = [
-  {
-    label: "GitHub",
-    href: "https://github.com/Ridlo543",
-    icon: FaGithub,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/",
-    icon: FaLinkedinIn,
-  },
-  {
-    label: "Email",
-    href: "mailto:ridloabdullahulinnuha543@gmail.com",
-    icon: HiOutlineMail,
-  },
-];
+const t = ui[defaultLang];
 ---
 
-<div class="relative flex h-full flex-col gap-4">
-  <div class="relative z-10 flex items-start justify-between gap-4">
-    <p class="text-lg font-light text-[var(--app-text)] md:text-xl">
-      Hi, I am <strong class="font-black text-[var(--app-accent)]"
-        >Ridlo Abdullah Ulinnuha</strong
-      >.
-    </p>
-    <ThemeSwitch />
+<div class="flex h-full flex-col justify-between gap-2.5">
+  <!-- Header: Identity + Language & Theme Switch -->
+  <div class="flex items-start justify-between gap-2">
+    <div>
+      <h1 class="text-xl font-bold tracking-tight text-[var(--app-text)] sm:text-2xl">
+        <span data-i18n="intro.greeting">{t["intro.greeting"]}</span>{" "}
+        <span class="text-[var(--app-accent)] font-extrabold">Ridlo Abdullah Ulinnuha</span>
+      </h1>
+      <div class="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[var(--app-text-soft)]">
+        <span class="font-semibold text-[var(--app-text)]" data-i18n="intro.role">{t["intro.role"]}</span>
+        <span>·</span>
+        <span class="inline-flex items-center gap-1">
+          <MapPin className="h-3.5 w-3.5 text-[var(--app-accent)]" />
+          <span data-i18n="intro.location">{t["intro.location"]}</span>
+        </span>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <LanguageSwitch />
+      <ThemeSwitch />
+    </div>
   </div>
 
-  <div class="relative z-10 grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
-    <div class="max-w-3xl">
-      <div
-        class="grid gap-2 text-sm font-semibold leading-snug text-[var(--app-text-muted)] sm:grid-cols-2"
-      >
-        <p>
-          Software Engineer building reliable web applications, APIs,
-          database-backed workflows, mobile interfaces, and machine learning
-          features.
-        </p>
-        <p>
-          I turn product requirements into maintainable interfaces, tested
-          flows, model-backed logic, and documentation teams can keep using.
-        </p>
-      </div>
+  <!-- Body: Authentic Bio + Profile Image -->
+  <div class="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+    <div class="space-y-2">
+      <p class="text-xs sm:text-sm leading-relaxed text-[var(--app-text-muted)]" data-i18n="intro.bio">
+        {t["intro.bio"]}
+      </p>
 
-      <div class="mt-3 flex flex-wrap items-center gap-2">
-        {
-          socials.map(({ label, href, icon: Icon }) => (
-            <a
-              href={href}
-              target={href.startsWith("mailto:") ? undefined : "_blank"}
-              rel="noopener noreferrer"
-              aria-label={label}
-              class="icon-button"
-            >
-              <Icon className="h-5 w-5" />
-            </a>
-          ))
-        }
+      <!-- Action Buttons & Socials -->
+      <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+        <a
+          href="mailto:ridloabdullahulinnuha543@gmail.com"
+          class="inline-flex items-center gap-1.5 rounded-lg bg-[var(--app-accent)] px-2.5 py-1 text-xs font-bold text-slate-950 transition-colors hover:opacity-90 shadow-sm"
+        >
+          <Mail className="h-3.5 w-3.5" />
+          <span data-i18n="intro.getInTouch">{t["intro.getInTouch"]}</span>
+        </a>
+        <a
+          href="https://github.com/Ridlo543"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          title="GitHub Profile"
+          class="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] text-[var(--app-text)] transition-colors hover:border-[var(--app-accent)] hover:text-[var(--app-accent)]"
+        >
+          <FaGithub className="h-3.5 w-3.5" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          title="LinkedIn Profile"
+          class="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] text-[var(--app-text)] transition-colors hover:border-[var(--app-accent)] hover:text-[var(--app-accent)]"
+        >
+          <FaLinkedinIn className="h-3.5 w-3.5" />
+        </a>
         <CvDownloadMenu />
         <VisitorBadge />
       </div>
     </div>
 
+    <!-- Clean Avatar Squircle -->
     <img
       src={profilePhoto.src}
-      alt="Ridlo Abdullah Ulinnuha logo"
-      class="mx-auto h-32 w-32 shrink-0 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] object-cover md:mx-0 lg:h-40 lg:w-40"
+      alt="Ridlo Abdullah Ulinnuha"
+      class="hidden sm:block h-20 w-20 md:h-22 md:w-22 shrink-0 rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-raised)] object-cover shadow-sm"
     />
   </div>
 </div>

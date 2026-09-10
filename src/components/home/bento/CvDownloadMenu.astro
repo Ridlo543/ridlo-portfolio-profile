@@ -1,5 +1,8 @@
 ---
 import { ChevronDown, FileDown, FileText } from "lucide-react";
+import { ui, defaultLang } from "../../../i18n/ui";
+
+const t = ui[defaultLang];
 ---
 
 <div class="relative inline-flex" data-cv-menu>
@@ -11,7 +14,7 @@ import { ChevronDown, FileDown, FileText } from "lucide-react";
     aria-expanded="false"
   >
     <FileDown aria-hidden="true" className="h-4 w-4" />
-    Download CV
+    <span data-i18n="intro.downloadCv">{t["intro.downloadCv"]}</span>
     <ChevronDown aria-hidden="true" className="h-4 w-4" />
   </button>
 
@@ -21,22 +24,22 @@ import { ChevronDown, FileDown, FileText } from "lucide-react";
     role="menu"
   >
     <a
-      href="/cv/ridlo-software-engineer-en.pdf"
-      download
-      class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)]"
-      role="menuitem"
-    >
-      <FileText aria-hidden="true" className="h-4 w-4" />
-      English CV
-    </a>
-    <a
       href="/cv/ridlo-software-engineer-id.pdf"
       download
       class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)]"
       role="menuitem"
     >
       <FileText aria-hidden="true" className="h-4 w-4" />
-      Indonesian CV
+      <span data-i18n="intro.cvId">{t["intro.cvId"]}</span>
+    </a>
+    <a
+      href="/cv/ridlo-software-engineer-en.pdf"
+      download
+      class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)]"
+      role="menuitem"
+    >
+      <FileText aria-hidden="true" className="h-4 w-4" />
+      <span data-i18n="intro.cvEn">{t["intro.cvEn"]}</span>
     </a>
   </div>
 </div>

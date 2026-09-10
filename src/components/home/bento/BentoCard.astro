@@ -1,16 +1,25 @@
 ---
 interface Props {
+  titleKey?: string;
   title?: string;
   span?: string;
   className?: string;
 }
 
-const { title, span = "", className = "" } = Astro.props;
+import { ui, defaultLang, type TranslationKey } from "../../../i18n/ui";
+
+const { titleKey, title, span = "", className = "" } = Astro.props;
+const t = ui[defaultLang];
+const renderedTitle = titleKey ? t[titleKey as TranslationKey] : title;
 ---
 
 <section class={`bento-card p-3 md:p-3.5 ${span} ${className}`}>
   <div class="relative z-10">
-    {title && <h2 class="bento-card-title">{title}</h2>}
+    {renderedTitle && (
+      <h2 class="bento-card-title" data-i18n={titleKey}>
+        {renderedTitle}
+      </h2>
+    )}
     <slot />
   </div>
 </section>

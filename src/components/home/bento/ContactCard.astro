@@ -4,37 +4,42 @@ import { Mail } from "lucide-react";
 ---
 
 <div
-  class="flex flex-col items-center gap-3 text-center text-sm text-[var(--app-text-muted)] md:flex-row md:justify-between md:text-left"
+  class="flex flex-col items-center justify-between gap-2.5 text-center text-xs text-[var(--app-text-muted)] sm:flex-row sm:text-left py-0.5"
 >
-  <p class="max-w-2xl">
-    Available for software engineering roles, web and API work, data
-    collaboration, machine learning product work, or portfolio review.
-  </p>
-  <div class="flex shrink-0 flex-wrap justify-center gap-2">
+  <div class="space-y-0.5">
+    <h3 class="text-xs font-bold text-[var(--app-text)]">
+      Let's Connect & Build Together
+    </h3>
+    <p class="text-[0.72rem] text-[var(--app-text-soft)]">
+      Available for software engineering roles, technical collaboration, and open discussions.
+    </p>
+  </div>
+
+  <div class="flex shrink-0 flex-wrap justify-center gap-1.5">
     <a
       href="mailto:ridloabdullahulinnuha543@gmail.com"
-      class="modal-action modal-action--primary"
+      class="modal-action modal-action--primary text-xs py-1 px-2.5"
     >
-      <Mail aria-hidden="true" className="h-4 w-4" />
-      Email
-    </a>
-    <a
-      href="https://github.com/Ridlo543"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="modal-action"
-    >
-      <FaGithub aria-hidden="true" className="h-4 w-4" />
-      GitHub
+      <Mail aria-hidden="true" className="h-3.5 w-3.5" />
+      <span>Email</span>
     </a>
     <a
       href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/"
       target="_blank"
       rel="noopener noreferrer"
-      class="modal-action"
+      class="modal-action text-xs py-1 px-2.5"
     >
-      <FaLinkedinIn aria-hidden="true" className="h-4 w-4" />
-      LinkedIn
+      <FaLinkedinIn aria-hidden="true" className="h-3.5 w-3.5" />
+      <span>LinkedIn</span>
+    </a>
+    <a
+      href="https://github.com/Ridlo543"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="modal-action text-xs py-1 px-2.5"
+    >
+      <FaGithub aria-hidden="true" className="h-3.5 w-3.5" />
+      <span>GitHub</span>
     </a>
   </div>
 </div>

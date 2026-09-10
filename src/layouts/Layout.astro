@@ -19,7 +19,7 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="id" data-lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -62,34 +62,36 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     {noindex && <meta name="robots" content="noindex" />}
     <script is:inline>
       (() => {
-        const storageKey = "portfolio-theme";
-        const defaultMode = "dark";
-        const modes = ["system", "light", "dark"];
-
-        const getStoredMode = () => {
-          try {
-            const stored = localStorage.getItem(storageKey);
-            return modes.includes(stored) ? stored : defaultMode;
-          } catch {
-            return defaultMode;
+        // Theme init
+        const themeKey = "portfolio-theme";
+        const defaultTheme = "dark";
+        let theme = defaultTheme;
+        try {
+          const storedTheme = localStorage.getItem(themeKey);
+          if (storedTheme === "light" || storedTheme === "dark") {
+            theme = storedTheme;
           }
-        };
+        } catch {}
 
-        const getResolvedTheme = (mode) => {
-          if (mode === "light" || mode === "dark") return mode;
-          return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        };
-
-        const mode = getStoredMode();
-        const theme = getResolvedTheme(mode);
         const root = document.documentElement;
-
-        root.dataset.themeMode = mode;
+        root.dataset.themeMode = theme;
         root.dataset.theme = theme;
-        root.classList.toggle("dark", theme === "dark");
-        root.classList.toggle("light", theme === "light");
+        root.classList.remove("dark", "light");
+        root.classList.add(theme);
+
+        // Language init (default: id)
+        const langKey = "portfolio-lang";
+        const defaultLang = "id";
+        let lang = defaultLang;
+        try {
+          const storedLang = localStorage.getItem(langKey);
+          if (storedLang === "id" || storedLang === "en") {
+            lang = storedLang;
+          }
+        } catch {}
+
+        root.dataset.lang = lang;
+        root.lang = lang;
       })();
     </script>
     <title>{title}</title>

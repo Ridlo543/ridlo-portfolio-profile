@@ -1,24 +1,71 @@
-<div class="space-y-3 text-sm leading-relaxed text-[var(--app-text-muted)]">
-  <div class="space-y-2.5">
-    <p class="text-[var(--app-text-soft)]">
-      Web applications, APIs, databases, mobile interfaces, testing, design
-      handoff, and machine learning product work.
-    </p>
-    <p class="font-semibold text-[var(--app-text)]">
-      I connect product needs with maintainable systems: clear application
-      logic, dependable data flows, ML model logic, and interfaces that stay
-      usable in production.
-    </p>
+---
+import { GitPullRequest, Gauge, GraduationCap, Zap } from "lucide-react";
+import { ui, defaultLang } from "../../../i18n/ui";
+
+const t = ui[defaultLang];
+
+const metrics = [
+  {
+    value: "177+",
+    labelKey: "about.metric1.label",
+    descKey: "about.metric1.desc",
+    icon: GitPullRequest,
+  },
+  {
+    value: "40%",
+    labelKey: "about.metric2.label",
+    descKey: "about.metric2.desc",
+    icon: Zap,
+  },
+  {
+    value: "3.75",
+    labelKey: "about.metric3.label",
+    descKey: "about.metric3.desc",
+    icon: GraduationCap,
+  },
+  {
+    value: "95+",
+    labelKey: "about.metric4.label",
+    descKey: "about.metric4.desc",
+    icon: Gauge,
+  },
+] as const;
+---
+
+<div class="flex h-full flex-col justify-between gap-2 text-sm">
+  <div class="grid grid-cols-2 gap-2">
+    {
+      metrics.map((m) => {
+        const Icon = m.icon;
+        return (
+          <div class="rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/80 p-2 transition-colors hover:border-[var(--app-border-strong)]">
+            <div class="flex items-center justify-between">
+              <span class="text-base font-black text-[var(--app-accent)] font-mono">
+                {m.value}
+              </span>
+              <Icon className="h-3 w-3 text-[var(--app-text-soft)]" />
+            </div>
+            <p class="mt-0.5 text-[0.72rem] font-bold text-[var(--app-text)] leading-tight" data-i18n={m.labelKey}>
+              {t[m.labelKey]}
+            </p>
+            <p class="text-[0.65rem] text-[var(--app-text-soft)] leading-tight" data-i18n={m.descKey}>
+              {t[m.descKey]}
+            </p>
+          </div>
+        );
+      })
+    }
   </div>
 
-  <p>
-    My work spans production features, API flows, query optimization, automated
-    checks, data workflows, model experiments, and practical AI-assisted
-    engineering.
-  </p>
-
-  <p class="text-xs text-[var(--app-text-soft)]">
-    I value readable code, measured tradeoffs, reliable delivery, and handoff
-    notes that make the next change easier.
-  </p>
+  <div class="flex flex-wrap items-center gap-1.5 border-t border-[var(--app-border)] pt-2 text-[0.7rem] font-semibold">
+    <span class="rounded bg-[var(--app-surface-muted)] px-2 py-0.5 text-[var(--app-text-muted)]" data-i18n="about.tag1">
+      {t["about.tag1"]}
+    </span>
+    <span class="rounded bg-[var(--app-surface-muted)] px-2 py-0.5 text-[var(--app-text-muted)]" data-i18n="about.tag2">
+      {t["about.tag2"]}
+    </span>
+    <span class="rounded bg-[var(--app-surface-muted)] px-2 py-0.5 text-[var(--app-text-muted)]" data-i18n="about.tag3">
+      {t["about.tag3"]}
+    </span>
+  </div>
 </div>

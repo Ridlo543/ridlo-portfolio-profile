@@ -5,79 +5,57 @@ import IntroCard from "../components/home/bento/IntroCard.astro";
 import AboutCard from "../components/home/bento/AboutCard.astro";
 import TechnologyCard from "../components/home/bento/TechnologyCard.astro";
 import ProjectsCard from "../components/home/bento/ProjectsCard.astro";
-import TimeCard from "../components/home/bento/TimeCard.astro";
-import QuoteCard from "../components/home/bento/QuoteCard.astro";
 import StudyCard from "../components/home/bento/StudyCard.astro";
 import ExperienceCard from "../components/home/bento/ExperienceCard.astro";
-import ReadsCard from "../components/home/bento/ReadsCard.astro";
-import ContactCard from "../components/home/bento/ContactCard.astro";
+import { ui, defaultLang } from "../i18n/ui";
+
+const t = ui[defaultLang];
 ---
 
 <Layout
   title="Ridlo Abdullah Ulinnuha - Software Engineer"
-  description="Ridlo Abdullah Ulinnuha's software engineering portfolio covering web applications, APIs, databases, mobile interfaces, machine learning models, design tools, and selected projects."
+  description="Software Engineer portfolio of Ridlo Abdullah Ulinnuha. Experienced in production Laravel systems (177+ PRs), MySQL query optimization, applied machine learning, and modern web applications."
 >
-  <main class="bento-theme min-h-screen px-3 py-4 sm:px-4 md:px-6 md:py-6">
+  <main class="bento-theme min-h-screen px-3 py-2.5 sm:px-4 sm:py-3.5 md:px-6 md:py-4">
     <div class="bento-shell mx-auto w-full max-w-7xl">
+      <!-- ROW 1: Identity & Highlights -->
       <div class="bento-top">
-        <BentoCard className="bento-card--menu">
+        <BentoCard className="bento-card--intro">
           <IntroCard />
         </BentoCard>
 
-        <BentoCard title="About me">
+        <BentoCard titleKey="about.title">
           <AboutCard />
         </BentoCard>
       </div>
 
-      <BentoCard title="Technologies">
+      <!-- ROW 2: Core Technologies -->
+      <BentoCard titleKey="tech.title">
         <TechnologyCard />
       </BentoCard>
 
-      <div class="bento-board">
-        <div class="bento-stack">
-          <BentoCard title="Projects">
-            <ProjectsCard />
-          </BentoCard>
-        </div>
+      <!-- ROW 3: Deep Dives -->
+      <div class="bento-board bento-board--trio">
+        <BentoCard titleKey="projects.title">
+          <ProjectsCard />
+        </BentoCard>
 
-        <div class="bento-stack">
-          <BentoCard title="Your time">
-            <TimeCard label="Local time" helper="Your browser timezone" />
-          </BentoCard>
+        <BentoCard titleKey="experience.title">
+          <ExperienceCard />
+        </BentoCard>
 
-          <BentoCard title="Experience">
-            <ExperienceCard />
-          </BentoCard>
-        </div>
-
-        <div class="bento-stack">
-          <BentoCard title="My time">
-            <TimeCard
-              label="Jakarta time"
-              helper="Asia/Jakarta"
-              timezone="Asia/Jakarta"
-            />
-          </BentoCard>
-
-          <BentoCard title="Education and Certifications">
-            <StudyCard />
-          </BentoCard>
-        </div>
-
-        <div class="bento-stack">
-          <BentoCard>
-            <QuoteCard />
-          </BentoCard>
-
-          <BentoCard title="Current Focus">
-            <ReadsCard />
-          </BentoCard>
-        </div>
+        <BentoCard titleKey="study.title">
+          <StudyCard />
+        </BentoCard>
       </div>
 
-      <BentoCard title="Contact">
-        <ContactCard />
-      </BentoCard>
+      <!-- Footer -->
+      <footer class="flex flex-col sm:flex-row items-center justify-between gap-1 pt-1 text-[0.68rem] text-[var(--app-text-soft)]">
+        <span data-i18n="footer.copyright" data-i18n-year={String(new Date().getFullYear())}>
+          {t["footer.copyright"].replace("{year}", String(new Date().getFullYear()))}
+        </span>
+        <span class="font-mono" data-i18n="footer.location">{t["footer.location"]}</span>
+      </footer>
     </div>
   </main>
 </Layout>
