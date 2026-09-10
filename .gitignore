@@ -30,3 +30,4 @@ tmp/
 audit-*.md
 audit-*.png
 single-page-snapshot.md
+.config/
