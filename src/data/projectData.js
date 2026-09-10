@@ -8,14 +8,15 @@ export const projectFilters = [
 
 export const projects = [
   {
+    id: "neo-edukasi",
     title: "Neo Edukasi Education Platform",
     year: "2024 - Present",
     description:
-      "Production Laravel platform for education operations, billing, reporting, WhatsApp notifications, tutor workflows, and admin dashboards.",
+      "Production Laravel platform for daily education operations, automated billing reconciliation, WhatsApp notification dispatch, tutor management, and administrative dashboards.",
     impact: [
-      "Worked on 177 merged PRs across billing, reporting, notifications, dashboards, and data maintenance.",
-      "Fixed prepaid, postpaid, and per-meet invoice reconciliation flows for operational reporting.",
-      "Wrote feature tests, refactored critical flows, and optimized MySQL queries to cut load time by up to 40%.",
+      "Authored 177 merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
+      "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
+      "Wrote feature tests and optimized MySQL queries, reducing critical report query load times by up to 40%.",
     ],
     technologies: [
       "Laravel",
@@ -32,18 +33,19 @@ export const projects = [
     links: [],
   },
   {
+    id: "stunby-ml",
     title: "StunBy Machine Learning Capstone",
     year: "2024",
     description:
-      "Bangkit capstone machine learning workflows for baby height detection, nutrition prediction, WHO Z-score checks, food tracking, and chatbot support.",
+      "Bangkit Academy capstone pipeline for child growth classification, nutrition tracking, WHO Z-score calculation, and AI chatbot support.",
     impact: [
-      "Developed Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG workflows for stunting-related product features.",
-      "Documented API endpoints for nutrition prediction, growth classification, tracking, and recommendations.",
-      "Improved model behavior, chatbot flows, and API handoff through team PRs in the public Bangkit organization repositories.",
+      "Engineered Python, TensorFlow, YOLO, Flask API, and Vertex AI RAG services for growth classification.",
+      "Designed and documented REST endpoints for nutrition checks, image classification handoff, and recommendations.",
+      "Coordinated with cross-functional mobile and cloud teams through GitHub pull requests in public organization repos.",
     ],
     technologies: ["Python", "TensorFlow", "YOLO", "Flask API", "Vertex AI"],
     categories: ["professional", "data-ml"],
-    visualLabel: "ML/API Capstone",
+    visualLabel: "ML / API Capstone",
     accent: "#a78bfa",
     featured: true,
     links: [
@@ -60,14 +62,15 @@ export const projects = [
     ],
   },
   {
+    id: "recycle-reward",
     title: "Recycle Reward Web Application",
     year: "2024",
     description:
-      "Laravel and Filament web application for recyclable waste management, rewards, complaint handling, profile editing, notifications, and dashboard charts.",
+      "Waste management platform with Laravel and Filament admin panel for recyclable collection, point reward calculations, complaint tickets, and analytics.",
     impact: [
-      "Built reward and complaint modules, dashboard charts, profile flows, notifications, and user panel setup.",
-      "Contributed nine merged PRs and project setup documentation for maintainable Laravel development.",
-      "Used MySQL-backed Laravel workflows with Filament administration patterns.",
+      "Implemented reward calculation modules, ticket filing system, dashboard metrics, and user management panel.",
+      "Contributed 9 merged pull requests and clear setup documentation for team development.",
+      "Structured MySQL schema and relational workflows following Filament admin conventions.",
     ],
     technologies: ["Laravel", "Filament", "PHP", "MySQL", "Tailwind CSS"],
     categories: ["web"],
@@ -83,14 +86,15 @@ export const projects = [
     ],
   },
   {
+    id: "share-task",
     title: "Share Task App Suite",
     year: "2024",
     description:
-      "Android Kotlin task-sharing application with a Next.js API, Prisma, PostgreSQL, and a deployed API surface.",
+      "Android task collaboration client backed by a TypeScript Next.js API, Prisma ORM, and PostgreSQL database deployed on Vercel.",
     impact: [
-      "Built a mobile-first task workflow backed by a TypeScript API service.",
-      "Connected Android features to a Prisma and PostgreSQL backend deployed on Vercel.",
-      "Kept app and API repositories separated for clearer mobile/backend responsibilities.",
+      "Built mobile task management flows connected to authenticated REST API endpoints.",
+      "Designed relational schemas and database migrations with Prisma and PostgreSQL.",
+      "Separated mobile and API repos for clear decoupling and independent deployment.",
     ],
     technologies: ["Kotlin", "Android", "Next.js", "Prisma", "PostgreSQL"],
     categories: ["mobile", "web"],
@@ -108,21 +112,22 @@ export const projects = [
         type: "code",
       },
       {
-        label: "API",
+        label: "Live API",
         href: "https://share-task-app.vercel.app",
         type: "demo",
       },
     ],
   },
   {
+    id: "mobile-laundry",
     title: "Mobile Laundry Android Contribution",
     year: "2025",
     description:
-      "Jetpack Compose Android contribution for laundry order management, authentication flow, splash screen, and customer dashboard cards.",
+      "Jetpack Compose Android contribution for laundry order management, customer status tracking, and authentication flows.",
     impact: [
-      "Contributed merged PRs for customer dashboard order cards, navigation logic, and order detail improvements.",
-      "Worked with Compose UI, ViewModel flow, and Android order-management screens.",
-      "Supported a team codebase in the Laundry Almada organization.",
+      "Submitted merged PRs for customer dashboard order cards, navigation state, and detail screens.",
+      "Built declarative Compose UI components following Android ViewModel architecture.",
+      "Collaborated in a team repository within the Laundry Almada organization.",
     ],
     technologies: ["Kotlin", "Jetpack Compose", "Android", "ViewModel"],
     categories: ["professional", "mobile"],
@@ -137,18 +142,19 @@ export const projects = [
     ],
   },
   {
-    title: "Unitip Mobile and API Contribution",
+    id: "unitip-mobile",
+    title: "Unitip Mobile & API Contribution",
     year: "2025",
     description:
-      "Team contribution across a Jetpack Compose mobile app and TypeScript API for the Unitip application.",
+      "Jetpack Compose Android app and TypeScript API for a peer-to-peer parcel and food delivery service.",
     impact: [
-      "Contributed to mobile and API repositories in the Unitip organization.",
-      "Worked with Kotlin, Jetpack Compose, TypeScript, and API documentation workflows.",
-      "Kept public source links available while omitting the unavailable API demo from the portfolio.",
+      "Contributed to both mobile UI screens and backend API services across team repositories.",
+      "Implemented Compose state flows and documented endpoints for client-server integration.",
+      "Ensured clean repository hygiene and reproducible local build instructions.",
     ],
-    technologies: ["Kotlin", "Jetpack Compose", "TypeScript", "API"],
+    technologies: ["Kotlin", "Jetpack Compose", "TypeScript", "REST API"],
     categories: ["professional", "mobile", "web"],
-    visualLabel: "Mobile/API Team",
+    visualLabel: "Mobile / API",
     accent: "#f59e0b",
     links: [
       {
@@ -164,14 +170,15 @@ export const projects = [
     ],
   },
   {
-    title: "Air Quality Dashboard",
+    id: "air-quality",
+    title: "Air Quality Analytics Dashboard",
     year: "2024",
     description:
-      "Streamlit dashboard and notebook analysis for Wanshouxigong air quality data, built for a Python data analysis project.",
+      "Interactive Streamlit dashboard analyzing sensor data from Beijing air quality stations, with exploratory Jupyter notebooks.",
     impact: [
-      "Prepared a reproducible Python environment for analysis and dashboard execution.",
-      "Published a live Streamlit dashboard for interactive exploration.",
-      "Used notebook-driven analysis to turn air quality data into a deployable dashboard.",
+      "Prepared data processing and visualization pipelines using Pandas and Matplotlib.",
+      "Deployed interactive dashboard to Streamlit Cloud for open inspection.",
+      "Structured reproducible virtual environment and analysis notebooks.",
     ],
     technologies: ["Python", "Streamlit", "Pandas", "Jupyter Notebook"],
     categories: ["data-ml", "web"],
@@ -191,14 +198,15 @@ export const projects = [
     ],
   },
   {
-    title: "News Recommendation and NER",
+    id: "news-recommendation",
+    title: "News Recommendation & NER",
     year: "2024",
     description:
-      "Indonesian news recommendation, search, sentiment, and named entity recognition notebook using TF-IDF, cosine similarity, and NER models.",
+      "Indonesian news recommendation, search engine, and Named Entity Recognition pipeline over 500k articles.",
     impact: [
-      "Explored an Indonesian news dataset with nearly 500k rows.",
-      "Implemented recommendation and search workflows with TF-IDF vectorization and cosine similarity.",
-      "Integrated Indonesian NER model usage for entity extraction.",
+      "Analyzed large-scale Indonesian corpus with TF-IDF vectorization and cosine similarity.",
+      "Built search and content recommendation mechanisms for news headlines and bodies.",
+      "Integrated pretrained transformer NER models for Indonesian entity extraction.",
     ],
     technologies: ["Python", "NLP", "TF-IDF", "NER", "Jupyter Notebook"],
     categories: ["data-ml"],
@@ -218,14 +226,15 @@ export const projects = [
     ],
   },
   {
+    id: "turing-machine",
     title: "Turing Machine Simulator",
     year: "2024",
     description:
-      "Astro-based simulator for exploring Turing machine behavior through an interactive web interface.",
+      "Interactive educational web simulator for visualizing Turing machine state transitions, tape movements, and formal grammars.",
     impact: [
-      "Built and deployed an educational simulator with Astro.",
-      "Published a GitHub Pages demo for quick access and testing.",
-      "Used a focused interface to make formal language concepts easier to inspect.",
+      "Built single-page interactive simulator with Astro and vanilla JavaScript.",
+      "Deployed to GitHub Pages for instant student access during university coursework.",
+      "Visualized step-by-step state changes and tape head shifts with zero external UI dependencies.",
     ],
     technologies: ["Astro", "JavaScript", "GitHub Pages"],
     categories: ["web"],
@@ -233,7 +242,7 @@ export const projects = [
     accent: "#fb7185",
     links: [
       {
-        label: "Demo",
+        label: "Live Demo",
         href: "https://ridlo543.github.io/turing-machine-astro/",
         type: "demo",
       },
