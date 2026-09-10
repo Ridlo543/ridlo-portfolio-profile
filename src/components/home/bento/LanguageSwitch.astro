@@ -1,0 +1,102 @@
+---
+import { Check, ChevronDown, Languages } from "lucide-react";
+---
+
+<div class="relative inline-flex" data-lang-menu>
+  <button
+    type="button"
+    class="flex h-8 items-center gap-1.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] px-2.5 text-xs font-bold text-[var(--app-text)] transition-colors hover:border-[var(--app-accent)] hover:text-[var(--app-accent)] cursor-pointer shadow-sm"
+    data-lang-toggle
+    aria-haspopup="menu"
+    aria-expanded="false"
+    aria-label="Pilih bahasa / Select language"
+  >
+    <Languages aria-hidden="true" className="h-3.5 w-3.5 text-[var(--app-accent)]" />
+    <span data-lang-current class="font-mono text-[0.72rem]">ID</span>
+    <ChevronDown aria-hidden="true" className="h-3 w-3 text-[var(--app-text-soft)] opacity-70" />
+  </button>
+
+  <div
+    class="absolute right-0 top-[calc(100%+0.35rem)] z-30 hidden w-36 rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)] p-1 shadow-lg backdrop-blur-md"
+    data-lang-panel
+    role="menu"
+  >
+    <button
+      type="button"
+      data-lang-option="id"
+      class="flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-xs font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)] cursor-pointer"
+      role="menuitem"
+    >
+      <span class="flex items-center gap-2">
+        <span class="text-sm">🇮🇩</span>
+        <span>Indonesia</span>
+      </span>
+      <Check className="h-3.5 w-3.5 text-[var(--app-accent)]" data-lang-check="id" />
+    </button>
+    <button
+      type="button"
+      data-lang-option="en"
+      class="flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-xs font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)] cursor-pointer"
+      role="menuitem"
+    >
+      <span class="flex items-center gap-2">
+        <span class="text-sm">🇬🇧</span>
+        <span>English</span>
+      </span>
+      <Check className="h-3.5 w-3.5 text-[var(--app-accent)] hidden" data-lang-check="en" />
+    </button>
+  </div>
+</div>
+
+<script>
+  import { initI18n } from "../../../i18n/store";
+
+  initI18n();
+
+  // Dropdown open/close behavior
+  document.querySelectorAll("[data-lang-menu]").forEach((menu) => {
+    const toggle = menu.querySelector("[data-lang-toggle]");
+    const panel = menu.querySelector("[data-lang-panel]");
+
+    if (
+      !(toggle instanceof HTMLButtonElement) ||
+      !(panel instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const panelEl = panel;
+    const toggleEl = toggle;
+
+    function setOpen(isOpen: boolean) {
+      panelEl.classList.toggle("hidden", !isOpen);
+      toggleEl.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    toggleEl.addEventListener("click", () => {
+      setOpen(panelEl.classList.contains("hidden"));
+    });
+
+    // Close on option click
+    menu.querySelectorAll("[data-lang-option]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setOpen(false);
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener("click", (e) => {
+      if (!(e.target instanceof Node) || !menu.contains(e.target)) {
+        setOpen(false);
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleEl.focus();
+      }
+    });
+  });
+</script>
