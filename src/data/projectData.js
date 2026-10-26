@@ -23,18 +23,8 @@ export const projects = [
     visualLabel: "AI / EdTech",
     accent: "#ec4899",
     featured: true,
-    links: [
-      {
-        label: "Repository",
-        href: "https://github.com/Ridlo543/ainylingo",
-        type: "code",
-      },
-      {
-        label: "Production",
-        href: "https://ainylingo.ainything.online",
-        type: "demo",
-      },
-    ],
+    privateCase: true,
+    links: [],
   },
   {
     id: "neo-edukasi",
