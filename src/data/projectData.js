@@ -14,7 +14,7 @@ export const projects = [
     description:
       "Production Laravel platform for daily education operations, automated billing reconciliation, WhatsApp notification dispatch, tutor management, and administrative dashboards.",
     impact: [
-      "Authored 177 merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
+      "Authored 227+ merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
       "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
       "Wrote feature tests and optimized MySQL queries, reducing critical report query load times by up to 40%.",
     ],

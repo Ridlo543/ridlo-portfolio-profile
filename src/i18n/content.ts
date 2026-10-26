@@ -39,12 +39,12 @@ export const bilingualProjects: BilingualProject[] = [
     },
     impact: {
       id: [
-        "Menulis 177 merged PR untuk fitur backend Laravel di production, otomatisasi reporting bulanan, dispatch alert WhatsApp, dan maintenance data.",
+        "Menulis 227+ merged PR untuk fitur backend Laravel di production, otomatisasi reporting bulanan, dispatch alert WhatsApp, dan maintenance data.",
         "Menyelesaikan logika rekonsiliasi invoice (prabayar, pascabayar, dan per sesi) untuk akurasi gaji tutor dan laporan keuangan.",
         "Menulis feature test suite dan mengoptimasi query MySQL, memangkas waktu muat laporan krusial hingga 40%.",
       ],
       en: [
-        "Authored 177 merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
+        "Authored 227+ merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
         "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
         "Wrote feature tests and optimized MySQL queries, reducing critical report query load times by up to 40%.",
       ],
@@ -379,13 +379,13 @@ export const bilingualExperiences: BilingualExperience[] = [
     },
     list: {
       id: [
-        "Menulis 177 merged PR untuk fitur backend Laravel di production, otomatisasi reporting, dan maintenance harian.",
+        "Menulis 227+ merged PR untuk fitur backend Laravel di production, otomatisasi reporting, dan maintenance harian.",
         "Merancang rekonsiliasi invoice otomatis (prabayar, pascabayar, dan per sesi) untuk kemudahan laporan keuangan bulanan.",
         "Menulis test suite fitur dan mengoptimasi query kompleks MySQL, memangkas waktu muat laporan utama hingga 40%.",
         "Mengintegrasikan WhatsApp API untuk pengiriman notifikasi otomatis kepada orang tua, siswa, dan tutor.",
       ],
       en: [
-        "Authored 177 merged PRs for production Laravel backend features, automated reporting, and daily operational fixes.",
+        "Authored 227+ merged PRs for production Laravel backend features, automated reporting, and daily operational fixes.",
         "Engineered automated prepaid, postpaid, and per-session invoice reconciliation, streamlining monthly financial reports.",
         "Wrote feature test suites and optimized complex MySQL joins, cutting critical report load times by up to 40%.",
         "Integrated WhatsApp API for automated notification dispatch to parents, students, and tutors.",

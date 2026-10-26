@@ -8,7 +8,7 @@ export const experiences = [
     description:
       "Main operational platform developer for tutoring services, billing reconciliation, reporting, and tutor management.",
     list: [
-      "Authored 177 merged PRs for production Laravel backend features, automated reporting, and daily operational fixes.",
+      "Authored 227+ merged PRs for production Laravel backend features, automated reporting, security patches, and daily operational fixes.",
       "Engineered automated prepaid, postpaid, and per-session invoice reconciliation, streamlining monthly financial reports.",
       "Wrote feature test suites and optimized complex MySQL joins, cutting critical report load times by up to 40%.",
       "Integrated WhatsApp API for automated notification dispatch to parents, students, and tutors.",
