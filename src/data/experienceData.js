@@ -15,6 +15,19 @@ export const experiences = [
     ],
   },
   {
+    role: "Teaching Assistant - Web Programming",
+    organization: "Sebelas Maret University (UNS)",
+    location: "Surakarta, Indonesia",
+    time: ["Feb 2025 - Jul 2025"],
+    badge: "Academic",
+    description:
+      "Guided undergraduate students through full-stack web development, client-server architecture, and API integration.",
+    list: [
+      "Instructed 60+ students in modern full-stack web engineering, RESTful API design, and frontend-backend connectivity.",
+      "Evaluated student lab practicums and provided architectural code review guidance.",
+    ],
+  },
+  {
     role: "Machine Learning Cohort",
     organization: "Bangkit Academy (Google, GoTo, Traveloka)",
     location: "Bandung, Indonesia",

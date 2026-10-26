@@ -8,6 +8,35 @@ export const projectFilters = [
 
 export const projects = [
   {
+    id: "ainylingo",
+    title: "AinyLingo: Adaptive AI Language Learning",
+    year: "2026",
+    description:
+      "Full-stack adaptive Japanese language learning platform featuring interactive AI tutors via RAG, contextual SRS spaced repetition, automated billing reconciliation, and automated E2E tests.",
+    impact: [
+      "Architected Next.js 16 App Router platform with React 19, Tailwind CSS v4, PostgreSQL, and Drizzle ORM.",
+      "Built streaming AI tutor conversations via Vercel AI SDK and contextual retrieval-augmented generation.",
+      "Implemented Playwright automated end-to-end tests covering placement algorithms, auth, and lesson persistence.",
+    ],
+    technologies: ["Next.js 16", "TypeScript", "PostgreSQL", "Drizzle ORM", "Playwright", "RAG"],
+    categories: ["web", "data-ml"],
+    visualLabel: "AI / EdTech",
+    accent: "#ec4899",
+    featured: true,
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/ainylingo",
+        type: "code",
+      },
+      {
+        label: "Production",
+        href: "https://ainylingo.ainything.online",
+        type: "demo",
+      },
+    ],
+  },
+  {
     id: "neo-edukasi",
     title: "Neo Edukasi Education Platform",
     year: "2024 - Present",
