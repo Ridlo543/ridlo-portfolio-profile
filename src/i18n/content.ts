@@ -29,6 +29,40 @@ export type BilingualProject = {
 
 export const bilingualProjects: BilingualProject[] = [
   {
+    id: "ainystudy",
+    title: "AinyStudy: Adaptive AI Language Learning",
+    year: { id: "2026", en: "2026" },
+    visualLabel: { id: "AI / EdTech", en: "AI / EdTech" },
+    description: {
+      id: "Platform pembelajaran bahasa Jepang (JLPT N5–N1) dan persiapan TOEIC berbasis Next.js 16 dan RAG dengan tutor AI interaktif, latihan adaptif, dan evaluasi audio.",
+      en: "Full-stack adaptive Japanese language (JLPT N5–N1) and TOEIC preparation platform featuring streaming conversational AI tutors via RAG, speech assessment, and spaced repetition drills.",
+    },
+    impact: {
+      id: [
+        "Membangun platform Next.js 16 App Router dengan React 19, Tailwind CSS v4, PostgreSQL, dan Drizzle ORM.",
+        "Mengembangkan dialog tutor AI streaming dengan contextual retrieval-augmented generation (RAG).",
+        "Mengintegrasikan evaluasi audio dan automated testing Playwright untuk algoritma placement test.",
+      ],
+      en: [
+        "Built Next.js 16 App Router platform with React 19, Tailwind CSS v4, PostgreSQL, and Drizzle ORM.",
+        "Engineered streaming AI tutor dialogues with contextual retrieval-augmented generation (RAG).",
+        "Integrated audio speech evaluation and automated Playwright test suites for placement algorithms.",
+      ],
+    },
+    technologies: ["Next.js 16", "TypeScript", "PostgreSQL", "Drizzle ORM", "Playwright", "RAG"],
+    categories: ["web", "data-ml"],
+    accent: "#ec4899",
+    featured: true,
+    privateCase: false,
+    links: [
+      {
+        label: { id: "Live Demo", en: "Live Demo" },
+        href: "https://ainystudy.ainything.online",
+        type: "demo",
+      },
+    ],
+  },
+  {
     id: "neo-edukasi",
     title: "Neo Edukasi Education Platform",
     year: { id: "2024 - Sekarang", en: "2024 - Present" },
@@ -39,14 +73,14 @@ export const bilingualProjects: BilingualProject[] = [
     },
     impact: {
       id: [
-        "Menulis 227+ merged PR untuk fitur backend Laravel di production, otomatisasi reporting bulanan, dispatch alert WhatsApp, dan maintenance data.",
+        "Menyelesaikan 167+ merged PR untuk fitur platform edukasi Laravel di production (194+ di seluruh repositori), otomatisasi reporting, dan maintenance data.",
         "Menyelesaikan logika rekonsiliasi invoice (prabayar, pascabayar, dan per sesi) untuk akurasi gaji tutor dan laporan keuangan.",
-        "Menulis feature test suite dan mengoptimasi query MySQL, memangkas waktu muat laporan krusial hingga 40%.",
+        "Menulis feature test suite serta mengoptimasi query dan indeks MySQL untuk mempercepat waktu respons laporan.",
       ],
       en: [
-        "Authored 227+ merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
+        "Delivered 167+ merged PRs for production Laravel backend features (194+ across repositories), automated reporting, and data maintenance.",
         "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
-        "Wrote feature tests and optimized MySQL queries, reducing critical report query load times by up to 40%.",
+        "Wrote feature tests and optimized MySQL queries and indexes to improve critical report response times.",
       ],
     },
     technologies: ["Laravel", "PHP", "MySQL", "Feature Testing", "WhatsApp API"],
@@ -379,15 +413,15 @@ export const bilingualExperiences: BilingualExperience[] = [
     },
     list: {
       id: [
-        "Menulis 227+ merged PR untuk fitur backend Laravel di production, otomatisasi reporting, dan maintenance harian.",
+        "Menyelesaikan 167+ merged PR untuk fitur platform edukasi Laravel di production (194+ di seluruh repositori), otomatisasi reporting, dan maintenance data.",
         "Merancang rekonsiliasi invoice otomatis (prabayar, pascabayar, dan per sesi) untuk kemudahan laporan keuangan bulanan.",
-        "Menulis test suite fitur dan mengoptimasi query kompleks MySQL, memangkas waktu muat laporan utama hingga 40%.",
+        "Menulis test suite fitur serta mengoptimasi indeks dan query MySQL untuk mempercepat respons laporan utama.",
         "Mengintegrasikan WhatsApp API untuk pengiriman notifikasi otomatis kepada orang tua, siswa, dan tutor.",
       ],
       en: [
-        "Authored 227+ merged PRs for production Laravel backend features, automated reporting, and daily operational fixes.",
+        "Delivered 167+ merged PRs for production Laravel backend features (194+ across repositories), automated reporting, and daily operational fixes.",
         "Engineered automated prepaid, postpaid, and per-session invoice reconciliation, streamlining monthly financial reports.",
-        "Wrote feature test suites and optimized complex MySQL joins, cutting critical report load times by up to 40%.",
+        "Wrote feature test suites and optimized MySQL indexes and joins to improve report query performance.",
         "Integrated WhatsApp API for automated notification dispatch to parents, students, and tutors.",
       ],
     },
@@ -451,12 +485,12 @@ export const bilingualExperiences: BilingualExperience[] = [
     },
     list: {
       id: [
-        "Meningkatkan skor Google PageSpeed Insights dari 65 ke 95+ melalui optimasi asset dan island architecture.",
-        "Memangkas loading time landing page hingga 50% dan berkontribusi menurunkan bounce rate pengunjung sebesar 20%.",
+        "Membangun dan merilis landing page pemasaran berkinerja tinggi menggunakan Astro, React, dan Tailwind CSS island architecture.",
+        "Mengoptimasi pengiriman aset web dan mempermudah alur navigasi pengunjung.",
       ],
       en: [
-        "Raised Google PageSpeed Insights score from 65 to 95+ through asset optimization and island architecture.",
-        "Reduced landing page load time by 50% and contributed to a 20% decrease in user bounce rate.",
+        "Built and deployed high-performance marketing landing pages using Astro, React, and Tailwind CSS component islands.",
+        "Optimized asset delivery and improved user navigation flows across marketing pages.",
       ],
     },
   },
@@ -488,10 +522,10 @@ export const bilingualEducation = {
   title: { id: "S1 Informatika", en: "Bachelor of Computer Science, Informatics" },
   institution: { id: "Universitas Sebelas Maret", en: "Sebelas Maret University" },
   location: "Surakarta, Indonesia",
-  period: { id: "Agu 2022 - Jul 2026", en: "Aug 2022 - Jul 2026" },
-  gpa: { id: "IPK 3.75", en: "GPA 3.75" },
+  period: { id: "Agu 2022 - Okt 2026", en: "Aug 2022 - Oct 2026" },
+  gpa: { id: "IPK 3.81", en: "GPA 3.81" },
   description: {
-    id: "Mahasiswa S1 Informatika dengan fokus pada software engineering, sistem database, web development, dan machine learning.",
-    en: "Computer Science undergraduate focused on software engineering, database systems, web development, and applied machine learning.",
+    id: "Lulusan S1 Informatika Universitas Sebelas Maret (Lulus Oktober 2026). Fokus pada software engineering, sistem database, web development, dan machine learning.",
+    en: "Bachelor of Computer Science (Informatics) from Sebelas Maret University, graduated October 2026. Focused on software engineering, database systems, web development, and applied machine learning.",
   },
 };

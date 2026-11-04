@@ -4,10 +4,10 @@ export const education = {
   title: "Bachelor of Computer Science, Informatics",
   institution: "Sebelas Maret University",
   location: "Surakarta, Indonesia",
-  period: "Aug 2022 - Jul 2026",
-  gpa: "GPA 3.75",
+  period: "Aug 2022 - Oct 2026",
+  gpa: "GPA 3.81",
   description:
-    "Computer Science undergraduate focused on software engineering, database systems, web development, and applied machine learning.",
+    "Bachelor of Computer Science (Informatics) from Sebelas Maret University, graduated October 2026. Focused on software engineering, database systems, web development, and applied machine learning.",
 };
 
 export const certificateFilters = [
@@ -37,6 +37,16 @@ const rawCertificates = [
     description:
       "Official graduation letter for the Machine Learning learning path in Bangkit 2024 Batch 2.",
     file: "Pelatihan/Bangkit/[Bangkit 2024 Batch 2] Graduation Letter - M312B4KY3827.pdf",
+    featured: true,
+  },
+  {
+    title: "DeepLearning.AI TensorFlow Developer Certificate",
+    issuer: "DeepLearning.AI / Coursera",
+    date: "Nov 2024",
+    categories: ["career", "ml-data"],
+    description:
+      "Professional certificate covering neural networks, computer vision, NLP, and sequence modeling in TensorFlow.",
+    file: "Pelatihan/coursera/DeepLearningAI_TensorFlow_Developer.pdf",
     featured: true,
   },
   {

@@ -8,23 +8,29 @@ export const projectFilters = [
 
 export const projects = [
   {
-    id: "ainylingo",
-    title: "AinyLingo: Adaptive AI Language Learning",
+    id: "ainystudy",
+    title: "AinyStudy: Adaptive AI Language Learning",
     year: "2026",
     description:
-      "Full-stack adaptive Japanese language learning platform featuring interactive AI tutors via RAG, contextual SRS spaced repetition, automated billing reconciliation, and automated E2E tests.",
+      "Full-stack adaptive Japanese language (JLPT N5–N1) and TOEIC preparation platform featuring streaming conversational AI tutors via RAG, speech assessment, and spaced repetition drills.",
     impact: [
-      "Architected Next.js 16 App Router platform with React 19, Tailwind CSS v4, PostgreSQL, and Drizzle ORM.",
-      "Built streaming AI tutor conversations via Vercel AI SDK and contextual retrieval-augmented generation.",
-      "Implemented Playwright automated end-to-end tests covering placement algorithms, auth, and lesson persistence.",
+      "Built Next.js 16 App Router platform with React 19, Tailwind CSS v4, PostgreSQL, and Drizzle ORM.",
+      "Engineered streaming AI tutor dialogues with contextual retrieval-augmented generation (RAG).",
+      "Integrated audio speech evaluation and automated Playwright test suites for placement algorithms.",
     ],
     technologies: ["Next.js 16", "TypeScript", "PostgreSQL", "Drizzle ORM", "Playwright", "RAG"],
     categories: ["web", "data-ml"],
     visualLabel: "AI / EdTech",
     accent: "#ec4899",
     featured: true,
-    privateCase: true,
-    links: [],
+    privateCase: false,
+    links: [
+      {
+        label: "Live Demo",
+        href: "https://ainystudy.ainything.online",
+        type: "demo",
+      },
+    ],
   },
   {
     id: "neo-edukasi",
@@ -33,9 +39,9 @@ export const projects = [
     description:
       "Production Laravel platform for daily education operations, automated billing reconciliation, WhatsApp notification dispatch, tutor management, and administrative dashboards.",
     impact: [
-      "Authored 227+ merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance.",
+      "Delivered 167+ merged PRs across billing, monthly reporting, automated WhatsApp alerts, and data maintenance (194+ across repositories).",
       "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
-      "Wrote feature tests and optimized MySQL queries, reducing critical report query load times by up to 40%.",
+      "Wrote feature tests and optimized MySQL queries and indexes to improve critical report response times.",
     ],
     technologies: [
       "Laravel",

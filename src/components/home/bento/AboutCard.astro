@@ -1,33 +1,33 @@
 ---
-import { GitPullRequest, Gauge, GraduationCap, Zap } from "lucide-react";
+import { GitPullRequest, GitMerge, GraduationCap, Clock } from "lucide-react";
 import { ui, defaultLang } from "../../../i18n/ui";
 
 const t = ui[defaultLang];
 
 const metrics = [
   {
-    value: "227+",
+    value: "167+",
     labelKey: "about.metric1.label",
     descKey: "about.metric1.desc",
     icon: GitPullRequest,
   },
   {
-    value: "40%",
+    value: "194+",
     labelKey: "about.metric2.label",
     descKey: "about.metric2.desc",
-    icon: Zap,
+    icon: GitMerge,
   },
   {
-    value: "3.75",
+    value: "3.81",
     labelKey: "about.metric3.label",
     descKey: "about.metric3.desc",
     icon: GraduationCap,
   },
   {
-    value: "95+",
+    value: "230",
     labelKey: "about.metric4.label",
     descKey: "about.metric4.desc",
-    icon: Gauge,
+    icon: Clock,
   },
 ] as const;
 ---

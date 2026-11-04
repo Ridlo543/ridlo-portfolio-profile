@@ -8,9 +8,9 @@ export const experiences = [
     description:
       "Main operational platform developer for tutoring services, billing reconciliation, reporting, and tutor management.",
     list: [
-      "Authored 227+ merged PRs for production Laravel backend features, automated reporting, security patches, and daily operational fixes.",
+      "Delivered 167+ merged PRs for production Laravel backend features (194+ across repositories), automated reporting, security patches, and daily operational fixes.",
       "Engineered automated prepaid, postpaid, and per-session invoice reconciliation, streamlining monthly financial reports.",
-      "Wrote feature test suites and optimized complex MySQL joins, cutting critical report load times by up to 40%.",
+      "Wrote feature test suites and optimized MySQL indexes and joins to improve report query performance.",
       "Integrated WhatsApp API for automated notification dispatch to parents, students, and tutors.",
     ],
   },
@@ -63,8 +63,8 @@ export const experiences = [
     description:
       "Built and launched a modern company landing page with Astro, React, and Tailwind CSS.",
     list: [
-      "Raised Google PageSpeed Insights score from 65 to 95+ through asset optimization and island architecture.",
-      "Reduced landing page load time by 50% and contributed to a 20% decrease in user bounce rate.",
+      "Built and deployed high-performance marketing landing pages using Astro, React, and Tailwind CSS component islands.",
+      "Optimized asset delivery and improved user navigation flows across marketing pages.",
     ],
   },
   {
