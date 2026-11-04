@@ -21,26 +21,50 @@ const filterOptions = [
     {
       featured.map((project) => (
         <article
-          class="group cursor-pointer rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/50 p-2.5 transition-all hover:border-[var(--app-accent)] hover:bg-[var(--app-surface-raised)]"
-          data-open-project-id={project.id}
+          class="group rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/50 p-2.5 transition-all hover:border-[var(--app-border-strong)]"
           data-project-item={project.id}
         >
           <div class="flex items-center justify-between text-[0.68rem] font-bold text-[var(--app-text-soft)]">
-            <span class="text-[var(--app-accent)] font-semibold" data-project-field="visualLabel">
+            <span class="text-[var(--app-accent)] font-semibold font-mono" data-project-field="visualLabel">
               {project.visualLabel[defaultLang]}
             </span>
-            <span data-project-field="year">{project.year[defaultLang]}</span>
+            <span class="font-mono text-[0.65rem]" data-project-field="year">{project.year[defaultLang]}</span>
           </div>
-          <h3 class="mt-0.5 text-xs font-bold text-[var(--app-text)] group-hover:text-[var(--app-accent)] transition-colors line-clamp-1">
+          <h3 class="mt-0.5 text-xs font-bold text-[var(--app-text)] line-clamp-1">
             {project.title}
           </h3>
-          <p class="mt-0.5 text-[0.72rem] leading-relaxed text-[var(--app-text-muted)] line-clamp-1" data-project-field="description">
+          <p class="mt-0.5 text-[0.72rem] leading-relaxed text-[var(--app-text-muted)] line-clamp-2" data-project-field="description">
             {project.description[defaultLang]}
           </p>
-          <div class="mt-1.5 flex flex-wrap gap-1">
-            {project.technologies.slice(0, 3).map((tech) => (
-              <span class="tag tag--compact">{tech}</span>
-            ))}
+          <div class="mt-2 flex items-center justify-between gap-2 border-t border-[var(--app-border)]/60 pt-2 text-[0.7rem]">
+            <div class="flex flex-wrap gap-1">
+              {project.technologies.slice(0, 3).map((tech) => (
+                <span class="tag tag--compact">{tech}</span>
+              ))}
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              {project.links.map((link) => (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 font-bold text-[var(--app-accent)] hover:underline"
+                >
+                  {link.type === "demo" ? (
+                    <ExternalLink className="h-3 w-3" />
+                  ) : (
+                    <Code2 className="h-3 w-3" />
+                  )}
+                  <span>{link.label[defaultLang]}</span>
+                </a>
+              ))}
+              {project.privateCase && (
+                <span class="text-[0.65rem] text-[var(--app-text-soft)] italic flex items-center gap-0.5">
+                  <LockKeyhole className="h-2.5 w-2.5" />
+                  <span>Private</span>
+                </span>
+              )}
+            </div>
           </div>
         </article>
       ))

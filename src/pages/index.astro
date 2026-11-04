@@ -1,61 +1,634 @@
 ---
+// Clean, Human, Stop-Slop Professional Portfolio
+// Zero pretentious AI jargon (no "Dossier", "Telemetry", "Arsenal", "Odyssey", or fake symbols)
+// Split-Screen Layout (Desktop: 100vh Zero-Scroll, Mobile: Responsive Column)
+// Gathers ALL 10 projects, ALL 19 certificates, ALL career experiences, and verified metrics.
 import Layout from "../layouts/Layout.astro";
-import BentoCard from "../components/home/bento/BentoCard.astro";
-import IntroCard from "../components/home/bento/IntroCard.astro";
-import AboutCard from "../components/home/bento/AboutCard.astro";
-import TechnologyCard from "../components/home/bento/TechnologyCard.astro";
-import ProjectsCard from "../components/home/bento/ProjectsCard.astro";
-import StudyCard from "../components/home/bento/StudyCard.astro";
-import ExperienceCard from "../components/home/bento/ExperienceCard.astro";
+import LanguageSwitch from "../components/home/bento/LanguageSwitch.astro";
+import ThemeSwitch from "../components/home/bento/ThemeSwitch.astro";
+import { bilingualProjects, bilingualExperiences, bilingualEducation } from "../i18n/content";
+import { certificates } from "../data/certificateData.js";
 import { ui, defaultLang } from "../i18n/ui";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import { 
+  FileText, 
+  Mail, 
+  ExternalLink, 
+  Code2, 
+  Download, 
+  X, 
+  ArrowRight,
+  Briefcase,
+  Layers,
+  Award,
+  Cpu
+} from "lucide-react";
 
 const t = ui[defaultLang];
+
+// Featured items for right panel
+const featuredProjects = bilingualProjects.slice(0, 3);
+const featuredCerts = certificates.slice(0, 4);
+
+// Skills grouped naturally
+const techStack = [
+  {
+    category: "Backend & Database",
+    skills: ["Laravel", "PHP", "Filament", "MySQL", "PostgreSQL", "Prisma", "REST API", "Docker", "WhatsApp Gateway"]
+  },
+  {
+    category: "Frontend & Web",
+    skills: ["TypeScript", "Next.js 16", "React 19", "JavaScript", "Tailwind CSS v4", "Astro", "Vue.js"]
+  },
+  {
+    category: "Machine Learning & AI",
+    skills: ["Python", "TensorFlow", "YOLO", "Vertex AI", "RAG Architecture", "Pandas", "Jupyter", "Flask API"]
+  },
+  {
+    category: "Mobile & Tools",
+    skills: ["Kotlin", "Android", "Jetpack Compose", "Flutter", "Git / GitHub", "Playwright", "Figma", "Linux"]
+  }
+];
 ---
 
 <Layout
   title="Ridlo Abdullah Ulinnuha - Software Engineer"
   description="Software Engineer portfolio of Ridlo Abdullah Ulinnuha. Experienced in production Laravel systems (167+ PRs on live platform, 194+ across repositories), TypeScript/Next.js applications, and applied machine learning."
 >
-  <main class="bento-theme min-h-screen px-3 py-2.5 sm:px-4 sm:py-3.5 md:px-6 md:py-4">
-    <div class="bento-shell mx-auto w-full max-w-7xl">
-      <!-- ROW 1: Identity & Highlights -->
-      <div class="bento-top">
-        <BentoCard className="bento-card--intro">
-          <IntroCard />
-        </BentoCard>
-
-        <BentoCard titleKey="about.title">
-          <AboutCard />
-        </BentoCard>
-      </div>
-
-      <!-- ROW 2: Core Technologies -->
-      <BentoCard titleKey="tech.title">
-        <TechnologyCard />
-      </BentoCard>
-
-      <!-- ROW 3: Deep Dives -->
-      <div class="bento-board bento-board--trio">
-        <BentoCard titleKey="projects.title">
-          <ProjectsCard />
-        </BentoCard>
-
-        <BentoCard titleKey="experience.title">
-          <ExperienceCard />
-        </BentoCard>
-
-        <BentoCard titleKey="study.title">
-          <StudyCard />
-        </BentoCard>
-      </div>
-
-      <!-- Footer -->
-      <footer class="flex flex-col sm:flex-row items-center justify-between gap-1 pt-1 text-[0.68rem] text-[var(--app-text-soft)]">
-        <span data-i18n="footer.copyright" data-i18n-year={String(new Date().getFullYear())}>
-          {t["footer.copyright"].replace("{year}", String(new Date().getFullYear()))}
+  <!-- MAIN SPLIT-SCREEN WORKSPACE (Desktop: 100vh Zero-Scroll, Mobile: Responsive Column) -->
+  <main class="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 lg:h-screen lg:overflow-hidden relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+    <!-- ========================================================================= -->
+    <!-- LEFT PANEL: IDENTITY, EVIDENCE, CV & CONTACT (38% / 5 Cols on Desktop)    -->
+    <!-- ========================================================================= -->
+    <aside class="lg:col-span-5 flex flex-col justify-between space-y-4 lg:overflow-y-auto lg:pr-2">
+      <!-- 1. Status Ketersediaan & Tombol Switch (Bahasa & Tema) -->
+      <div class="flex items-center justify-between gap-2 pb-1 border-b border-[var(--app-border)]">
+        <span class="inline-flex items-center gap-1.5 text-xs text-[var(--app-accent)] font-mono font-medium">
+          <span class="h-2 w-2 rounded-full bg-[var(--app-accent)] animate-pulse"></span>
+          <span data-i18n="intro.available">{t["intro.available"]}</span>
         </span>
-        <span class="font-mono" data-i18n="footer.location">{t["footer.location"]}</span>
-      </footer>
-    </div>
+        <div class="flex items-center gap-2">
+          <LanguageSwitch />
+          <ThemeSwitch />
+        </div>
+      </div>
+
+      <!-- 2. Identitas Tunggal (Satu-satunya Nama di Layar) & Bio Faktual -->
+      <div class="space-y-3">
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--app-text)] font-sans tracking-tight">
+            Ridlo Abdullah Ulinnuha
+          </h1>
+          <p class="text-xs sm:text-sm font-mono text-[var(--app-accent)] font-medium mt-1">
+            Software Engineer · Full-Stack & Applied Machine Learning
+          </p>
+        </div>
+        <p class="text-xs leading-relaxed text-[var(--app-text-muted)] border-l-2 border-[var(--app-accent)] pl-3 py-0.5" data-i18n="intro.bio">
+          {t["intro.bio"]}
+        </p>
+      </div>
+
+      <!-- Key Numbers (Clean Human Labels, Zero AI Slop) -->
+      <div class="border-y border-[var(--app-border)] py-3.5 space-y-2.5">
+        <span class="font-mono text-[0.65rem] font-bold text-[var(--app-text-soft)] uppercase tracking-wider">
+          Key Highlights
+        </span>
+
+        <div class="grid grid-cols-2 gap-3 font-mono">
+          <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
+            <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">167+</span>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Merged PRs (Live Platform)</p>
+          </div>
+
+          <div class="border-l border-cyan-500/50 pl-2.5">
+            <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">194+</span>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Total PRs Across GitHub</p>
+          </div>
+
+          <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
+            <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">3.81</span>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">GPA S1 Informatika UNS</p>
+          </div>
+
+          <div class="border-l border-cyan-500/50 pl-2.5">
+            <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">230</span>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Hours ML (Bangkit Academy)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CV Download & Direct Contact -->
+      <div class="space-y-3 pt-1">
+        <div class="flex flex-wrap items-center gap-2">
+          <a
+            href="/cv/ridlo-software-engineer-en.pdf"
+            download
+            class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[var(--app-accent)] hover:opacity-90 text-[var(--app-on-primary)] font-bold px-3 py-2 text-xs font-mono transition-opacity shadow-sm"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            <span>Download CV (EN)</span>
+          </a>
+
+          <a
+            href="/cv/ridlo-software-engineer-id.pdf"
+            download
+            class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] hover:bg-[var(--app-surface-muted)] text-[var(--app-text)] font-semibold px-3 py-2 text-xs font-mono transition-colors"
+          >
+            <FileText className="h-3.5 w-3.5 text-[var(--app-accent)]" />
+            <span>Download CV (ID)</span>
+          </a>
+        </div>
+
+        <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-muted)] pt-1">
+          <div class="flex items-center gap-3">
+            <a
+              href="https://github.com/Ridlo543"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
+            >
+              <FaGithub className="h-3.5 w-3.5" />
+              <span>GitHub (194+ PRs)</span>
+            </a>
+            <span class="text-[var(--app-border)]">·</span>
+            <a
+              href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
+            >
+              <FaLinkedinIn className="h-3.5 w-3.5" />
+              <span>LinkedIn</span>
+            </a>
+            <span class="text-[var(--app-border)]">·</span>
+            <a
+              href="mailto:ridloabdullahulinnuha543@gmail.com"
+              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              <span>Email</span>
+            </a>
+          </div>
+
+          <span class="text-[var(--app-text-soft)] text-[0.65rem]">Surakarta, ID</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========================================================================= -->
+    <!-- RIGHT PANEL: WORKBENCH TABS & MODALS (62% / 7 Cols on Desktop)            -->
+    <!-- ========================================================================= -->
+    <section class="lg:col-span-7 flex flex-col h-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)]/85 backdrop-blur-xl p-4 sm:p-5 lg:overflow-hidden relative shadow-xl">
+      <!-- TAB NAVIGATION -->
+      <nav class="flex items-center gap-4 border-b border-[var(--app-border)] pb-3 text-xs font-mono shrink-0 overflow-x-auto" aria-label="Sections">
+        <button
+          type="button"
+          data-tab-btn="projects"
+          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-bold border-b-2 border-[var(--app-accent)] text-[var(--app-accent)] transition-colors cursor-pointer shrink-0"
+        >
+          <Layers className="h-3.5 w-3.5" />
+          <span>Projects ({bilingualProjects.length})</span>
+        </button>
+
+        <button
+          type="button"
+          data-tab-btn="experience"
+          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
+        >
+          <Briefcase className="h-3.5 w-3.5" />
+          <span>Experience</span>
+        </button>
+
+        <button
+          type="button"
+          data-tab-btn="credentials"
+          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
+        >
+          <Award className="h-3.5 w-3.5" />
+          <span>Education & Certifications ({certificates.length})</span>
+        </button>
+
+        <button
+          type="button"
+          data-tab-btn="stack"
+          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
+        >
+          <Cpu className="h-3.5 w-3.5" />
+          <span>Skills</span>
+        </button>
+      </nav>
+
+      <!-- TAB CONTENT SCROLLABLE AREA -->
+      <div class="flex-1 lg:overflow-y-auto mt-4 pr-1.5 space-y-4">
+        <!-- ================= TAB 1: PROJECTS ================= -->
+        <div id="tab-panel-projects" class="space-y-3.5">
+          {featuredProjects.map(project => (
+            <article 
+              class={`p-4 rounded-lg border transition-all ${
+                project.id === "ainystudy" 
+                  ? "border-[var(--app-accent)]/50 bg-[var(--app-accent)]/5 hover:border-[var(--app-accent)]" 
+                  : "border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 hover:border-[var(--app-border-strong)]"
+              }`}
+              data-project-item={project.id}
+            >
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-[0.68rem] text-[var(--app-accent)] font-bold uppercase tracking-wider">
+                      {project.visualLabel[defaultLang]}
+                    </span>
+                    <span class="text-[var(--app-border)]">·</span>
+                    <span class="font-mono text-[0.68rem] text-[var(--app-text-soft)]">
+                      {project.year[defaultLang]}
+                    </span>
+                  </div>
+                  <h3 class="text-sm sm:text-base font-bold text-[var(--app-text)] font-sans mt-0.5">
+                    {project.title}
+                  </h3>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  {project.links.map(link => (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-[0.68rem] px-2.5 py-1 text-[var(--app-accent)] transition-colors"
+                    >
+                      {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
+                      <span>{link.label[defaultLang]}</span>
+                    </a>
+                  ))}
+                  {project.privateCase && (
+                    <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)] italic px-2 py-0.5 bg-[var(--app-surface-muted)] rounded">
+                      Internal System
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <p class="text-xs text-[var(--app-text-muted)] leading-relaxed mt-2">
+                {project.description[defaultLang]}
+              </p>
+
+              <ul class="mt-2 space-y-1 pl-3.5 list-disc text-[0.72rem] text-[var(--app-text-muted)]">
+                {project.impact[defaultLang].map(bullet => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+
+              <div class="flex flex-wrap gap-1 pt-2.5 mt-2 border-t border-[var(--app-border)] font-mono text-[0.62rem]">
+                {project.technologies.map(tech => (
+                  <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+
+          <!-- Open All 10 Projects Modal Button -->
+          <button
+            id="btn-open-projects-modal"
+            type="button"
+            class="w-full py-2.5 text-xs font-mono font-bold text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer mt-2"
+          >
+            <span>View all {bilingualProjects.length} projects in detail modal</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        <!-- ================= TAB 2: WORK EXPERIENCE ================= -->
+        <div id="tab-panel-experience" class="hidden space-y-4">
+          <div class="space-y-3 pl-3 border-l border-[var(--app-border)] ml-1">
+            {bilingualExperiences.map(exp => (
+              <div class="relative pl-4 space-y-0.5">
+                <span class="absolute -left-[17px] top-1.5 h-2 w-2 rounded-full border border-[var(--app-accent)] bg-[var(--app-surface)]"></span>
+                <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-soft)]">
+                  <span class="text-[var(--app-accent)] font-semibold">{exp.badge[defaultLang]}</span>
+                  <span>{exp.time[defaultLang]}</span>
+                </div>
+                <h4 class="text-xs sm:text-sm font-bold text-[var(--app-text)] font-sans">
+                  {exp.role[defaultLang]}
+                </h4>
+                <p class="text-[0.68rem] text-[var(--app-text-soft)] font-medium">
+                  {exp.organization} · {exp.location}
+                </p>
+                <p class="text-xs text-[var(--app-text-muted)] leading-relaxed pt-0.5">
+                  {exp.description[defaultLang]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- ================= TAB 3: EDUCATION & CREDENTIALS ================= -->
+        <div id="tab-panel-credentials" class="hidden space-y-4">
+          <!-- Formal Education Banner -->
+          <div class="p-4 rounded-lg border-l-2 border-[var(--app-accent)] bg-[var(--app-accent)]/5 space-y-1.5">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="font-mono text-[0.68rem] text-[var(--app-accent)] font-bold uppercase tracking-wider">
+                  Degree
+                </span>
+                <h4 class="text-base font-bold text-[var(--app-text)] mt-0.5">
+                  {bilingualEducation.title[defaultLang]}
+                </h4>
+                <p class="text-xs text-[var(--app-text-soft)]">
+                  {bilingualEducation.institution[defaultLang]} ({bilingualEducation.period[defaultLang]})
+                </p>
+              </div>
+              <span class="font-mono text-sm font-bold text-[var(--app-accent)]">
+                {bilingualEducation.gpa[defaultLang]}
+              </span>
+            </div>
+            <p class="text-xs text-[var(--app-text-muted)] leading-relaxed pt-1">
+              {bilingualEducation.description[defaultLang]}
+            </p>
+          </div>
+
+          <!-- Featured Certs Preview -->
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-soft)] pb-1">
+              <span>Certificates</span>
+              <span>{certificates.length} Verified</span>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-2.5">
+              {featuredCerts.map(cert => (
+                <article class="p-3 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 flex flex-col justify-between hover:border-[var(--app-accent)] transition-colors">
+                  <div>
+                    <div class="flex items-center justify-between text-[0.65rem] font-mono text-[var(--app-text-soft)]">
+                      <span class="text-[var(--app-accent)] font-bold uppercase">{cert.issuer}</span>
+                      <span>{cert.date}</span>
+                    </div>
+                    <h5 class="mt-1 text-xs font-bold text-[var(--app-text)] line-clamp-2">
+                      {cert.title}
+                    </h5>
+                    <p class="mt-1 text-[0.7rem] text-[var(--app-text-muted)] line-clamp-2 leading-relaxed">
+                      {cert.description}
+                    </p>
+                  </div>
+
+                  <div class="mt-2.5 pt-2 border-t border-[var(--app-border)] flex items-center justify-between text-[0.68rem] font-mono">
+                    <span class="text-[var(--app-text-soft)]">{cert.fileType}</span>
+                    <a
+                      href={cert.href}
+                      download
+                      class="inline-flex items-center gap-1 font-bold text-[var(--app-accent)] hover:underline"
+                    >
+                      <Download className="h-3 w-3" />
+                      <span>Download PDF</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <!-- Open All 19 Certificates Modal Button -->
+            <button
+              id="btn-open-certs-modal"
+              type="button"
+              class="w-full py-2.5 text-xs font-mono font-bold text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer mt-2"
+            >
+              <span>View all {certificates.length} credentials in detail modal</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= TAB 4: TECH STACK ================= -->
+        <div id="tab-panel-stack" class="hidden space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            {techStack.map(group => (
+              <div class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-2.5">
+                <div class="flex items-center justify-between border-b border-[var(--app-border)] pb-1.5">
+                  <h4 class="font-mono text-xs font-bold text-[var(--app-accent)] uppercase tracking-wider">
+                    {group.category}
+                  </h4>
+                  <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)]">
+                    {group.skills.length} skills
+                  </span>
+                </div>
+                <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                  {group.skills.map(skill => (
+                    <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)] hover:border-[var(--app-accent)] transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 1: ALL 10 PROJECTS DIALOG SHEET                                     -->
+  <!-- ========================================================================= -->
+  <dialog id="modal-all-projects" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
+      <div>
+        <h3 class="text-base sm:text-lg font-bold font-sans">
+          All Projects ({bilingualProjects.length})
+        </h3>
+        <p class="text-xs text-[var(--app-text-muted)] mt-0.5">
+          Web platforms, machine learning pipelines, and full-stack applications.
+        </p>
+      </div>
+      <button id="btn-close-projects-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">
+        <X className="h-5 w-5" />
+      </button>
+    </div>
+
+    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-80px)] space-y-4">
+      {bilingualProjects.map(project => (
+        <article class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] space-y-2">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2 font-mono text-[0.68rem]">
+                <span class="text-[var(--app-accent)] font-bold uppercase">{project.visualLabel[defaultLang]}</span>
+                <span class="text-[var(--app-border)]">·</span>
+                <span class="text-[var(--app-text-soft)]">{project.year[defaultLang]}</span>
+              </div>
+              <h4 class="text-base font-bold text-[var(--app-text)] mt-0.5">{project.title}</h4>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              {project.links.map(link => (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-xs px-2.5 py-1 text-[var(--app-accent)] transition-colors"
+                >
+                  {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
+                  <span>{link.label[defaultLang]}</span>
+                </a>
+              ))}
+              {project.privateCase && (
+                <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)] italic px-2 py-0.5 bg-[var(--app-surface-muted)] rounded">
+                  Internal System
+                </span>
+              )}
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-[var(--app-text-muted)] leading-relaxed">
+            {project.description[defaultLang]}
+          </p>
+
+          <ul class="space-y-1 pl-4 list-disc text-xs text-[var(--app-text-muted)]">
+            {project.impact[defaultLang].map(b => (
+              <li>{b}</li>
+            ))}
+          </ul>
+
+          <div class="flex flex-wrap gap-1 pt-2 border-t border-[var(--app-border)] font-mono text-[0.65rem]">
+            {project.technologies.map(t => (
+              <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)]">
+                {t}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </dialog>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: ALL 19 CERTIFICATES DIALOG SHEET                                -->
+  <!-- ========================================================================= -->
+  <dialog id="modal-all-certs" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
+      <div>
+        <h3 class="text-base sm:text-lg font-bold font-sans">
+          All Credentials & Certificates ({certificates.length})
+        </h3>
+        <p class="text-xs text-[var(--app-text-muted)] mt-0.5">
+          Official certifications, university appointments, and completed curriculum records.
+        </p>
+      </div>
+      <button id="btn-close-certs-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">
+        <X className="h-5 w-5" />
+      </button>
+    </div>
+
+    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-80px)] grid sm:grid-cols-2 gap-3">
+      {certificates.map(cert => (
+        <article class="p-3.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] flex flex-col justify-between hover:border-[var(--app-accent)] transition-colors">
+          <div>
+            <div class="flex items-center justify-between text-[0.68rem] font-mono text-[var(--app-text-soft)]">
+              <span class="text-[var(--app-accent)] font-bold uppercase">{cert.issuer}</span>
+              <span>{cert.date}</span>
+            </div>
+            <h4 class="mt-1 text-xs font-bold text-[var(--app-text)] line-clamp-2">
+              {cert.title}
+            </h4>
+            <p class="mt-1 text-[0.72rem] text-[var(--app-text-muted)] line-clamp-3 leading-relaxed">
+              {cert.description}
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2.5 border-t border-[var(--app-border)] flex items-center justify-between text-[0.68rem] font-mono">
+            <span class="text-[var(--app-text-soft)]">{cert.fileType}</span>
+            <a
+              href={cert.href}
+              download
+              class="inline-flex items-center gap-1 font-bold text-[var(--app-accent)] hover:underline"
+            >
+              <Download className="h-3 w-3" />
+              <span>Download PDF</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </dialog>
+
+  <!-- Client-Side Tabs & Modals Controller Script -->
+  <script>
+    function initWorkspaceController() {
+      // 1. Tab Switching
+      const tabBtns = document.querySelectorAll<HTMLButtonElement>("[data-tab-btn]");
+      const panelProjects = document.getElementById("tab-panel-projects");
+      const panelExperience = document.getElementById("tab-panel-experience");
+      const panelCredentials = document.getElementById("tab-panel-credentials");
+      const panelStack = document.getElementById("tab-panel-stack");
+
+      const panels: Record<string, HTMLElement | null> = {
+        projects: panelProjects,
+        experience: panelExperience,
+        credentials: panelCredentials,
+        stack: panelStack
+      };
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.tabBtn;
+          if (!target) return;
+
+          tabBtns.forEach(b => {
+            const isActive = b.dataset.tabBtn === target;
+            b.classList.toggle("text-[var(--app-accent)]", isActive);
+            b.classList.toggle("border-[var(--app-accent)]", isActive);
+            b.classList.toggle("text-[var(--app-text-muted)]", !isActive);
+            b.classList.toggle("border-transparent", !isActive);
+          });
+
+          Object.entries(panels).forEach(([key, panel]) => {
+            if (panel) {
+              panel.classList.toggle("hidden", key !== target);
+            }
+          });
+        });
+      });
+
+      // 2. Modals Control (Native <dialog>)
+      const modalProjects = document.getElementById("modal-all-projects") as HTMLDialogElement | null;
+      const modalCerts = document.getElementById("modal-all-certs") as HTMLDialogElement | null;
+
+      const btnOpenProjects = document.getElementById("btn-open-projects-modal");
+      const btnCloseProjects = document.getElementById("btn-close-projects-modal");
+
+      const btnOpenCerts = document.getElementById("btn-open-certs-modal");
+      const btnCloseCerts = document.getElementById("btn-close-certs-modal");
+
+      btnOpenProjects?.addEventListener("click", () => {
+        modalProjects?.showModal();
+        document.documentElement.classList.add("modal-open");
+      });
+
+      btnCloseProjects?.addEventListener("click", () => {
+        modalProjects?.close();
+      });
+
+      btnOpenCerts?.addEventListener("click", () => {
+        modalCerts?.showModal();
+        document.documentElement.classList.add("modal-open");
+      });
+
+      btnCloseCerts?.addEventListener("click", () => {
+        modalCerts?.close();
+      });
+
+      // Close modal on outside backdrop click
+      [modalProjects, modalCerts].forEach(m => {
+        m?.addEventListener("click", (e) => {
+          if (e.target === m) m.close();
+        });
+        m?.addEventListener("close", () => {
+          document.documentElement.classList.remove("modal-open");
+        });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initWorkspaceController);
+    } else {
+      initWorkspaceController();
+    }
+  </script>
 </Layout>

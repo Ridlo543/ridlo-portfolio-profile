@@ -26,6 +26,11 @@ const t = ui[defaultLang];
           <MapPin className="h-3.5 w-3.5 text-[var(--app-accent)]" />
           <span data-i18n="intro.location">{t["intro.location"]}</span>
         </span>
+        <span>·</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[0.68rem] font-medium text-emerald-400">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span data-i18n="intro.available">{t["intro.available"]}</span>
+        </span>
       </div>
     </div>
     <div class="flex items-center gap-1.5 shrink-0">

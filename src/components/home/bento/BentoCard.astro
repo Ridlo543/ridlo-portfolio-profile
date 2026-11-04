@@ -13,12 +13,15 @@ const t = ui[defaultLang];
 const renderedTitle = titleKey ? t[titleKey as TranslationKey] : title;
 ---
 
-<section class={`bento-card p-3 md:p-3.5 ${span} ${className}`}>
+<section class={`bento-card p-3.5 md:p-4 ${span} ${className}`}>
   <div class="relative z-10">
     {renderedTitle && (
-      <h2 class="bento-card-title" data-i18n={titleKey}>
-        {renderedTitle}
-      </h2>
+      <div class="mb-3 flex items-center justify-between border-b border-[var(--app-border)] pb-2">
+        <h2 class="bento-card-title !mb-0 font-sans text-sm font-bold text-[var(--app-text)] tracking-tight flex items-center gap-2" data-i18n={titleKey}>
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+          <span>{renderedTitle}</span>
+        </h2>
+      </div>
     )}
     <slot />
   </div>

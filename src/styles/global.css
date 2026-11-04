@@ -1,51 +1,60 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;
   --app-font-sans:
-    "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   --app-font-mono:
-    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  --app-bg: #0b0f17;
-  --app-surface: #111622;
-  --app-surface-raised: #182030;
-  --app-surface-muted: #1f293d;
-  --app-text: #f8fafc;
-  --app-text-muted: #cbd5e1;
-  --app-text-soft: #94a3b8;
-  --app-border: #242f42;
-  --app-border-strong: #3b4b66;
-  --app-primary: #8b5cf6;
-  --app-primary-soft: rgb(139 92 246 / 0.18);
-  --app-accent: #2dd4bf;
-  --app-accent-soft: rgb(45 212 191 / 0.16);
-  --app-on-primary: #ffffff;
-  --app-focus: #2dd4bf;
-  --app-backdrop: rgb(2 6 23 / 0.78);
-  --app-shadow: 0 24px 60px rgb(2 6 23 / 0.38);
+    "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --app-bg: #09090b;
+  --app-surface: #111114;
+  --app-surface-raised: #18181b;
+  --app-surface-muted: #27272a;
+  --app-text: #fafafa;
+  --app-text-muted: #a1a1aa;
+  --app-text-soft: #71717a;
+  --app-border: #27272a;
+  --app-border-strong: #3f3f46;
+  --app-primary: #fafafa;
+  --app-primary-soft: rgb(250 250 250 / 0.08);
+  --app-accent: #10b981;
+  --app-accent-soft: rgb(16 185 129 / 0.12);
+  --app-on-primary: #09090b;
+  --app-focus: #10b981;
+  --app-backdrop: rgb(9 9 11 / 0.82);
+  --app-shadow: 0 20px 50px rgb(0 0 0 / 0.45);
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --app-bg: #f6f7fb;
+  --app-font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --app-font-mono:
+    "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --app-bg: #fafafa;
   --app-surface: #ffffff;
-  --app-surface-raised: #f8fafc;
-  --app-surface-muted: #eef2f7;
-  --app-text: #111827;
-  --app-text-muted: #475569;
-  --app-text-soft: #64748b;
-  --app-border: #e2e8f0;
-  --app-border-strong: #cbd5e1;
-  --app-primary: #6d28d9;
-  --app-primary-soft: rgb(109 40 217 / 0.04);
-  --app-accent: #0f766e;
-  --app-accent-soft: rgb(15 118 110 / 0.08);
+  --app-surface-raised: #f4f4f5;
+  --app-surface-muted: #e4e4e7;
+  --app-text: #09090b;
+  --app-text-muted: #52525b;
+  --app-text-soft: #71717a;
+  --app-border: #e4e4e7;
+  --app-border-strong: #d4d4d8;
+  --app-primary: #09090b;
+  --app-primary-soft: rgb(9 9 11 / 0.05);
+  --app-accent: #059669;
+  --app-accent-soft: rgb(5 150 105 / 0.08);
   --app-on-primary: #ffffff;
-  --app-focus: #0f766e;
-  --app-backdrop: rgb(15 23 42 / 0.38);
-  --app-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  --app-focus: #059669;
+  --app-backdrop: rgb(250 250 250 / 0.85);
+  --app-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
 }
 
 html {
@@ -70,6 +79,25 @@ body {
     background-color 0.2s ease,
     color 0.2s ease;
 }
+/* Sleek, ultra-thin dark scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.5);
+}
 
 button,
 input,
@@ -77,7 +105,6 @@ select,
 textarea {
   font: inherit;
 }
-
 .font-mono {
   font-family: var(--app-font-mono);
 }
@@ -93,13 +120,7 @@ a {
 }
 
 .bento-theme {
-  background:
-    radial-gradient(
-      circle at top left,
-      var(--app-primary-soft),
-      transparent 32rem
-    ),
-    var(--app-bg);
+  background: var(--app-bg);
   color: var(--app-text);
 }
 
@@ -107,47 +128,32 @@ a {
 .bento-stack {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.75rem;
 }
 
 .bento-top,
 .bento-board {
   display: grid;
-  gap: 0.625rem;
+  gap: 0.75rem;
   grid-template-columns: minmax(0, 1fr);
 }
+
 .bento-card {
   position: relative;
   overflow: visible;
   border: 1px solid var(--app-border);
-  border-radius: 0.65rem;
+  border-radius: 0.75rem;
   background: var(--app-surface);
-  box-shadow: var(--app-shadow);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
   transition:
-    border-color 0.16s ease,
-    background-color 0.16s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.bento-card::before {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: 0.65rem;
-  content: "";
-  background: linear-gradient(
-    135deg,
-    var(--app-primary-soft),
-    transparent 50%,
-    var(--app-accent-soft)
-  );
-  opacity: 0.2;
-}
 .bento-card:hover {
-  border-color: color-mix(
-    in srgb,
-    var(--app-accent) 40%,
-    var(--app-border-strong)
-  );
+  border-color: var(--app-border-strong);
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6);
 }
 .bento-card--menu {
   overflow: visible;

@@ -1,0 +1,117 @@
+---
+// Official tsParticles Library Integration
+// Modern, strict-mode compatible, high-performance particle network.
+---
+
+<div id="particles-js" class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true"></div>
+
+<style is:global>
+  #particles-js {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  #particles-js canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  import { tsParticles } from "@tsparticles/engine";
+  import { loadSlim } from "@tsparticles/slim";
+
+  async function initParticles() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    try {
+      await loadSlim(tsParticles);
+
+      await tsParticles.load({
+        id: "particles-js",
+        options: {
+          background: {
+            color: {
+              value: "transparent",
+            },
+          },
+          fpsLimit: 60,
+          particles: {
+            number: {
+              value: 65,
+              density: {
+                enable: true,
+                width: 900,
+                height: 900,
+              },
+            },
+            color: {
+              value: ["#10b981", "#38bdf8", "#f1f5f9"],
+            },
+            shape: {
+              type: "circle",
+            },
+            opacity: {
+              value: { min: 0.2, max: 0.55 },
+            },
+            size: {
+              value: { min: 1, max: 2.2 },
+            },
+            links: {
+              enable: true,
+              distance: 125,
+              color: "#38bdf8",
+              opacity: 0.22,
+              width: 0.8,
+            },
+            move: {
+              enable: true,
+              speed: 1.1,
+              direction: "none",
+              random: false,
+              straight: false,
+              outModes: {
+                default: "out",
+              },
+            },
+          },
+          interactivity: {
+            detectsOn: "window",
+            events: {
+              onHover: {
+                enable: true,
+                mode: "grab",
+              },
+              resize: {
+                enable: true,
+              },
+            },
+            modes: {
+              grab: {
+                distance: 140,
+                links: {
+                  opacity: 0.55,
+                  color: "#10b981",
+                },
+              },
+            },
+          },
+          detectRetina: true,
+        },
+      });
+    } catch (e) {
+      // Fallback
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initParticles);
+  } else {
+    initParticles();
+  }
+</script>

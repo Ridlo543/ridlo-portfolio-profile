@@ -112,191 +112,67 @@ const mobileDevopsToolsItems: TechnologyItem[] = [
   { label: "Affinity Designer", logo: "/logos/affinity-designer.svg", color: "#38bdf8" },
 ];
 
-const desktopRows: TechnologyRow[] = [
+const categories: TechnologyRow[] = [
   {
-    label: "Web / API",
-    ariaLabel: "Web, backend, and API technologies",
+    label: "Backend & Systems",
+    ariaLabel: "Backend and database technologies",
     className: "",
-    items: webBackendItems,
+    items: webBackendItems.filter((i) =>
+      ["Laravel", "PHP", "Filament", "MySQL", "PostgreSQL", "Prisma", "REST API", "WhatsApp API"].includes(i.label)
+    ),
   },
   {
-    label: "Data / AI",
-    ariaLabel: "Machine learning, data, and AI agent technologies",
-    className: "technology-row--offset",
-    items: dataAiItems,
-  },
-  {
-    label: "Mobile / Tool",
-    ariaLabel: "Mobile, DevOps, containers, and design tools",
-    className: "technology-row--tools",
-    items: mobileDevopsToolsItems,
-  },
-];
-
-const mobileRows: TechnologyRow[] = [
-  {
-    label: "Web/API",
-    ariaLabel: "Backend, database, and API technologies",
+    label: "Frontend & Web",
+    ariaLabel: "Frontend and web engineering",
     className: "",
-    items: webBackendItems.slice(0, 9),
+    items: webBackendItems.filter((i) =>
+      ["TypeScript", "Next.js", "React", "JavaScript", "Tailwind CSS", "Astro", "Vue.js"].includes(i.label)
+    ),
   },
   {
-    label: "Frontend",
-    ariaLabel: "Frontend application technologies",
-    className: "technology-row--offset",
-    items: webBackendItems.slice(9),
+    label: "AI & Machine Learning",
+    ariaLabel: "Machine learning, data, and AI technologies",
+    className: "",
+    items: dataAiItems.filter((i) =>
+      ["Python", "TensorFlow", "YOLO", "Vertex AI", "Pandas", "Jupyter", "Flask API", "MCP Server", "AI Agent Orchestration"].includes(i.label)
+    ),
   },
   {
-    label: "AI Flow",
-    ariaLabel: "AI tools, orchestration, and proxy routers",
-    className: "technology-row--slow",
-    items: dataAiItems.slice(0, 10),
-  },
-  {
-    label: "Data/ML",
-    ariaLabel: "Data science and machine learning technologies",
-    className: "technology-row--alt",
-    items: dataAiItems.slice(10),
-  },
-  {
-    label: "Mobile",
-    ariaLabel: "Mobile development technologies",
-    className: "technology-row--tools",
-    items: mobileDevopsToolsItems.slice(0, 5),
-  },
-  {
-    label: "Tools",
-    ariaLabel: "DevOps, containers, and design tools",
-    className: "technology-row--wide",
-    items: mobileDevopsToolsItems.slice(5),
+    label: "Mobile & DevOps",
+    ariaLabel: "Mobile, DevOps, containers, and tools",
+    className: "",
+    items: mobileDevopsToolsItems.filter((i) =>
+      ["Kotlin", "Android", "Jetpack Compose", "Flutter", "Dart", "Docker", "Git / GitHub", "Figma"].includes(i.label)
+    ),
   },
 ];
 ---
 
-<div
-  class="technology-rail technology-rail--desktop"
-  aria-label="Technology stack"
->
+<div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 text-xs" aria-label="Technology stack">
   {
-    desktopRows.map((row) => (
-      <div
-        class:list={["technology-row", row.className]}
-        aria-label={row.ariaLabel}
-      >
-        <span class="technology-row-label">{row.label}</span>
-        <div class="technology-window">
-          <div class="technology-track">
-            <div class="technology-set">
-              {row.items.map(({ label, icon: Icon, logo, color }) => (
-                <div
-                  class="technology-tile"
-                  style={`--technology-color: ${color}`}
-                >
-                  {logo ? (
-                    <img
-                      src={logo}
-                      alt=""
-                      loading="lazy"
-                      class="technology-logo"
-                    />
-                  ) : (
-                    Icon && (
-                      <Icon aria-hidden="true" className="technology-icon" />
-                    )
-                  )}
-                  <span class="technology-label">{label}</span>
-                </div>
-              ))}
-            </div>
-
-            <div class="technology-set" aria-hidden="true">
-              {row.items.map(({ label, icon: Icon, logo, color }) => (
-                <div
-                  class="technology-tile technology-tile--clone"
-                  style={`--technology-color: ${color}`}
-                >
-                  {logo ? (
-                    <img
-                      src={logo}
-                      alt=""
-                      loading="lazy"
-                      class="technology-logo"
-                    />
-                  ) : (
-                    Icon && (
-                      <Icon aria-hidden="true" className="technology-icon" />
-                    )
-                  )}
-                  <span class="technology-label">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+    categories.map((category) => (
+      <div class="flex flex-col rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/60 p-2.5 transition-colors hover:border-[var(--app-border-strong)]">
+        <div class="mb-2 flex items-center justify-between border-b border-[var(--app-border)] pb-1.5">
+          <span class="font-mono text-[0.68rem] font-bold tracking-tight text-[var(--app-text)]">
+            {category.label}
+          </span>
+          <span class="font-mono text-[0.62rem] text-[var(--app-text-soft)]">
+            {category.items.length}
+          </span>
         </div>
-      </div>
-    ))
-  }
-</div>
-
-<div
-  class="technology-rail technology-rail--mobile"
-  aria-label="Technology stack"
->
-  {
-    mobileRows.map((row) => (
-      <div
-        class:list={["technology-row", row.className]}
-        aria-label={row.ariaLabel}
-      >
-        <span class="technology-row-label">{row.label}</span>
-        <div class="technology-window">
-          <div class="technology-track">
-            <div class="technology-set">
-              {row.items.map(({ label, icon: Icon, logo, color }) => (
-                <div
-                  class="technology-tile"
-                  style={`--technology-color: ${color}`}
-                >
-                  {logo ? (
-                    <img
-                      src={logo}
-                      alt=""
-                      loading="lazy"
-                      class="technology-logo"
-                    />
-                  ) : (
-                    Icon && (
-                      <Icon aria-hidden="true" className="technology-icon" />
-                    )
-                  )}
-                  <span class="technology-label">{label}</span>
-                </div>
-              ))}
-            </div>
-
-            <div class="technology-set" aria-hidden="true">
-              {row.items.map(({ label, icon: Icon, logo, color }) => (
-                <div
-                  class="technology-tile technology-tile--clone"
-                  style={`--technology-color: ${color}`}
-                >
-                  {logo ? (
-                    <img
-                      src={logo}
-                      alt=""
-                      loading="lazy"
-                      class="technology-logo"
-                    />
-                  ) : (
-                    Icon && (
-                      <Icon aria-hidden="true" className="technology-icon" />
-                    )
-                  )}
-                  <span class="technology-label">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div class="flex flex-wrap gap-1">
+          {category.items.map(({ label, icon: Icon, logo, color }) => (
+            <span
+              class="inline-flex items-center gap-1 rounded border border-[var(--app-border)] bg-[var(--app-surface)]/80 px-1.5 py-0.5 text-[0.68rem] font-medium text-[var(--app-text)] transition-colors hover:border-[var(--app-border-strong)]"
+            >
+              {logo ? (
+                <img src={logo} alt="" loading="lazy" class="h-3 w-3 object-contain shrink-0" />
+              ) : (
+                Icon && <Icon aria-hidden="true" className="h-3 w-3 shrink-0" style={{ color }} />
+              )}
+              <span class="truncate">{label}</span>
+            </span>
+          ))}
         </div>
       </div>
     ))

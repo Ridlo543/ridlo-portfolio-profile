@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ParticlesBackground from "../components/3d/ParticlesBackground.astro";
 
 const {
   title = "Ridlo Abdullah Ulinnuha - Software Engineer",
@@ -26,7 +27,7 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -96,7 +97,48 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     </script>
     <title>{title}</title>
   </head>
-  <body class="bg-[var(--app-bg)] text-[var(--app-text)]">
-    <slot />
+  <body class="bg-[var(--app-bg)] text-[var(--app-text)] min-h-screen relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300">
+    <ParticlesBackground />
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <script>
+      // 3D Card Tilt & Specular Glare System
+      function initCardTilt() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (window.innerWidth < 768) return;
+
+        const cards = document.querySelectorAll<HTMLElement>("[data-tilt-card]");
+
+        cards.forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -3.5;
+            const rotateY = ((x - centerX) / centerX) * 3.5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(3px)`;
+            card.style.setProperty("--mouse-x", `${x.toFixed(1)}px`);
+            card.style.setProperty("--mouse-y", `${y.toFixed(1)}px`);
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+          });
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCardTilt);
+      } else {
+        initCardTilt();
+      }
+    </script>
   </body>
 </html>

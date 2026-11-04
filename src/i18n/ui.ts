@@ -13,6 +13,7 @@ export const ui = {
     "intro.greeting": "Halo, saya",
     "intro.role": "Software Engineer",
     "intro.location": "Surakarta, ID (WIB)",
+    "intro.available": "Siap Bekerja (Full-Time / Kontrak)",
     "intro.bio":
       "Software engineer dengan fokus pada pengembangan aplikasi web produksi dan arsitektur backend menggunakan Laravel, Next.js, dan TypeScript. Menyelesaikan 167+ merged PR pada platform edukasi live dan mengintegrasikan inferensi machine learning berbasis RAG. Lulusan S1 Informatika Universitas Sebelas Maret (IPK 3.81/4.00).",
     "intro.getInTouch": "Get in Touch",
@@ -79,6 +80,7 @@ export const ui = {
     "intro.greeting": "Hi, I am",
     "intro.role": "Software Engineer",
     "intro.location": "Surakarta, ID (UTC+7)",
+    "intro.available": "Available for Work (Full-Time / Contract)",
     "intro.bio":
       "Software engineer building web applications and backend systems with Laravel, Next.js, and TypeScript. Shipped 167+ merged PRs for an active education platform (194+ across repositories) and built RAG-based AI services. Computer Science graduate from Sebelas Maret University (GPA 3.81/4.00).",
     "intro.getInTouch": "Get in Touch",
