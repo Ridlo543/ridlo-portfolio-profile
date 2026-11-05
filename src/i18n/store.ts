@@ -62,6 +62,14 @@ export function initI18n() {
       if (impactList) {
         impactList.innerHTML = project.impact[lang].map((item) => `<li>${item}</li>`).join("");
       }
+
+      card.querySelectorAll<HTMLElement>("[data-project-link]").forEach((linkEl) => {
+        const idx = Number(linkEl.dataset.projectLink);
+        const linkObj = project.links[idx];
+        if (linkObj && linkObj.label) {
+          linkEl.textContent = linkObj.label[lang];
+        }
+      });
     });
 
     // 5. Update Experiences (both main screen previews and modal articles)
@@ -96,9 +104,11 @@ export function initI18n() {
       const gpa = card.querySelector<HTMLElement>('[data-edu-field="gpa"]');
       if (gpa) gpa.textContent = bilingualEducation.gpa[lang];
 
+      const inst = card.querySelector<HTMLElement>('[data-edu-field="institution"]');
+      if (inst) inst.textContent = bilingualEducation.institution[lang];
+
       const period = card.querySelector<HTMLElement>('[data-edu-field="period"]');
       if (period) period.textContent = `${bilingualEducation.period[lang]} · Surakarta, Indonesia`;
-
       const desc = card.querySelector<HTMLElement>('[data-edu-field="description"]');
       if (desc) desc.textContent = bilingualEducation.description[lang];
     });

@@ -97,22 +97,22 @@ const techStack = [
         <div class="grid grid-cols-2 gap-3 font-mono">
           <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
             <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">167+</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Merged PRs (Live Platform)</p>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric1.desc">{t["about.metric1.desc"]}</p>
           </div>
 
           <div class="border-l border-cyan-500/50 pl-2.5">
             <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">194+</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Total PRs Across GitHub</p>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric2.desc">{t["about.metric2.desc"]}</p>
           </div>
 
           <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
             <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">3.81</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">GPA S1 Informatika UNS</p>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric3.desc">{t["about.metric3.desc"]}</p>
           </div>
 
           <div class="border-l border-cyan-500/50 pl-2.5">
             <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">230</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5">Hours ML (Bangkit Academy)</p>
+            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric4.desc">{t["about.metric4.desc"]}</p>
           </div>
         </div>
       </div>
@@ -187,7 +187,7 @@ const techStack = [
           class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-bold border-b-2 border-[var(--app-accent)] text-[var(--app-accent)] transition-colors cursor-pointer shrink-0"
         >
           <Layers className="h-3.5 w-3.5" />
-          <span>Projects ({bilingualProjects.length})</span>
+          <span data-i18n="nav.projects">{t["nav.projects"]} ({bilingualProjects.length})</span>
         </button>
 
         <button
@@ -196,7 +196,7 @@ const techStack = [
           class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
         >
           <Briefcase className="h-3.5 w-3.5" />
-          <span>Experience</span>
+          <span data-i18n="nav.experience">{t["nav.experience"]}</span>
         </button>
 
         <button
@@ -205,7 +205,7 @@ const techStack = [
           class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
         >
           <Award className="h-3.5 w-3.5" />
-          <span>Education & Certifications ({certificates.length})</span>
+          <span data-i18n="nav.credentials">{t["nav.credentials"]} ({certificates.length})</span>
         </button>
 
         <button
@@ -214,7 +214,7 @@ const techStack = [
           class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
         >
           <Cpu className="h-3.5 w-3.5" />
-          <span>Skills</span>
+          <span data-i18n="nav.skills">{t["nav.skills"]}</span>
         </button>
       </nav>
 
@@ -248,7 +248,7 @@ const techStack = [
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  {project.links.map(link => (
+                  {project.links.map((link, linkIdx) => (
                     <a
                       href={link.href}
                       target="_blank"
@@ -256,7 +256,7 @@ const techStack = [
                       class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-[0.68rem] px-2.5 py-1 text-[var(--app-accent)] transition-colors"
                     >
                       {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
-                      <span>{link.label[defaultLang]}</span>
+                      <span data-project-link={linkIdx}>{link.label[defaultLang]}</span>
                     </a>
                   ))}
                   {project.privateCase && (
@@ -334,8 +334,10 @@ const techStack = [
                 <h4 class="text-base font-bold text-[var(--app-text)] mt-0.5" data-edu-field="title">
                   {bilingualEducation.title[defaultLang]}
                 </h4>
-                <p class="text-xs text-[var(--app-text-soft)]" data-edu-field="period">
-                  {bilingualEducation.period[defaultLang]} · Surakarta, Indonesia
+                <p class="text-xs text-[var(--app-text-soft)]">
+                  <span data-edu-field="institution">{bilingualEducation.institution[defaultLang]}</span>
+                  <span> · </span>
+                  <span data-edu-field="period">{bilingualEducation.period[defaultLang]}</span>
                 </p>
               </div>
               <span class="font-mono text-sm font-bold text-[var(--app-accent)]" data-edu-field="gpa">
@@ -432,10 +434,10 @@ const techStack = [
     <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
         <h3 class="text-base sm:text-lg font-bold font-sans">
-          All Projects ({bilingualProjects.length})
+          <span data-i18n="projects.modalHeaderTitle">{t["projects.modalHeaderTitle"]}</span> ({bilingualProjects.length})
         </h3>
-        <p class="text-xs text-[var(--app-text-muted)] mt-0.5">
-          Web platforms, machine learning pipelines, and full-stack applications.
+        <p class="text-xs text-[var(--app-text-muted)] mt-0.5" data-i18n="projects.modalHeaderDesc">
+          {t["projects.modalHeaderDesc"]}
         </p>
       </div>
       <button id="btn-close-projects-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">
@@ -457,7 +459,7 @@ const techStack = [
             </div>
 
             <div class="flex items-center gap-1.5">
-              {project.links.map(link => (
+              {project.links.map((link, linkIdx) => (
                 <a
                   href={link.href}
                   target="_blank"
@@ -465,7 +467,7 @@ const techStack = [
                   class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-xs px-2.5 py-1 text-[var(--app-accent)] transition-colors"
                 >
                   {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
-                  <span>{link.label[defaultLang]}</span>
+                  <span data-project-link={linkIdx}>{link.label[defaultLang]}</span>
                 </a>
               ))}
               {project.privateCase && (
@@ -505,10 +507,10 @@ const techStack = [
     <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
         <h3 class="text-base sm:text-lg font-bold font-sans">
-          All Credentials & Certificates ({certificates.length})
+          <span data-i18n="certs.modalHeaderTitle">{t["certs.modalHeaderTitle"]}</span> ({certificates.length})
         </h3>
-        <p class="text-xs text-[var(--app-text-muted)] mt-0.5">
-          Official certifications, university appointments, and completed curriculum records.
+        <p class="text-xs text-[var(--app-text-muted)] mt-0.5" data-i18n="certs.modalHeaderDesc">
+          {t["certs.modalHeaderDesc"]}
         </p>
       </div>
       <button id="btn-close-certs-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">

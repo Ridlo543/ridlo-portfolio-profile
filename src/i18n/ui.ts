@@ -30,7 +30,7 @@ export const ui = {
     "about.metric2.label": "Total Merged PRs",
     "about.metric2.desc": "Seluruh repositori GitHub",
     "about.metric3.label": "IPK S1",
-    "about.metric3.desc": "Informatika @ UNS (Resmi)",
+    "about.metric3.desc": "Informatika @ UNS (3.81 / 4.00)",
     "about.metric4.label": "Jam Pelatihan ML",
     "about.metric4.desc": "Kurikulum Bangkit Academy",
     "about.tag1": "Production Backend & APIs",
@@ -71,7 +71,15 @@ export const ui = {
       "Gelar akademik resmi, surat keterangan kelulusan, dan sertifikasi teknis terverifikasi.",
     "study.download": "Download",
 
-    // Footer
+    // Navigation Tabs & Modal Headers
+    "nav.projects": "Proyek",
+    "nav.experience": "Pengalaman",
+    "nav.credentials": "Pendidikan & Sertifikasi",
+    "nav.skills": "Keahlian",
+    "projects.modalHeaderTitle": "Semua Proyek",
+    "projects.modalHeaderDesc": "Platform web produksi, pipeline machine learning, dan aplikasi software.",
+    "certs.modalHeaderTitle": "Semua Sertifikat & Kredensial",
+    "certs.modalHeaderDesc": "Gelar akademik resmi, surat keterangan kelulusan, dan sertifikasi teknis terverifikasi.",
     "footer.copyright": "© {year} Ridlo Abdullah Ulinnuha · Informatika @ Universitas Sebelas Maret",
     "footer.location": "Surakarta, Indonesia (WIB / UTC+7)",
   },
@@ -82,7 +90,7 @@ export const ui = {
     "intro.location": "Surakarta, ID (UTC+7)",
     "intro.available": "Available for Work (Full-Time / Contract)",
     "intro.bio":
-      "Software engineer building web applications and backend systems with Laravel, Next.js, and TypeScript. Shipped 167+ merged PRs for an active education platform (194+ across repositories) and built RAG-based AI services. Computer Science graduate from Sebelas Maret University (GPA 3.81/4.00).",
+      "Software engineer building web applications and backend systems with Laravel, Next.js, and TypeScript. Shipped 167+ merged PRs for an active education platform (194+ across repositories) and built RAG-based AI services. Bachelor of Computer Science in Informatics from Sebelas Maret University (GPA 3.81/4.00).",
     "intro.getInTouch": "Get in Touch",
     "intro.downloadCv": "Download CV",
     "intro.cvId": "Indonesian CV",
@@ -96,8 +104,8 @@ export const ui = {
     "about.metric1.desc": "Neo Edukasi live platform",
     "about.metric2.label": "Total Merged PRs",
     "about.metric2.desc": "Across all GitHub repos",
-    "about.metric3.label": "Undergraduate GPA",
-    "about.metric3.desc": "Informatics @ UNS (Official)",
+    "about.metric3.label": "Bachelor's GPA",
+    "about.metric3.desc": "Informatics @ UNS (3.81 / 4.00)",
     "about.metric4.label": "ML Training Hours",
     "about.metric4.desc": "Bangkit Academy curriculum",
     "about.tag1": "Production Backend & APIs",
@@ -138,7 +146,15 @@ export const ui = {
       "Academic degrees, graduation letters, and technical course certifications.",
     "study.download": "Download",
 
-    // Footer
+    // Navigation Tabs & Modal Headers
+    "nav.projects": "Projects",
+    "nav.experience": "Experience",
+    "nav.credentials": "Education & Credentials",
+    "nav.skills": "Skills",
+    "projects.modalHeaderTitle": "All Projects",
+    "projects.modalHeaderDesc": "Web platforms, machine learning pipelines, and full-stack software applications.",
+    "certs.modalHeaderTitle": "All Credentials & Certificates",
+    "certs.modalHeaderDesc": "Official academic degrees, graduation letters, and verified technical certificates.",
     "footer.copyright": "© {year} Ridlo Abdullah Ulinnuha · Informatics @ Sebelas Maret University",
     "footer.location": "Surakarta, Indonesia (WIB / UTC+7)",
   },

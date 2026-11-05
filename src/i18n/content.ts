@@ -530,13 +530,13 @@ export const bilingualExperiences: BilingualExperience[] = [
 ];
 
 export const bilingualEducation = {
-  title: { id: "S1 Informatika", en: "Bachelor of Computer Science, Informatics" },
+  title: { id: "S1 Informatika", en: "Bachelor of Computer Science (Informatics)" },
   institution: { id: "Universitas Sebelas Maret", en: "Sebelas Maret University" },
   location: "Surakarta, Indonesia",
   period: { id: "Agu 2022 - Okt 2026", en: "Aug 2022 - Oct 2026" },
-  gpa: { id: "IPK 3.81", en: "GPA 3.81" },
+  gpa: { id: "IPK 3.81 / 4.00", en: "GPA 3.81 / 4.00" },
   description: {
     id: "Lulusan S1 Informatika Universitas Sebelas Maret (Lulus Oktober 2026). Fokus pada software engineering, sistem database, web development, dan machine learning.",
-    en: "Bachelor of Computer Science (Informatics) from Sebelas Maret University, graduated October 2026. Focused on software engineering, database systems, web development, and applied machine learning.",
+    en: "Bachelor of Computer Science in Informatics from Sebelas Maret University, graduated October 2026. Focused on software engineering, database systems, web development, and applied machine learning.",
   },
 };
