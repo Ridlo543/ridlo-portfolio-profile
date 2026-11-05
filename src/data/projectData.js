@@ -289,6 +289,29 @@ export const projects = [
       },
     ],
   },
+  {
+    id: "karaoke-app",
+    title: "Java Karaoke Desktop Application",
+    year: "2024",
+    description:
+      "Java desktop karaoke application built with structured MVC architecture, multimedia audio playback engine, package session billing, and transaction receipt generation.",
+    impact: [
+      "Engineered structured MVC architecture separating Controller business logic, data Models, and custom View components.",
+      "Developed multimedia audio playback, user authentication flows, and automated transaction billing calculations.",
+      "Delivered full public GitHub documentation including architectural diagrams and UI workflow screenshots.",
+    ],
+    technologies: ["Java", "OOP", "MVC Architecture", "Desktop GUI", "Multimedia Audio"],
+    categories: ["software"],
+    visualLabel: "Java Desktop App",
+    accent: "#f59e0b",
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Ridlo543/karaoke-project",
+        type: "code",
+      },
+    ],
+  },
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);

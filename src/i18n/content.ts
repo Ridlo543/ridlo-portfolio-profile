@@ -394,6 +394,38 @@ export const bilingualProjects: BilingualProject[] = [
       },
     ],
   },
+  {
+    id: "karaoke-app",
+    title: "Java Karaoke Desktop Application",
+    year: { id: "2024", en: "2024" },
+    visualLabel: { id: "Java Desktop App", en: "Java Desktop App" },
+    description: {
+      id: "Aplikasi desktop karaoke berbasis Java murni dengan arsitektur MVC terstruktur, pemutar audio multimedia, manajemen sesi paket, dan pencetakan nota transaksi.",
+      en: "Java desktop karaoke application built with structured MVC architecture, multimedia audio playback engine, package session billing, and transaction receipt generation.",
+    },
+    impact: {
+      id: [
+        "Merancang arsitektur MVC (Model-View-Controller) memisahkan logika bisnis Controller, Model data, dan komponen View kustom.",
+        "Mengembangkan pemutar musik multimedia, autentikasi pengguna (login/register), dan kalkulasi otomatis nota transaksi.",
+        "Menyediakan repositori publik lengkap dengan dokumentasi arsitektur dan tangkapan layar antarmuka pengguna.",
+      ],
+      en: [
+        "Engineered structured MVC architecture separating Controller business logic, data Models, and custom View components.",
+        "Developed multimedia audio playback, user authentication flows, and automated transaction billing calculations.",
+        "Delivered full public GitHub documentation including architectural diagrams and UI workflow screenshots.",
+      ],
+    },
+    technologies: ["Java", "OOP", "MVC Architecture", "Desktop GUI", "Multimedia Audio"],
+    categories: ["software"],
+    accent: "#f59e0b",
+    links: [
+      {
+        label: { id: "Repository", en: "Repository" },
+        href: "https://github.com/Ridlo543/karaoke-project",
+        type: "code",
+      },
+    ],
+  },
 ];
 
 export type BilingualExperience = {
