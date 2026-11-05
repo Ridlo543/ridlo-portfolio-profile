@@ -54,8 +54,19 @@ export const projects = [
     visualLabel: "Production Platform",
     accent: "#5eead4",
     featured: true,
-    privateCase: true,
-    links: [],
+    privateCase: false,
+    links: [
+      {
+        type: "demo",
+        label: "Live Web App",
+        href: "https://app.neo-edukasi.com/",
+      },
+      {
+        type: "demo",
+        label: "Landing Page (Astro)",
+        href: "https://neo-edukasi.com/",
+      },
+    ],
   },
   {
     id: "stunby-ml",

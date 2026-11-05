@@ -87,8 +87,19 @@ export const bilingualProjects: BilingualProject[] = [
     categories: ["professional", "web"],
     accent: "#5eead4",
     featured: true,
-    privateCase: true,
-    links: [],
+    privateCase: false,
+    links: [
+      {
+        type: "demo",
+        label: { id: "Platform Operasional", en: "Live Web App" },
+        href: "https://app.neo-edukasi.com/",
+      },
+      {
+        type: "demo",
+        label: { id: "Landing Page (Astro)", en: "Landing Page (Astro)" },
+        href: "https://neo-edukasi.com/",
+      },
+    ],
   },
   {
     id: "stunby-ml",
