@@ -1,8 +1,5 @@
 ---
-// Clean, Human, Stop-Slop Professional Portfolio
-// Zero pretentious AI jargon (no "Dossier", "Telemetry", "Arsenal", "Odyssey", or fake symbols)
-// Split-Screen Layout (Desktop: 100vh Zero-Scroll, Mobile: Responsive Column)
-// Gathers ALL 10 projects, ALL 19 certificates, ALL career experiences, and verified metrics.
+// One screen on desktop (identity left, tabbed work right); a single column on phones.
 import Layout from "../layouts/Layout.astro";
 import LanguageSwitch from "../components/home/bento/LanguageSwitch.astro";
 import ThemeSwitch from "../components/home/bento/ThemeSwitch.astro";
@@ -10,415 +7,300 @@ import { bilingualProjects, bilingualExperiences, bilingualEducation } from "../
 import { certificates } from "../data/certificateData.js";
 import { ui, defaultLang } from "../i18n/ui";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
-import { 
-  FileText, 
-  Mail, 
-  ExternalLink, 
-  Code2, 
-  Download, 
-  X, 
-  ArrowRight,
-  Briefcase,
-  Layers,
-  Award,
-  Cpu
-} from "lucide-react";
+import ProjectCard from "../components/home/ProjectCard.astro";
+import CertCard from "../components/home/CertCard.astro";
+import CloseButton from "../components/home/CloseButton.astro";
 
 const t = ui[defaultLang];
+const lang = defaultLang;
 
-// Featured items for right panel
-const featuredProjects = bilingualProjects.slice(0, 3);
-const featuredCerts = certificates.slice(0, 4);
+const featuredProjects = bilingualProjects.slice(0, 4);
+// Four certificates that say the most about the work, in this order.
+const featuredTitles = [
+  "Alibaba Cloud Certified Developers",
+  "DeepLearning.AI TensorFlow Developer Certificate",
+  "Bangkit 2024 Machine Learning Completion",
+  "Back-End Application Beginner",
+];
+const featuredCerts = featuredTitles.flatMap((title) => certificates.filter((c) => c.title === title));
 
-// Skills grouped naturally
-const techStack = [
+// Logos live in public/icons/tech. "ink" logos are near-black and get inverted on the dark theme.
+type Tool = { name: string; logo?: string; ink?: boolean; href?: string; own?: boolean };
+type GroupKey = "skills.ai" | "skills.web" | "skills.ml" | "skills.ops" | "skills.mobile";
+const stack: { key: GroupKey; wide?: boolean; tools: Tool[] }[] = [
   {
-    category: "Cloud, DevOps & VPS",
-    skills: ["Linux (Ubuntu VPS)", "Nginx Reverse Proxy", "Docker", "CI/CD", "AWS Cloud", "Alibaba Cloud", "SSL & Domain DNS", "Playwright E2E"]
+    key: "skills.ai",
+    wide: true,
+    tools: [
+      { name: "Claude Code", logo: "claude" },
+      { name: "OpenCode", logo: "opencode", ink: true },
+      { name: "Oh My Pi" },
+      { name: "Hermes Agent" },
+      { name: "MCP", logo: "mcp", ink: true },
+      { name: "systemone", logo: "github", ink: true, href: "https://github.com/Ridlo543/systemone-judge", own: true },
+    ],
   },
   {
-    category: "Backend & Systems",
-    skills: ["Laravel", "PHP", "Node.js", "MySQL", "PostgreSQL", "Drizzle ORM", "REST API", "Database Indexing", "Filament"]
+    key: "skills.web",
+    tools: [
+      { name: "Laravel", logo: "laravel" },
+      { name: "PHP", logo: "php" },
+      { name: "MySQL", logo: "mysql", ink: true },
+      { name: "PostgreSQL", logo: "postgres" },
+      { name: "Vue", logo: "vue" },
+      { name: "Next.js", logo: "nextjs", ink: true },
+      { name: "React", logo: "react" },
+      { name: "TypeScript", logo: "typescript" },
+      { name: "JavaScript", logo: "javascript" },
+      { name: "Astro", logo: "astro", ink: true },
+      { name: "Tailwind CSS", logo: "tailwindcss" },
+      { name: "Drizzle ORM", logo: "drizzle" },
+      { name: "Filament", logo: "filament" },
+    ],
   },
   {
-    category: "Frontend & Web",
-    skills: ["TypeScript", "Next.js 16", "React 19", "JavaScript", "Tailwind CSS v4", "Astro", "Kotlin (Android)", "Flutter"]
+    key: "skills.ml",
+    tools: [
+      { name: "Python", logo: "python" },
+      { name: "PyTorch", logo: "pytorch" },
+      { name: "TensorFlow", logo: "tensorflow" },
+      { name: "YOLO", logo: "ultralytics", ink: true },
+      { name: "OpenCV", logo: "opencv" },
+      { name: "scikit-learn", logo: "scikit-learn" },
+      { name: "Pandas", logo: "pandas", ink: true },
+      { name: "NumPy", logo: "numpy" },
+      { name: "Jupyter", logo: "jupyter" },
+      { name: "FastAPI", logo: "fastapi" },
+      { name: "Flask", logo: "flask", ink: true },
+      { name: "Gemini", logo: "gemini" },
+      { name: "Vertex AI", logo: "google-cloud" },
+      { name: "Hugging Face", logo: "huggingface" },
+      { name: "RAG" },
+    ],
   },
   {
-    category: "Machine Learning & AI",
-    skills: ["Python", "TensorFlow", "PyTorch", "YOLO", "RAG Architecture", "Vertex AI", "OpenCV", "Flask API"]
-  }
+    key: "skills.ops",
+    tools: [
+      { name: "Linux VPS", logo: "linux-tux" },
+      { name: "Docker", logo: "docker" },
+      { name: "Nginx", logo: "nginx" },
+      { name: "Git", logo: "git" },
+      { name: "GitHub", logo: "github", ink: true },
+      { name: "CI/CD" },
+      { name: "Google Cloud", logo: "google-cloud" },
+      { name: "AWS", logo: "aws", ink: true },
+      { name: "Alibaba Cloud", logo: "alibaba-cloud" },
+      { name: "Vercel", logo: "vercel", ink: true },
+    ],
+  },
+  {
+    key: "skills.mobile",
+    tools: [
+      { name: "Kotlin", logo: "kotlin" },
+      { name: "Jetpack Compose", logo: "jetpack-compose" },
+      { name: "Android", logo: "android" },
+      { name: "Flutter", logo: "flutter" },
+      { name: "Java", logo: "java" },
+      { name: "Playwright", logo: "playwright" },
+      { name: "WhatsApp API", logo: "whatsapp" },
+    ],
+  },
+];
+
+const quietBtn =
+  "w-full py-2.5 text-sm font-medium text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors cursor-pointer";
+const tabBase =
+  "workspace-tab-btn inline-flex items-baseline gap-1.5 pb-2 -mb-px border-b-2 transition-colors cursor-pointer shrink-0";
+
+const metrics = [
+  { value: "241+", key: "about.metric1.desc" as const },
+  { value: t["about.metric4.value"], valueKey: "about.metric4.value" as const, key: "about.metric4.desc" as const },
+  { value: "110+", key: "about.metric2.desc" as const },
+  { value: "3.81", key: "about.metric3.desc" as const },
 ];
 ---
 
 <Layout
   title="Ridlo Abdullah Ulinnuha - Software Engineer"
-  description="Software Engineer portfolio of Ridlo Abdullah Ulinnuha. Experienced in production Laravel systems (167+ PRs on live platform, 194+ across repositories), TypeScript/Next.js applications, and applied machine learning."
+  description="Software engineer for web, machine learning and automation. 241+ merged pull requests on Neo Edukasi, a tutoring platform with 20,000+ registered users; AinyStudy, a RAG tutor; and thesis research on latent watermarks."
 >
-  <!-- MAIN SPLIT-SCREEN WORKSPACE (Desktop: 100vh Zero-Scroll, Mobile: Responsive Column) -->
-  <main class="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 lg:h-screen lg:overflow-hidden relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-    <!-- ========================================================================= -->
-    <!-- LEFT PANEL: IDENTITY, EVIDENCE, CV & CONTACT (38% / 5 Cols on Desktop)    -->
-    <!-- ========================================================================= -->
-    <aside class="lg:col-span-5 flex flex-col justify-between space-y-4 lg:overflow-y-auto lg:pr-2">
-      <!-- 1. Status Ketersediaan & Tombol Switch (Bahasa & Tema) -->
-      <div class="flex items-center justify-between gap-2 pb-1 border-b border-[var(--app-border)]">
-        <span class="inline-flex items-center gap-1.5 text-xs text-[var(--app-accent)] font-mono font-medium">
-          <span class="h-2 w-2 rounded-full bg-[var(--app-accent)] animate-pulse"></span>
+  <main class="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 lg:h-screen lg:overflow-hidden relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
+    <aside class="min-w-0 lg:col-span-5 flex flex-col gap-8 lg:overflow-y-auto lg:pr-2">
+      <div class="flex items-center justify-between gap-3 pb-3 border-b border-[var(--app-border)]">
+        <p class="min-w-0 inline-flex items-center gap-2 text-xs text-[var(--app-text-muted)]">
+          <span class="h-1.5 w-1.5 rounded-full bg-[var(--app-accent)]" aria-hidden="true"></span>
           <span data-i18n="intro.available">{t["intro.available"]}</span>
-        </span>
+        </p>
         <div class="flex items-center gap-2">
           <LanguageSwitch />
           <ThemeSwitch />
         </div>
       </div>
 
-      <!-- 2. Identitas Tunggal (Satu-satunya Nama di Layar) & Bio Faktual -->
-      <div class="space-y-3">
-        <div>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--app-text)] font-sans tracking-tight">
+      <div class="lg:my-auto space-y-7">
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-[var(--app-text)] tracking-tight leading-[1.05]">
             Ridlo Abdullah Ulinnuha
           </h1>
-          <p class="text-xs sm:text-sm font-mono text-[var(--app-accent)] font-medium mt-1">
-            Software Engineer · Full-Stack, Cloud/VPS & Applied ML
+          <p class="text-base font-medium text-[var(--app-accent)]" data-i18n="intro.subtitle">
+            {t["intro.subtitle"]}
+          </p>
+          <p class="text-sm leading-relaxed text-[var(--app-text-muted)] max-w-[52ch]" data-i18n="intro.bio">
+            {t["intro.bio"]}
           </p>
         </div>
-        <p class="text-xs leading-relaxed text-[var(--app-text-muted)] border-l-2 border-[var(--app-accent)] pl-3 py-0.5" data-i18n="intro.bio">
-          {t["intro.bio"]}
-        </p>
+
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[var(--app-border)] pt-6">
+          {metrics.map((m) => (
+            <div>
+              <dt class="sr-only" data-i18n={m.key}>{t[m.key]}</dt>
+              <dd>
+                <span class="block font-mono text-3xl font-bold tracking-tight text-[var(--app-text)]" data-i18n={m.valueKey}>{m.value}</span>
+                <span class="block text-xs text-[var(--app-text-muted)] mt-1" aria-hidden="true" data-i18n={m.key}>{t[m.key]}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      <!-- Key Numbers (Clean Human Labels, Zero AI Slop) -->
-      <div class="border-y border-[var(--app-border)] py-3.5 space-y-2.5">
-        <span class="font-mono text-[0.65rem] font-bold text-[var(--app-text-soft)] uppercase tracking-wider">
-          Key Highlights
-        </span>
-
-        <div class="grid grid-cols-2 gap-3 font-mono">
-          <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
-            <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">167+</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric1.desc">{t["about.metric1.desc"]}</p>
-          </div>
-
-          <div class="border-l border-cyan-500/50 pl-2.5">
-            <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">110+</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric2.desc">{t["about.metric2.desc"]}</p>
-          </div>
-
-          <div class="border-l border-[var(--app-accent)]/50 pl-2.5">
-            <span class="text-2xl sm:text-3xl font-black text-[var(--app-accent)]">3.81</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric3.desc">{t["about.metric3.desc"]}</p>
-          </div>
-
-          <div class="border-l border-cyan-500/50 pl-2.5">
-            <span class="text-2xl sm:text-3xl font-black text-cyan-500 dark:text-cyan-400">2+</span>
-            <p class="text-[0.68rem] text-[var(--app-text-muted)] font-sans mt-0.5" data-i18n="about.metric4.desc">{t["about.metric4.desc"]}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CV Download & Direct Contact -->
-      <div class="space-y-3 pt-1">
+      <div class="space-y-4">
         <div class="flex flex-wrap items-center gap-2">
           <a
             href="/cv/ridlo-software-engineer-en.pdf"
             download
-            class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[var(--app-accent)] hover:opacity-90 text-[var(--app-on-primary)] font-bold px-3 py-2 text-xs font-mono transition-opacity shadow-sm"
-          >
-            <FileText className="h-3.5 w-3.5" />
-            <span>Download CV (EN)</span>
-          </a>
-
+            class="flex-1 inline-flex items-center justify-center rounded-lg bg-[var(--app-accent)] hover:opacity-90 active:translate-y-px text-[var(--app-on-primary)] font-semibold px-3 py-2.5 text-sm transition"
+            data-i18n="cv.en"
+          >{t["cv.en"]}</a>
           <a
             href="/cv/ridlo-software-engineer-id.pdf"
             download
-            class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] hover:bg-[var(--app-surface-muted)] text-[var(--app-text)] font-semibold px-3 py-2 text-xs font-mono transition-colors"
-          >
-            <FileText className="h-3.5 w-3.5 text-[var(--app-accent)]" />
-            <span>Download CV (ID)</span>
-          </a>
+            class="flex-1 inline-flex items-center justify-center rounded-lg border border-[var(--app-border-strong)] bg-[var(--app-surface-raised)] hover:bg-[var(--app-surface-muted)] active:translate-y-px text-[var(--app-text)] font-semibold px-3 py-2.5 text-sm transition"
+            data-i18n="cv.id"
+          >{t["cv.id"]}</a>
         </div>
 
-        <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-muted)] pt-1">
-          <div class="flex items-center gap-3">
-            <a
-              href="https://github.com/Ridlo543"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
-            >
-              <FaGithub className="h-3.5 w-3.5" />
-              <span>GitHub (194+ PRs)</span>
+        <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--app-text-muted)]">
+          <div class="flex items-center gap-4">
+            <a href="https://github.com/Ridlo543" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-[var(--app-accent)] transition-colors">
+              <FaGithub className="h-4 w-4" />
+              <span>GitHub</span>
             </a>
-            <span class="text-[var(--app-border)]">·</span>
-            <a
-              href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
-            >
-              <FaLinkedinIn className="h-3.5 w-3.5" />
+            <a href="https://www.linkedin.com/in/ridlo-abdullah-ulinnuha/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-[var(--app-accent)] transition-colors">
+              <FaLinkedinIn className="h-4 w-4" />
               <span>LinkedIn</span>
             </a>
-            <span class="text-[var(--app-border)]">·</span>
-            <a
-              href="mailto:ridloabdullahulinnuha543@gmail.com"
-              class="inline-flex items-center gap-1 hover:text-[var(--app-accent)] transition-colors"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              <span>Email</span>
-            </a>
+            <a href="mailto:ridloabdullahulinnuha543@gmail.com" class="hover:text-[var(--app-accent)] transition-colors">Email</a>
           </div>
-
-          <span class="text-[var(--app-text-soft)] text-[0.65rem]">Surakarta, ID</span>
+          <span class="text-xs text-[var(--app-text-soft)]">Surakarta, UTC+7</span>
         </div>
       </div>
     </aside>
 
-    <!-- ========================================================================= -->
-    <!-- RIGHT PANEL: WORKBENCH TABS & MODALS (62% / 7 Cols on Desktop)            -->
-    <!-- ========================================================================= -->
-    <section class="lg:col-span-7 flex flex-col h-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)]/85 backdrop-blur-xl p-4 sm:p-5 lg:overflow-hidden relative shadow-xl">
-      <!-- TAB NAVIGATION -->
-      <nav class="flex items-center gap-4 border-b border-[var(--app-border)] pb-3 text-xs font-mono shrink-0 overflow-x-auto" aria-label="Sections">
-        <button
-          type="button"
-          data-tab-btn="projects"
-          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-bold border-b-2 border-[var(--app-accent)] text-[var(--app-accent)] transition-colors cursor-pointer shrink-0"
-        >
-          <Layers className="h-3.5 w-3.5" />
-          <span data-i18n="nav.projects">{t["nav.projects"]} ({bilingualProjects.length})</span>
+    <section class="min-w-0 lg:col-span-7 flex flex-col h-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)]/90 backdrop-blur-md p-4 sm:p-5 lg:overflow-hidden relative shadow-xl">
+      <nav class="flex items-center gap-5 border-b border-[var(--app-border)] text-sm shrink-0 overflow-x-auto overflow-y-hidden" aria-label="Sections">
+        <button type="button" data-tab-btn="projects" aria-pressed="true" class={`${tabBase} font-semibold border-[var(--app-accent)] text-[var(--app-accent)]`}>
+          <span data-i18n="nav.projects">{t["nav.projects"]}</span>
+          <span class="font-mono text-xs opacity-60">{bilingualProjects.length}</span>
         </button>
-
-        <button
-          type="button"
-          data-tab-btn="experience"
-          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
-        >
-          <Briefcase className="h-3.5 w-3.5" />
+        <button type="button" data-tab-btn="experience" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
           <span data-i18n="nav.experience">{t["nav.experience"]}</span>
         </button>
-
-        <button
-          type="button"
-          data-tab-btn="credentials"
-          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
-        >
-          <Award className="h-3.5 w-3.5" />
-          <span data-i18n="nav.credentials">{t["nav.credentials"]} ({certificates.length})</span>
+        <button type="button" data-tab-btn="credentials" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
+          <span data-i18n="nav.credentials">{t["nav.credentials"]}</span>
+          <span class="font-mono text-xs opacity-60">{certificates.length}</span>
         </button>
-
-        <button
-          type="button"
-          data-tab-btn="stack"
-          class="workspace-tab-btn inline-flex items-center gap-1.5 pb-1 font-semibold border-b-2 border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)] transition-colors cursor-pointer shrink-0"
-        >
-          <Cpu className="h-3.5 w-3.5" />
+        <button type="button" data-tab-btn="stack" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
           <span data-i18n="nav.skills">{t["nav.skills"]}</span>
         </button>
       </nav>
 
-      <!-- TAB CONTENT SCROLLABLE AREA -->
-      <div class="flex-1 lg:overflow-y-auto mt-4 pr-1.5 space-y-4">
-        <!-- ================= TAB 1: PROJECTS ================= -->
-        <div id="tab-panel-projects" class="space-y-3.5">
-          {featuredProjects.map(project => (
-            <article 
-              class={`p-4 rounded-lg border transition-all ${
-                project.id === "ainystudy" 
-                  ? "border-[var(--app-accent)]/50 bg-[var(--app-accent)]/5 hover:border-[var(--app-accent)]" 
-                  : "border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 hover:border-[var(--app-border-strong)]"
-              }`}
-              data-project-item={project.id}
-            >
-              <div class="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="font-mono text-[0.68rem] text-[var(--app-accent)] font-bold uppercase tracking-wider" data-project-field="visualLabel">
-                      {project.visualLabel[defaultLang]}
-                    </span>
-                    <span class="text-[var(--app-border)]">·</span>
-                    <span class="font-mono text-[0.68rem] text-[var(--app-text-soft)]" data-project-field="year">
-                      {project.year[defaultLang]}
-                    </span>
-                  </div>
-                  <h3 class="text-sm sm:text-base font-bold text-[var(--app-text)] font-sans mt-0.5">
-                    {project.title}
-                  </h3>
-                </div>
-
-                <div class="flex items-center gap-1.5">
-                  {project.links.map((link, linkIdx) => (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-[0.68rem] px-2.5 py-1 text-[var(--app-accent)] transition-colors"
-                    >
-                      {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
-                      <span data-project-link={linkIdx}>{link.label[defaultLang]}</span>
-                    </a>
-                  ))}
-                  {project.privateCase && (
-                    <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)] italic px-2 py-0.5 bg-[var(--app-surface-muted)] rounded">
-                      Internal System
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <p class="text-xs text-[var(--app-text-muted)] leading-relaxed mt-2" data-project-field="description">
-                {project.description[defaultLang]}
-              </p>
-
-              <ul class="mt-2 space-y-1 pl-3.5 list-disc text-[0.72rem] text-[var(--app-text-muted)]" data-project-field="impact">
-                {project.impact[defaultLang].map(bullet => (
-                  <li>{bullet}</li>
-                ))}
-              </ul>
-
-              <div class="flex flex-wrap gap-1 pt-2.5 mt-2 border-t border-[var(--app-border)] font-mono text-[0.62rem]">
-                {project.technologies.map(tech => (
-                  <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)]">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </article>
+      <div class="flex-1 lg:overflow-y-auto mt-4 pr-1.5">
+        <div id="tab-panel-projects" class="space-y-3">
+          {featuredProjects.map((project) => (
+            <ProjectCard project={project} />
           ))}
-
-          <!-- Open All 10 Projects Modal Button -->
-          <button
-            id="btn-open-projects-modal"
-            type="button"
-            class="w-full py-2.5 text-xs font-mono font-bold text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer mt-2"
-          >
-            <span>View all {bilingualProjects.length} projects in detail modal</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+          <button id="btn-open-projects-modal" type="button" class={quietBtn} data-i18n="projects.viewAllBtn" data-i18n-count={bilingualProjects.length}>
+            {t["projects.viewAllBtn"].replace("{count}", String(bilingualProjects.length))}
           </button>
         </div>
 
-        <!-- ================= TAB 2: WORK EXPERIENCE ================= -->
-        <div id="tab-panel-experience" class="hidden space-y-4">
-          <div class="space-y-3 pl-3 border-l border-[var(--app-border)] ml-1">
-            {bilingualExperiences.map(exp => (
-              <div class="relative pl-4 space-y-0.5" data-experience-item={exp.id}>
-                <span class="absolute -left-[17px] top-1.5 h-2 w-2 rounded-full border border-[var(--app-accent)] bg-[var(--app-surface)]"></span>
-                <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-soft)]">
-                  <span class="text-[var(--app-accent)] font-semibold" data-exp-field="badge">{exp.badge[defaultLang]}</span>
-                  <span data-exp-field="time">{exp.time[defaultLang]}</span>
+        <div id="tab-panel-experience" class="hidden">
+          <ol class="space-y-5 pl-4 border-l border-[var(--app-border)] ml-1">
+            {bilingualExperiences.map((exp) => (
+              <li class="relative space-y-1" data-experience-item={exp.id}>
+                <span class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--app-accent)] bg-[var(--app-surface)]" aria-hidden="true"></span>
+                <div class="flex flex-wrap items-baseline justify-between gap-x-3 text-xs">
+                  <span class="font-medium text-[var(--app-accent)]" data-exp-field="badge">{exp.badge[lang]}</span>
+                  <span class="font-mono text-[var(--app-text-soft)]" data-exp-field="time">{exp.time[lang]}</span>
                 </div>
-                <h4 class="text-xs sm:text-sm font-bold text-[var(--app-text)] font-sans" data-exp-field="role">
-                  {exp.role[defaultLang]}
-                </h4>
-                <p class="text-[0.68rem] text-[var(--app-text-soft)] font-medium">
-                  {exp.organization} · {exp.location}
-                </p>
-                <p class="text-xs text-[var(--app-text-muted)] leading-relaxed pt-0.5" data-exp-field="description">
-                  {exp.description[defaultLang]}
-                </p>
-              </div>
+                <h3 class="text-base font-semibold text-[var(--app-text)]" data-exp-field="role">{exp.role[lang]}</h3>
+                <p class="text-xs text-[var(--app-text-soft)]">{exp.organization} · {exp.location}</p>
+                <p class="text-sm text-[var(--app-text-muted)] leading-relaxed pt-0.5" data-exp-field="description">{exp.description[lang]}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
-        <!-- ================= TAB 3: EDUCATION & CREDENTIALS ================= -->
-        <div id="tab-panel-credentials" class="hidden space-y-4">
-          <!-- Formal Education Banner -->
-          <div class="p-4 rounded-lg border-l-2 border-[var(--app-accent)] bg-[var(--app-accent)]/5 space-y-1.5" data-education-card>
-            <div class="flex items-start justify-between gap-2">
+        <div id="tab-panel-credentials" class="hidden space-y-5">
+          <div class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-1.5" data-education-card>
+            <div class="flex items-start justify-between gap-3">
               <div>
-                <span class="font-mono text-[0.68rem] text-[var(--app-accent)] font-bold uppercase tracking-wider">
-                  Degree
-                </span>
-                <h4 class="text-base font-bold text-[var(--app-text)] mt-0.5" data-edu-field="title">
-                  {bilingualEducation.title[defaultLang]}
-                </h4>
+                <span class="text-xs font-medium text-[var(--app-accent)]" data-i18n="edu.degree">{t["edu.degree"]}</span>
+                <h3 class="text-base font-semibold text-[var(--app-text)] mt-0.5" data-edu-field="title">{bilingualEducation.title[lang]}</h3>
                 <p class="text-xs text-[var(--app-text-soft)]">
-                  <span data-edu-field="institution">{bilingualEducation.institution[defaultLang]}</span>
+                  <span data-edu-field="institution">{bilingualEducation.institution[lang]}</span>
                   <span> · </span>
-                  <span data-edu-field="period">{bilingualEducation.period[defaultLang]}</span>
+                  <span data-edu-field="period">{bilingualEducation.period[lang]}</span>
                 </p>
               </div>
-              <span class="font-mono text-sm font-bold text-[var(--app-accent)]" data-edu-field="gpa">
-                {bilingualEducation.gpa[defaultLang]}
-              </span>
+              <span class="font-mono text-sm font-semibold text-[var(--app-text)] whitespace-nowrap" data-edu-field="gpa">{bilingualEducation.gpa[lang]}</span>
             </div>
-            <p class="text-xs text-[var(--app-text-muted)] leading-relaxed pt-1" data-edu-field="description">
-              {bilingualEducation.description[defaultLang]}
-            </p>
+            <p class="text-sm text-[var(--app-text-muted)] leading-relaxed pt-1" data-edu-field="description">{bilingualEducation.description[lang]}</p>
           </div>
 
-          <!-- Featured Certs Preview -->
           <div class="space-y-2.5">
-            <div class="flex items-center justify-between text-xs font-mono text-[var(--app-text-soft)] pb-1">
-              <span>Certificates</span>
-              <span>{certificates.length} Verified</span>
+            <div class="flex items-baseline justify-between text-xs text-[var(--app-text-soft)]">
+              <h3 class="text-sm font-semibold text-[var(--app-text)]" data-i18n="certs.heading">{t["certs.heading"]}</h3>
+              <span data-i18n="certs.count" data-i18n-count={certificates.length}>{t["certs.count"].replace("{count}", String(certificates.length))}</span>
             </div>
-
             <div class="grid sm:grid-cols-2 gap-2.5">
-              {featuredCerts.map(cert => (
-                <article class="p-3 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 flex flex-col justify-between hover:border-[var(--app-accent)] transition-colors">
-                  <div>
-                    <div class="flex items-center justify-between text-[0.65rem] font-mono text-[var(--app-text-soft)]">
-                      <span class="text-[var(--app-accent)] font-bold uppercase">{cert.issuer}</span>
-                      <span>{cert.date}</span>
-                    </div>
-                    <h5 class="mt-1 text-xs font-bold text-[var(--app-text)] line-clamp-2">
-                      {cert.title}
-                    </h5>
-                    <p class="mt-1 text-[0.7rem] text-[var(--app-text-muted)] line-clamp-2 leading-relaxed">
-                      {cert.description}
-                    </p>
-                  </div>
-
-                  <div class="mt-2.5 pt-2 border-t border-[var(--app-border)] flex items-center justify-between text-[0.68rem] font-mono">
-                    <span class="text-[var(--app-text-soft)]">{cert.fileType}</span>
-                    <a
-                      href={cert.href}
-                      download
-                      class="inline-flex items-center gap-1 font-bold text-[var(--app-accent)] hover:underline"
-                    >
-                      <Download className="h-3 w-3" />
-                      <span>Download PDF</span>
-                    </a>
-                  </div>
-                </article>
-              ))}
+              {featuredCerts.map((cert) => <CertCard cert={cert} />)}
             </div>
-
-            <!-- Open All 19 Certificates Modal Button -->
-            <button
-              id="btn-open-certs-modal"
-              type="button"
-              class="w-full py-2.5 text-xs font-mono font-bold text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer mt-2"
-            >
-              <span>View all {certificates.length} credentials in detail modal</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+            <button id="btn-open-certs-modal" type="button" class={quietBtn} data-i18n="certs.viewAllBtn" data-i18n-count={certificates.length}>
+              {t["certs.viewAllBtn"].replace("{count}", String(certificates.length))}
             </button>
           </div>
         </div>
 
-        <!-- ================= TAB 4: TECH STACK ================= -->
-        <div id="tab-panel-stack" class="hidden space-y-4">
-          <div class="grid sm:grid-cols-2 gap-4">
-            {techStack.map(group => (
-              <div class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-2.5">
-                <div class="flex items-center justify-between border-b border-[var(--app-border)] pb-1.5">
-                  <h4 class="font-mono text-xs font-bold text-[var(--app-accent)] uppercase tracking-wider">
-                    {group.category}
-                  </h4>
-                  <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)]">
-                    {group.skills.length} skills
-                  </span>
-                </div>
-                <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-                  {group.skills.map(skill => (
-                    <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)] hover:border-[var(--app-accent)] transition-colors">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+        <div id="tab-panel-stack" class="hidden">
+          <div class="grid sm:grid-cols-2 gap-3">
+            {stack.map((group) => (
+              <div class:list={["p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-3", group.wide && "sm:col-span-2"]}>
+                <h3 class="text-sm font-semibold text-[var(--app-text)]" data-i18n={group.key}>{t[group.key]}</h3>
+                <ul class="flex flex-wrap gap-1.5">
+                  {group.tools.map((tool) => {
+                    const Tag = tool.href ? "a" : "span";
+                    return (
+                      <li>
+                        <Tag
+                          href={tool.href}
+                          target={tool.href ? "_blank" : undefined}
+                          rel={tool.href ? "noopener noreferrer" : undefined}
+                          class:list={[
+                            "inline-flex items-center gap-1.5 rounded-md border border-[var(--app-border)] bg-[var(--app-surface)] px-2 py-1 text-xs text-[var(--app-text)]",
+                            tool.href && "hover:border-[var(--app-accent)] transition-colors",
+                          ]}
+                        >
+                          {tool.logo && (
+                            <img src={`/icons/tech/${tool.logo}.svg`} alt="" width="16" height="16" loading="lazy" class:list={["h-4 w-4 object-contain", tool.ink && "logo-ink"]} />
+                          )}
+                          <span>{tool.name}</span>
+                          {tool.own && <span class="text-[var(--app-accent)]" data-i18n="skills.own">{t["skills.own"]}</span>}
+                        </Tag>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             ))}
           </div>
@@ -427,210 +309,142 @@ const techStack = [
     </section>
   </main>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL 1: ALL 10 PROJECTS DIALOG SHEET                                     -->
-  <!-- ========================================================================= -->
-  <dialog id="modal-all-projects" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
-    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
+  <dialog id="modal-all-projects" aria-labelledby="modal-projects-title" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between gap-4 sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
-        <h3 class="text-base sm:text-lg font-bold font-sans">
-          <span data-i18n="projects.modalHeaderTitle">{t["projects.modalHeaderTitle"]}</span> ({bilingualProjects.length})
-        </h3>
-        <p class="text-xs text-[var(--app-text-muted)] mt-0.5" data-i18n="projects.modalHeaderDesc">
-          {t["projects.modalHeaderDesc"]}
-        </p>
+        <h2 id="modal-projects-title" class="text-lg font-semibold" data-i18n="projects.modalHeaderTitle">{t["projects.modalHeaderTitle"]}</h2>
+        <p class="text-sm text-[var(--app-text-muted)] mt-0.5" data-i18n="projects.modalHeaderDesc">{t["projects.modalHeaderDesc"]}</p>
       </div>
-      <button id="btn-close-projects-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">
-        <X className="h-5 w-5" />
-      </button>
+      <CloseButton id="btn-close-projects-modal" />
     </div>
-
-    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-80px)] space-y-4">
-      {bilingualProjects.map(project => (
-        <article class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] space-y-2" data-project-item={project.id}>
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <div class="flex items-center gap-2 font-mono text-[0.68rem]">
-                <span class="text-[var(--app-accent)] font-bold uppercase" data-project-field="visualLabel">{project.visualLabel[defaultLang]}</span>
-                <span class="text-[var(--app-border)]">·</span>
-                <span class="text-[var(--app-text-soft)]" data-project-field="year">{project.year[defaultLang]}</span>
-              </div>
-              <h4 class="text-base font-bold text-[var(--app-text)] mt-0.5">{project.title}</h4>
-            </div>
-
-            <div class="flex items-center gap-1.5">
-              {project.links.map((link, linkIdx) => (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded bg-[var(--app-accent)]/15 border border-[var(--app-accent)]/30 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] font-mono font-bold text-xs px-2.5 py-1 text-[var(--app-accent)] transition-colors"
-                >
-                  {link.type === "demo" ? <ExternalLink className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
-                  <span data-project-link={linkIdx}>{link.label[defaultLang]}</span>
-                </a>
-              ))}
-              {project.privateCase && (
-                <span class="font-mono text-[0.65rem] text-[var(--app-text-soft)] italic px-2 py-0.5 bg-[var(--app-surface-muted)] rounded">
-                  Internal System
-                </span>
-              )}
-            </div>
-          </div>
-
-          <p class="text-xs sm:text-sm text-[var(--app-text-muted)] leading-relaxed" data-project-field="description">
-            {project.description[defaultLang]}
-          </p>
-
-          <ul class="space-y-1 pl-4 list-disc text-xs text-[var(--app-text-muted)]" data-project-field="impact">
-            {project.impact[defaultLang].map(b => (
-              <li>{b}</li>
-            ))}
-          </ul>
-
-          <div class="flex flex-wrap gap-1 pt-2 border-t border-[var(--app-border)] font-mono text-[0.65rem]">
-            {project.technologies.map(t => (
-              <span class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] border border-[var(--app-border)] text-[var(--app-text)]">
-                {t}
-              </span>
-            ))}
-          </div>
-        </article>
-      ))}
+    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-88px)] space-y-3">
+      {bilingualProjects.map((project) => <ProjectCard project={project} />)}
     </div>
   </dialog>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL 2: ALL 19 CERTIFICATES DIALOG SHEET                                -->
-  <!-- ========================================================================= -->
-  <dialog id="modal-all-certs" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
-    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between sticky top-0 bg-[var(--app-surface)] z-10">
+  <dialog id="modal-all-certs" aria-labelledby="modal-certs-title" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+    <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between gap-4 sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
-        <h3 class="text-base sm:text-lg font-bold font-sans">
-          <span data-i18n="certs.modalHeaderTitle">{t["certs.modalHeaderTitle"]}</span> ({certificates.length})
-        </h3>
-        <p class="text-xs text-[var(--app-text-muted)] mt-0.5" data-i18n="certs.modalHeaderDesc">
-          {t["certs.modalHeaderDesc"]}
-        </p>
+        <h2 id="modal-certs-title" class="text-lg font-semibold" data-i18n="certs.modalHeaderTitle">{t["certs.modalHeaderTitle"]}</h2>
+        <p class="text-sm text-[var(--app-text-muted)] mt-0.5" data-i18n="certs.modalHeaderDesc">{t["certs.modalHeaderDesc"]}</p>
       </div>
-      <button id="btn-close-certs-modal" type="button" class="p-2 rounded hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer text-[var(--app-text-muted)] hover:text-[var(--app-text)]" aria-label="Close Modal">
-        <X className="h-5 w-5" />
-      </button>
+      <CloseButton id="btn-close-certs-modal" />
     </div>
-
-    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-80px)] grid sm:grid-cols-2 gap-3">
-      {certificates.map(cert => (
-        <article class="p-3.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] flex flex-col justify-between hover:border-[var(--app-accent)] transition-colors">
-          <div>
-            <div class="flex items-center justify-between text-[0.68rem] font-mono text-[var(--app-text-soft)]">
-              <span class="text-[var(--app-accent)] font-bold uppercase">{cert.issuer}</span>
-              <span>{cert.date}</span>
-            </div>
-            <h4 class="mt-1 text-xs font-bold text-[var(--app-text)] line-clamp-2">
-              {cert.title}
-            </h4>
-            <p class="mt-1 text-[0.72rem] text-[var(--app-text-muted)] line-clamp-3 leading-relaxed">
-              {cert.description}
-            </p>
-          </div>
-
-          <div class="mt-3 pt-2.5 border-t border-[var(--app-border)] flex items-center justify-between text-[0.68rem] font-mono">
-            <span class="text-[var(--app-text-soft)]">{cert.fileType}</span>
-            <a
-              href={cert.href}
-              download
-              class="inline-flex items-center gap-1 font-bold text-[var(--app-accent)] hover:underline"
-            >
-              <Download className="h-3 w-3" />
-              <span>Download PDF</span>
-            </a>
-          </div>
-        </article>
-      ))}
+    <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(88vh-88px)] grid sm:grid-cols-2 gap-3">
+      {certificates.map((cert) => <CertCard cert={cert} />)}
     </div>
   </dialog>
 
-  <!-- Client-Side Tabs & Modals Controller Script -->
+  <dialog id="lightbox" aria-label="Screenshot" class="lightbox p-0 bg-transparent text-white max-w-none max-h-none w-screen h-[100dvh] m-0">
+    <div class="h-full w-full grid grid-rows-[auto_1fr_auto] gap-3 p-3 sm:p-6">
+      <div class="flex items-center justify-between gap-4 text-sm">
+        <span class="font-mono text-xs text-white/60" data-lightbox-count></span>
+        <button type="button" data-lightbox-close class="rounded-md px-3 py-1.5 bg-white/10 hover:bg-white/20 transition-colors cursor-pointer" data-i18n="lightbox.close">{t["lightbox.close"]}</button>
+      </div>
+      <figure class="min-h-0 flex flex-col items-center justify-center gap-3">
+        <img data-lightbox-img alt="" class="min-h-0 max-h-full max-w-full w-auto h-auto object-contain rounded-md shadow-2xl" />
+        <figcaption data-lightbox-caption class="text-sm text-white/75 text-center max-w-[70ch]"></figcaption>
+      </figure>
+      <div class="flex items-center justify-center gap-2" data-lightbox-nav>
+        <button type="button" data-lightbox-prev class="rounded-md px-4 py-2 bg-white/10 hover:bg-white/20 transition-colors cursor-pointer" data-i18n-aria="lightbox.prev" aria-label={t["lightbox.prev"]}>&lsaquo;</button>
+        <button type="button" data-lightbox-next class="rounded-md px-4 py-2 bg-white/10 hover:bg-white/20 transition-colors cursor-pointer" data-i18n-aria="lightbox.next" aria-label={t["lightbox.next"]}>&rsaquo;</button>
+      </div>
+    </div>
+  </dialog>
+
   <script>
-    function initWorkspaceController() {
-      // 1. Tab Switching
+    function initWorkspace() {
       const tabBtns = document.querySelectorAll<HTMLButtonElement>("[data-tab-btn]");
-      const panelProjects = document.getElementById("tab-panel-projects");
-      const panelExperience = document.getElementById("tab-panel-experience");
-      const panelCredentials = document.getElementById("tab-panel-credentials");
-      const panelStack = document.getElementById("tab-panel-stack");
+      const panels = ["projects", "experience", "credentials", "stack"].map((key) => [key, document.getElementById(`tab-panel-${key}`)] as const);
 
-      const panels: Record<string, HTMLElement | null> = {
-        projects: panelProjects,
-        experience: panelExperience,
-        credentials: panelCredentials,
-        stack: panelStack
-      };
-
-      tabBtns.forEach(btn => {
+      tabBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const target = btn.dataset.tabBtn;
-          if (!target) return;
-
-          tabBtns.forEach(b => {
-            const isActive = b.dataset.tabBtn === target;
-            b.classList.toggle("text-[var(--app-accent)]", isActive);
-            b.classList.toggle("border-[var(--app-accent)]", isActive);
-            b.classList.toggle("text-[var(--app-text-muted)]", !isActive);
-            b.classList.toggle("border-transparent", !isActive);
+          tabBtns.forEach((b) => {
+            const on = b.dataset.tabBtn === target;
+            b.setAttribute("aria-pressed", String(on));
+            b.classList.toggle("text-[var(--app-accent)]", on);
+            b.classList.toggle("border-[var(--app-accent)]", on);
+            b.classList.toggle("font-semibold", on);
+            b.classList.toggle("text-[var(--app-text-muted)]", !on);
+            b.classList.toggle("border-transparent", !on);
+            b.classList.toggle("font-medium", !on);
           });
-
-          Object.entries(panels).forEach(([key, panel]) => {
-            if (panel) {
-              panel.classList.toggle("hidden", key !== target);
-            }
-          });
+          panels.forEach(([key, panel]) => panel?.classList.toggle("hidden", key !== target));
         });
       });
 
-      // 2. Modals Control (Native <dialog>)
+      const openModal = (dialog: HTMLDialogElement | null) => {
+        if (!dialog) return;
+        dialog.showModal();
+        document.documentElement.classList.add("modal-open");
+      };
       const modalProjects = document.getElementById("modal-all-projects") as HTMLDialogElement | null;
       const modalCerts = document.getElementById("modal-all-certs") as HTMLDialogElement | null;
+      document.getElementById("btn-open-projects-modal")?.addEventListener("click", () => openModal(modalProjects));
+      document.getElementById("btn-open-certs-modal")?.addEventListener("click", () => openModal(modalCerts));
+      document.getElementById("btn-close-projects-modal")?.addEventListener("click", () => modalProjects?.close());
+      document.getElementById("btn-close-certs-modal")?.addEventListener("click", () => modalCerts?.close());
 
-      const btnOpenProjects = document.getElementById("btn-open-projects-modal");
-      const btnCloseProjects = document.getElementById("btn-close-projects-modal");
+      // Lightbox: every [data-shot] button carries its project group and index.
+      const lightbox = document.getElementById("lightbox") as HTMLDialogElement | null;
+      const lbImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");
+      const lbCaption = lightbox?.querySelector<HTMLElement>("[data-lightbox-caption]");
+      const lbCount = lightbox?.querySelector<HTMLElement>("[data-lightbox-count]");
+      const lbNav = lightbox?.querySelector<HTMLElement>("[data-lightbox-nav]");
+      let group: HTMLButtonElement[] = [];
+      let index = 0;
+      let returnFocus: HTMLElement | null = null;
 
-      const btnOpenCerts = document.getElementById("btn-open-certs-modal");
-      const btnCloseCerts = document.getElementById("btn-close-certs-modal");
+      const show = (i: number) => {
+        if (!lbImg || !group.length) return;
+        index = (i + group.length) % group.length;
+        const btn = group[index];
+        const thumb = btn.querySelector("img");
+        lbImg.src = btn.dataset.full ?? "";
+        lbImg.width = Number(btn.dataset.w);
+        lbImg.height = Number(btn.dataset.h);
+        lbImg.alt = thumb?.alt ?? "";
+        if (lbCaption) lbCaption.textContent = thumb?.alt ?? "";
+        if (lbCount) lbCount.textContent = group.length > 1 ? `${index + 1} / ${group.length}` : "";
+        lbNav?.classList.toggle("invisible", group.length < 2);
+      };
 
-      btnOpenProjects?.addEventListener("click", () => {
-        modalProjects?.showModal();
-        document.documentElement.classList.add("modal-open");
-      });
-
-      btnCloseProjects?.addEventListener("click", () => {
-        modalProjects?.close();
-      });
-
-      btnOpenCerts?.addEventListener("click", () => {
-        modalCerts?.showModal();
-        document.documentElement.classList.add("modal-open");
-      });
-
-      btnCloseCerts?.addEventListener("click", () => {
-        modalCerts?.close();
-      });
-
-      // Close modal on outside backdrop click
-      [modalProjects, modalCerts].forEach(m => {
-        m?.addEventListener("click", (e) => {
-          if (e.target === m) m.close();
+      document.querySelectorAll<HTMLButtonElement>("[data-shot]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const scope = btn.closest("[data-shot-group]") ?? btn.parentElement ?? document;
+          group = Array.from(scope.querySelectorAll<HTMLButtonElement>("[data-shot]"));
+          returnFocus = btn;
+          show(group.indexOf(btn));
+          lightbox?.showModal();
+          document.documentElement.classList.add("modal-open");
         });
-        m?.addEventListener("close", () => {
-          document.documentElement.classList.remove("modal-open");
+      });
+      lightbox?.querySelector("[data-lightbox-close]")?.addEventListener("click", () => lightbox.close());
+      lightbox?.querySelector("[data-lightbox-prev]")?.addEventListener("click", () => show(index - 1));
+      lightbox?.querySelector("[data-lightbox-next]")?.addEventListener("click", () => show(index + 1));
+      lightbox?.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") show(index - 1);
+        if (e.key === "ArrowRight") show(index + 1);
+      });
+      lightbox?.addEventListener("click", (e) => {
+        const el = e.target as HTMLElement;
+        if (el === lightbox || el.tagName === "FIGURE" || el.parentElement === lightbox) lightbox.close();
+      });
+
+      [modalProjects, modalCerts, lightbox].forEach((dialog) => {
+        dialog?.addEventListener("click", (e) => {
+          if (e.target === dialog) dialog.close();
+        });
+        dialog?.addEventListener("close", () => {
+          // keep scroll locked while another dialog is still open underneath
+          if (!document.querySelector("dialog[open]")) document.documentElement.classList.remove("modal-open");
+          if (dialog === lightbox) returnFocus?.focus();
         });
       });
     }
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initWorkspaceController);
-    } else {
-      initWorkspaceController();
-    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initWorkspace);
+    else initWorkspace();
   </script>
 </Layout>

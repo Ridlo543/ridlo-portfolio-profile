@@ -5,6 +5,14 @@ export type BilingualText = {
   en: string;
 };
 
+export type ProjectImage = {
+  // file stem in public/assets/portofolio; -320 and -740 variants sit beside it
+  name: string;
+  width: number;
+  height: number;
+  alt: BilingualText;
+};
+
 export type BilingualProject = {
   id: string;
   title: string;
@@ -20,6 +28,7 @@ export type BilingualProject = {
   accent: string;
   featured?: boolean;
   privateCase?: boolean;
+  images?: ProjectImage[];
   links: Array<{
     label: BilingualText;
     href: string;
@@ -29,24 +38,83 @@ export type BilingualProject = {
 
 export const bilingualProjects: BilingualProject[] = [
   {
-    id: "ainystudy",
-    title: "AinyStudy: Adaptive AI Language Learning",
-    year: { id: "2026", en: "2026" },
-    visualLabel: { id: "AI / EdTech", en: "AI / EdTech" },
+    id: "neo-edukasi",
+    title: "Neo Edukasi Education Platform",
+    year: { id: "2024 - Sekarang", en: "2024 - Present" },
+    visualLabel: { id: "Platform produksi", en: "In production" },
     description: {
-      id: "Platform pembelajaran bahasa Jepang (JLPT N5–N1) dan persiapan TOEIC berbasis Next.js 16 dan RAG dengan tutor AI interaktif, latihan adaptif, dan evaluasi audio.",
-      en: "Full-stack adaptive Japanese language (JLPT N5–N1) and TOEIC preparation platform featuring streaming conversational AI tutors via RAG, speech assessment, and spaced repetition drills.",
+      id: "Platform les privat dengan 20.000+ pengguna terdaftar di 20+ kota. Laravel, MySQL, dan Vue untuk jadwal tentor, absensi, laporan admin, dan pengingat WhatsApp.",
+      en: "A private tutoring platform with 20,000+ registered users in 20+ cities. Laravel, MySQL and Vue for tutor schedules, attendance, admin reports and WhatsApp reminders.",
     },
     impact: {
       id: [
-        "Membangun platform Next.js 16 App Router dengan React 19, Tailwind CSS v4, PostgreSQL, dan Drizzle ORM.",
-        "Mengembangkan dialog tutor AI streaming dengan contextual retrieval-augmented generation (RAG).",
-        "Mengintegrasikan evaluasi audio dan automated testing Playwright untuk algoritma placement test.",
+        "241+ pull request ter-merge di repo utama (292+ di semua repo) untuk operasional tentor, jadwal, absensi, dan laporan admin.",
+        "Rilis keamanan di 122 file: sanitasi XSS, lebih sedikit route yang terbuka, dan proteksi brute-force pada login.",
+        "Optimasi query, indeks, dan cache MySQL di balik dashboard laporan, plus feature test untuk validasi sesi dan notifikasi.",
       ],
       en: [
-        "Built Next.js 16 App Router platform with React 19, Tailwind CSS v4, PostgreSQL, and Drizzle ORM.",
-        "Engineered streaming AI tutor dialogues with contextual retrieval-augmented generation (RAG).",
-        "Integrated audio speech evaluation and automated Playwright test suites for placement algorithms.",
+        "241+ merged pull requests in the main repo (292+ across all repos) for tutor operations, scheduling, attendance and admin reports.",
+        "A security release across 122 files: XSS sanitising, fewer exposed routes and login brute-force protection.",
+        "Tuned MySQL queries, indexes and caches behind the report dashboards, and wrote feature tests for session checks and notifications.",
+      ],
+    },
+    technologies: ["Laravel", "PHP", "MySQL", "Vue", "WhatsApp API", "Feature Test"],
+    categories: ["professional", "web"],
+    accent: "#5eead4",
+    featured: true,
+    privateCase: false,
+    images: [
+      {
+        name: "neoedukasi_home",
+        width: 1600,
+        height: 849,
+        alt: {
+          id: "Halaman depan Neo Edukasi untuk pendaftaran tentor les privat",
+          en: "The Neo Edukasi landing page where private tutors sign up",
+        },
+      },
+      {
+        name: "neoedukasi_job",
+        width: 1600,
+        height: 849,
+        alt: {
+          id: "Halaman lowongan tentor Neo Edukasi dengan pencarian dan filter provinsi, mata pelajaran, dan kelas",
+          en: "The Neo Edukasi tutor job board with search and filters for province, subject and grade",
+        },
+      },
+    ],
+    links: [
+      {
+        type: "demo",
+        label: { id: "Aplikasi", en: "Web app" },
+        href: "https://app.neo-edukasi.com/",
+      },
+      {
+        type: "demo",
+        label: { id: "Situs", en: "Website" },
+        href: "https://neo-edukasi.com/",
+      },
+    ],
+  },
+  {
+    id: "ainystudy",
+    title: "AinyStudy: Adaptive AI Language Learning",
+    year: { id: "2026", en: "2026" },
+    visualLabel: { id: "Produk live / AI", en: "Live product / AI" },
+    description: {
+      id: "Platform belajar bahasa Jepang (JLPT N5 sampai N1) dan TOEIC yang saya bangun dan luncurkan sendiri. Tutor AI menjawab lewat streaming dengan RAG atas materi kursus.",
+      en: "A Japanese (JLPT N5 to N1) and TOEIC learning platform I built and launched myself. The AI tutor streams answers grounded in the course material with RAG.",
+    },
+    impact: {
+      id: [
+        "Next.js 16 App Router, React 19, Tailwind CSS v4, PostgreSQL, dan Drizzle ORM.",
+        "Tutor AI streaming dengan retrieval-augmented generation (RAG) atas materi kursus.",
+        "Penilaian audio, latihan spaced repetition, dan tes end-to-end Playwright untuk placement test.",
+      ],
+      en: [
+        "Next.js 16 App Router, React 19, Tailwind CSS v4, PostgreSQL and Drizzle ORM.",
+        "A streaming AI tutor with retrieval-augmented generation (RAG) over the course material.",
+        "Audio scoring, spaced repetition drills and Playwright end-to-end tests for the placement test.",
       ],
     },
     technologies: ["Next.js 16", "TypeScript", "PostgreSQL", "Drizzle ORM", "Playwright", "RAG"],
@@ -54,50 +122,115 @@ export const bilingualProjects: BilingualProject[] = [
     accent: "#ec4899",
     featured: true,
     privateCase: false,
+    images: [
+      {
+        name: "ainystudy",
+        width: 1600,
+        height: 849,
+        alt: {
+          id: "Halaman depan AinyStudy dengan pilihan jalur Bahasa Jepang dan TOEIC",
+          en: "The AinyStudy home page with the Japanese and TOEIC tracks",
+        },
+      },
+    ],
     links: [
       {
-        label: { id: "Live Demo", en: "Live Demo" },
+        label: { id: "Buka", en: "Open" },
         href: "https://ainystudy.ainything.online",
         type: "demo",
       },
     ],
   },
   {
-    id: "neo-edukasi",
-    title: "Neo Edukasi Education Platform",
-    year: { id: "2024 - Sekarang", en: "2024 - Present" },
-    visualLabel: { id: "Production Platform", en: "Production Platform" },
+    id: "latent-watermark",
+    title: "Latent Watermark Evaluation Platform",
+    year: { id: "2026", en: "2026" },
+    visualLabel: { id: "Skripsi / ML", en: "Thesis / ML" },
     description: {
-      id: "Platform production Laravel untuk operasional bimbingan belajar harian, otomatisasi rekonsiliasi billing, dispatch notifikasi WhatsApp, manajemen tutor, dan dashboard admin.",
-      en: "Production Laravel platform for daily education operations, automated billing reconciliation, WhatsApp notification dispatch, tutor management, and administrative dashboards.",
+      id: "Skripsi S1: watermark DCT di ruang laten VAE, diuji melawan serangan fine-tuning LoRA. Dashboard Next.js menunjukkan bit mana yang bertahan di setiap gambar.",
+      en: "My thesis: a DCT watermark in a VAE's latent space, tested against LoRA fine-tuning attacks. A Next.js dashboard shows which bits survive in each image.",
     },
     impact: {
       id: [
-        "Menyelesaikan 167+ merged PR untuk fitur platform edukasi Laravel di production (194+ di seluruh repositori), otomatisasi reporting, dan maintenance data.",
-        "Menyelesaikan logika rekonsiliasi invoice (prabayar, pascabayar, dan per sesi) untuk akurasi gaji tutor dan laporan keuangan.",
-        "Menulis feature test suite serta mengoptimasi query dan indeks MySQL untuk mempercepat waktu respons laporan.",
+        "Meningkatkan ketahanan watermark DCT di ruang laten VAE terhadap fine-tuning LoRA dengan redundant embedding dan majority vote.",
+        "Dashboard hasil Next.js dan layanan demo FastAPI yang siap tayang di Modal, dengan penyisipan watermark langsung.",
+        "Dataset gambar bukti dipublikasikan di Hugging Face.",
       ],
       en: [
-        "Delivered 167+ merged PRs for production Laravel backend features (194+ across repositories), automated reporting, and data maintenance.",
-        "Resolved prepaid, postpaid, and per-meet invoice reconciliation logic for accurate salary and financial reporting.",
-        "Wrote feature tests and optimized MySQL queries and indexes to improve critical report response times.",
+        "Made DCT watermarking in a VAE latent space more resistant to LoRA fine-tuning with redundant embedding and majority voting.",
+        "A Next.js results dashboard and a FastAPI demo service, deployable on Modal, with live watermark embedding.",
+        "The evidence image dataset is published on Hugging Face.",
       ],
     },
-    technologies: ["Laravel", "PHP", "MySQL", "Feature Testing", "WhatsApp API"],
-    categories: ["professional", "web"],
-    accent: "#5eead4",
+    technologies: ["Python", "PyTorch", "OpenCV", "FastAPI", "Next.js"],
+    categories: ["data-ml"],
+    accent: "#10b981",
     featured: true,
-    privateCase: false,
+    images: [
+      {
+        name: "dashboard_laten_watermark",
+        width: 1106,
+        height: 999,
+        alt: {
+          id: "Dashboard skripsi: gambar asli, gambar ber-watermark, hasil serangan LoRA, dan peta bit pesan",
+          en: "The thesis dashboard: the original, the watermarked image, the LoRA attack result and a map of the message bits",
+        },
+      },
+    ],
     links: [
       {
+        label: { id: "Dashboard", en: "Dashboard" },
+        href: "https://dashboard-latent-waterwark.vercel.app/",
         type: "demo",
-        label: { id: "Platform Operasional", en: "Live Web App" },
-        href: "https://app.neo-edukasi.com/",
       },
       {
+        label: { id: "Dataset", en: "Dataset" },
+        href: "https://huggingface.co/datasets/ridloau543/watermark-latent-citra-bukti",
         type: "demo",
-        label: { id: "Landing Page (Astro)", en: "Landing Page (Astro)" },
-        href: "https://neo-edukasi.com/",
+      },
+    ],
+  },
+  {
+    id: "docextract",
+    title: "DocExtract: Invoices and Receipts to JSON",
+    year: { id: "2026", en: "2026" },
+    visualLabel: { id: "Otomasi dokumen", en: "Document automation" },
+    description: {
+      id: "docTR membaca teksnya, lalu dua model Gemini membaca dokumen secara terpisah. Dokumen hanya lolos otomatis kalau setiap angkanya ditemukan di halaman dan totalnya cocok.",
+      en: "docTR reads the text, then two Gemini models read the document separately. A document passes on its own only when every number is found on the page and the totals add up.",
+    },
+    impact: {
+      id: [
+        "Setiap angka hasil ekstraksi dicocokkan ke posisinya di halaman, dengan confidence per field dan layar review.",
+        "Pada 100 struk uji CORD, 55% lolos otomatis dengan 1 kesalahan di antara 55 dokumen tersebut.",
+        "Keluaran JSON dan CSV, dengan demo publik berisi 7 dokumen contoh.",
+      ],
+      en: [
+        "Every extracted number is grounded to its position on the page, with per-field confidence and a review screen.",
+        "On 100 CORD test receipts, 55% passed automatically, with 1 error among those 55.",
+        "Outputs JSON and CSV, with a public demo of 7 sample documents.",
+      ],
+    },
+    technologies: ["Python", "docTR", "Gemini", "OCR"],
+    categories: ["data-ml", "web"],
+    accent: "#38bdf8",
+    featured: true,
+    images: [
+      {
+        name: "docextract",
+        width: 1600,
+        height: 849,
+        alt: {
+          id: "DocExtract menandai setiap angka pada foto struk dan mencocokkan totalnya",
+          en: "DocExtract marking each number on a receipt photo and checking the total",
+        },
+      },
+    ],
+    links: [
+      {
+        label: { id: "Demo", en: "Demo" },
+        href: "https://docextract.ainything.online",
+        type: "demo",
       },
     ],
   },
@@ -238,6 +371,17 @@ export const bilingualProjects: BilingualProject[] = [
     technologies: ["Kotlin", "Jetpack Compose", "Android", "ViewModel"],
     categories: ["professional", "mobile"],
     accent: "#60a5fa",
+    images: [
+      {
+        name: "laundry-screens",
+        width: 1200,
+        height: 1172,
+        alt: {
+          id: "Layar aplikasi Almada Laundry: splash, login, registrasi, dashboard, daftar order, dan filter order",
+          en: "Almada Laundry app screens: splash, login, sign-up, dashboard, order list and order filters",
+        },
+      },
+    ],
     links: [
       {
         label: { id: "Repository", en: "Repository" },
@@ -381,6 +525,17 @@ export const bilingualProjects: BilingualProject[] = [
     technologies: ["Astro", "JavaScript", "GitHub Pages"],
     categories: ["web"],
     accent: "#fb7185",
+    images: [
+      {
+        name: "turing-machine",
+        width: 1440,
+        height: 960,
+        alt: {
+          id: "Simulator mesin Turing: form input pembagian dan diagram state q0 sampai q3",
+          en: "The Turing machine simulator: the division input form and the state diagram from q0 to q3",
+        },
+      },
+    ],
     links: [
       {
         label: { id: "Live Demo", en: "Live Demo" },
@@ -448,37 +603,24 @@ export const bilingualExperiences: BilingualExperience[] = [
     role: { id: "Web Developer", en: "Web Developer" },
     organization: "Neo Edukasi (CV. Cendekia Karya)",
     location: "Karanganyar, Indonesia",
-    time: { id: "Apr 2024 - Sekarang", en: "Apr 2024 - Present" },
-    badge: { id: "Current Role", en: "Current Role" },
+    time: { id: "Apr 2024 - sekarang", en: "Apr 2024 - present" },
+    badge: { id: "Sekarang", en: "Current" },
     description: {
-      id: "Developer utama platform operasional: rekonsiliasi billing, reporting, dan manajemen tutor.",
-      en: "Main operational platform developer for tutoring services, billing reconciliation, reporting, and tutor management.",
+      id: "Platform les privat dengan 20.000+ pengguna terdaftar. 241+ pull request ter-merge untuk operasional tentor, jadwal, absensi, laporan admin, dan pengingat WhatsApp, termasuk rilis keamanan di 122 file.",
+      en: "A private tutoring platform with 20,000+ registered users. 241+ merged pull requests for tutor operations, scheduling, attendance, admin reports and WhatsApp reminders, including a security release across 122 files.",
     },
-    list: {
-      id: [
-        "Menyelesaikan 167+ merged PR untuk fitur platform edukasi Laravel di production (194+ di seluruh repositori), otomatisasi reporting, dan maintenance data.",
-        "Merancang rekonsiliasi invoice otomatis (prabayar, pascabayar, dan per sesi) untuk kemudahan laporan keuangan bulanan.",
-        "Menulis test suite fitur serta mengoptimasi indeks dan query MySQL untuk mempercepat respons laporan utama.",
-        "Mengintegrasikan WhatsApp API untuk pengiriman notifikasi otomatis kepada orang tua, siswa, dan tutor.",
-      ],
-      en: [
-        "Delivered 167+ merged PRs for production Laravel backend features (194+ across repositories), automated reporting, and daily operational fixes.",
-        "Engineered automated prepaid, postpaid, and per-session invoice reconciliation, streamlining monthly financial reports.",
-        "Wrote feature test suites and optimized MySQL indexes and joins to improve report query performance.",
-        "Integrated WhatsApp API for automated notification dispatch to parents, students, and tutors.",
-      ],
-    },
+    list: { id: [], en: [] },
   },
   {
     id: "bangkit-ml",
     role: { id: "Machine Learning Cohort", en: "Machine Learning Cohort" },
     organization: "Bangkit Academy (Google, GoTo, Traveloka)",
     location: "Bandung, Indonesia",
-    time: { id: "Sep 2024 - Jan 2025", en: "Sep 2024 - Jan 2025" },
-    badge: { id: "Graduated", en: "Graduated" },
+    time: { id: "Sep - Des 2024", en: "Sep - Dec 2024" },
+    badge: { id: "Lulus", en: "Graduated" },
     description: {
-      id: "Terpilih dalam program MSIB Batch 2 alur Machine Learning; membangun produk capstone StunBy.",
-      en: "Selected for MSIB Batch 2 in the Machine Learning learning path; built the StunBy capstone product.",
+      id: "Capstone StunBy bertiga: deteksi tinggi badan dengan YOLO, prediksi gizi TensorFlow, dan chatbot RAG Vertex AI di balik API Flask. Saya juga menulis dokumentasi API publiknya.",
+      en: "The StunBy capstone in a team of three: YOLO height detection, TensorFlow nutrition prediction and a Vertex AI RAG chatbot behind Flask APIs. I also wrote its public API docs.",
     },
     list: {
       id: [
@@ -495,25 +637,16 @@ export const bilingualExperiences: BilingualExperience[] = [
   },
   {
     id: "asdos-database",
-    role: { id: "Asisten Dosen - Mata Kuliah Basis Data", en: "Assistant Lecturer - Database Course" },
+    role: { id: "Asisten Dosen, Basis Data dan Pemrograman Web", en: "Teaching Assistant, Databases and Web Programming" },
     organization: "Universitas Sebelas Maret (UNS)",
     location: "Surakarta, Indonesia",
-    time: { id: "Sep 2024 - Jan 2025", en: "Sep 2024 - Jan 2025" },
-    badge: { id: "Academic", en: "Academic" },
+    time: { id: "Sep 2024 - Jul 2025", en: "Sep 2024 - Jul 2025" },
+    badge: { id: "Kampus", en: "University" },
     description: {
-      id: "Membimbing mahasiswa S1 Informatika dalam pemodelan database relasional, praktik SQL, dan query debugging.",
-      en: "Guided undergraduate students through relational database modeling, SQL practice, and query debugging.",
+      id: "Mengajar 50+ mahasiswa desain skema dan optimasi SQL, lalu 60+ mahasiswa web full-stack dan desain REST API.",
+      en: "Taught 50+ students schema design and SQL tuning, then 60+ students full-stack web development and REST API design.",
     },
-    list: {
-      id: [
-        "Mementori 40+ mahasiswa dalam normalisasi, ER diagram, query SQL kompleks, dan transaction handling.",
-        "Membantu perancangan skema dan strategi indexing database MySQL serta PostgreSQL.",
-      ],
-      en: [
-        "Mentored 40+ students in normalization, ER diagrams, complex SQL queries, and transaction handling.",
-        "Assisted students with MySQL and PostgreSQL schema design and indexing strategies.",
-      ],
-    },
+    list: { id: [], en: [] },
   },
   {
     id: "neo-edukasi-intern",
@@ -521,10 +654,10 @@ export const bilingualExperiences: BilingualExperience[] = [
     organization: "Neo Edukasi (CV. Cendekia Karya)",
     location: "Karanganyar, Indonesia",
     time: { id: "Jan 2024 - Mar 2024", en: "Jan 2024 - Mar 2024" },
-    badge: { id: "Internship", en: "Internship" },
+    badge: { id: "Magang", en: "Internship" },
     description: {
-      id: "Membangun dan merilis landing page modern perusahaan menggunakan Astro, React, dan Tailwind CSS.",
-      en: "Built and launched a modern company landing page with Astro, React, and Tailwind CSS.",
+      id: "Membangun dan merilis landing page perusahaan dengan Astro, React, dan Tailwind CSS.",
+      en: "Built and launched the company landing page with Astro, React and Tailwind CSS.",
     },
     list: {
       id: [
@@ -539,14 +672,14 @@ export const bilingualExperiences: BilingualExperience[] = [
   },
   {
     id: "asdos-statistika",
-    role: { id: "Asisten Praktikum - Statistika", en: "Teaching Assistant - Statistics Practicum" },
+    role: { id: "Asisten Praktikum Statistika", en: "Teaching Assistant, Statistics Practicum" },
     organization: "Universitas Sebelas Maret (UNS)",
     location: "Surakarta, Indonesia",
-    time: { id: "Agu 2023 - Des 2023", en: "Aug 2023 - Dec 2023" },
-    badge: { id: "Academic", en: "Academic" },
+    time: { id: "Agu - Des 2023", en: "Aug - Dec 2023" },
+    badge: { id: "Kampus", en: "University" },
     description: {
-      id: "Menyusun modul praktikum analisis data berbasis bahasa R untuk program studi Sains Data UNS.",
-      en: "Developed R-based statistical analysis course materials for the Data Science undergraduate program.",
+      id: "Menulis 9 modul praktikum R dan membimbing 40+ mahasiswa lewat 20+ studi kasus.",
+      en: "Wrote 9 R lab modules and guided 40+ students through 20+ case studies.",
     },
     list: {
       id: [
@@ -568,7 +701,7 @@ export const bilingualEducation = {
   period: { id: "Agu 2022 - Okt 2026", en: "Aug 2022 - Oct 2026" },
   gpa: { id: "IPK 3.81 / 4.00", en: "GPA 3.81 / 4.00" },
   description: {
-    id: "Lulusan S1 Informatika Universitas Sebelas Maret (Lulus Oktober 2026). Fokus pada software engineering, sistem database, web development, dan machine learning.",
-    en: "Bachelor of Computer Science in Informatics from Sebelas Maret University, graduated October 2026. Focused on software engineering, database systems, web development, and applied machine learning.",
+    id: "Lulus Oktober 2026. Fokus pada rekayasa perangkat lunak, sistem basis data, machine learning, dan statistika terapan, dengan skripsi tentang watermark laten.",
+    en: "Graduated October 2026. Focus on software engineering, database systems, machine learning and applied statistics, with a thesis on latent watermarks.",
   },
 };

@@ -1,0 +1,52 @@
+---
+import { ui, defaultLang } from "../../i18n/ui";
+
+interface Props {
+  cert: { title: string; issuer: string; date: string; href: string; fileType: string };
+}
+
+const { cert } = Astro.props;
+const t = ui[defaultLang];
+// Certificates with a picture of the certificate itself in public/assets/portofolio.
+const picture = cert.title.startsWith("Alibaba Cloud")
+  ? { name: "alibaba-certificate", width: 1200, height: 800, altKey: "certs.alibabaAlt" as const }
+  : null;
+---
+
+<article class="p-3.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 flex gap-3 hover:border-[var(--app-border-strong)] transition-colors">
+  {picture && (
+    <button
+      type="button"
+      data-shot
+      data-full={`/assets/portofolio/${picture.name}.webp`}
+      data-w={picture.width}
+      data-h={picture.height}
+      class="shot group shrink-0 self-start w-20 overflow-hidden rounded border border-[var(--app-border)] cursor-zoom-in"
+      data-i18n-aria="projects.enlarge"
+      aria-label={t["projects.enlarge"]}
+    >
+      <img
+        src={`/assets/portofolio/${picture.name}-320.webp`}
+        alt={t[picture.altKey]}
+        data-i18n-alt={picture.altKey}
+        width="320"
+        height="213"
+        loading="lazy"
+        class="block w-full aspect-[3/2] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+      />
+    </button>
+  )}
+  <div class="min-w-0 flex-1 flex flex-col justify-between gap-3">
+    <div>
+      <div class="flex items-baseline justify-between gap-3 text-xs">
+        <span class="font-medium text-[var(--app-accent)] truncate">{cert.issuer}</span>
+        <span class="font-mono text-[var(--app-text-soft)] whitespace-nowrap">{cert.date}</span>
+      </div>
+      <h4 class="mt-1 text-sm font-semibold text-[var(--app-text)] line-clamp-2">{cert.title}</h4>
+    </div>
+    <div class="flex items-center justify-between text-xs">
+      <span class="font-mono text-[var(--app-text-soft)]">{cert.fileType}</span>
+      <a href={cert.href} download class="font-medium text-[var(--app-accent)] hover:underline underline-offset-2" data-i18n="certs.download">{t["certs.download"]}</a>
+    </div>
+  </div>
+</article>

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import ParticlesBackground from "../components/3d/ParticlesBackground.astro";
+import LatentField from "../components/LatentField.astro";
 
 const {
   title = "Ridlo Abdullah Ulinnuha - Software Engineer",
@@ -98,7 +98,7 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     <title>{title}</title>
   </head>
   <body class="bg-[var(--app-bg)] text-[var(--app-text)] min-h-screen relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300">
-    <ParticlesBackground />
+    <LatentField />
     <div class="relative z-10">
       <slot />
     </div>
