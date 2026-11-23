@@ -8,7 +8,7 @@ export function initI18n() {
   function getStoredLang(): Language {
     try {
       const stored = localStorage.getItem(LANG_KEY);
-      return stored === "en" || stored === "id" ? stored : defaultLang;
+      return stored === "en" || stored === "id" || stored === "ja" ? stored : defaultLang;
     } catch {
       return defaultLang;
     }
