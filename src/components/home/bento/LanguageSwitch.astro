@@ -9,7 +9,7 @@ import { Check, ChevronDown, Languages } from "lucide-react";
     data-lang-toggle
     aria-haspopup="menu"
     aria-expanded="false"
-    aria-label="Pilih bahasa / Select language"
+    aria-label="Pilih bahasa / Select language / 言語を選択"
   >
     <Languages aria-hidden="true" className="h-3.5 w-3.5 text-[var(--app-accent)]" />
     <span data-lang-current class="font-mono text-[0.72rem]">ID</span>
@@ -44,6 +44,18 @@ import { Check, ChevronDown, Languages } from "lucide-react";
         <span>English</span>
       </span>
       <Check className="h-3.5 w-3.5 text-[var(--app-accent)] hidden" data-lang-check="en" />
+    </button>
+    <button
+      type="button"
+      data-lang-option="ja"
+      class="flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-xs font-bold text-[var(--app-text-muted)] transition hover:bg-[var(--app-surface-raised)] hover:text-[var(--app-accent)] cursor-pointer"
+      role="menuitem"
+    >
+      <span class="flex items-center gap-2">
+        <span class="text-sm">🇯🇵</span>
+        <span>日本語</span>
+      </span>
+      <Check className="h-3.5 w-3.5 text-[var(--app-accent)] hidden" data-lang-check="ja" />
     </button>
   </div>
 </div>
@@ -93,7 +105,7 @@ import { Check, ChevronDown, Languages } from "lucide-react";
 
     // Close on Escape
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !panelEl.classList.contains("hidden")) {
         setOpen(false);
         toggleEl.focus();
       }
