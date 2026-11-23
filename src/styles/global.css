@@ -656,3 +656,26 @@ a {
     padding: 0.875rem;
   }
 }
+
+/* Near-black brand logos (Next.js, Vercel, GitHub, Flask, AWS text) flip on the dark theme. */
+:root[data-theme="dark"] .logo-ink {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Screenshot lightbox: a full-screen native dialog over a dark scrim, on both themes. */
+.lightbox::backdrop {
+  background: rgb(5 6 8 / 0.95);
+}
+.lightbox[open] {
+  display: block;
+}
+.lightbox[open] figure {
+  animation: lightbox-in 0.18s ease-out;
+}
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.985); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open] figure { animation: none; }
+  .shot img { transition: none; }
+}

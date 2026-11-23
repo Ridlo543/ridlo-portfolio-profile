@@ -1,0 +1,17 @@
+---
+import { ui, defaultLang } from "../../i18n/ui";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const t = ui[defaultLang];
+---
+
+<button
+  {id}
+  type="button"
+  class="shrink-0 rounded-md px-3 py-1.5 text-sm text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:bg-[var(--app-surface-muted)] transition-colors cursor-pointer"
+  data-i18n="modal.close"
+>{t["modal.close"]}</button>

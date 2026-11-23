@@ -32,6 +32,15 @@ export function initI18n() {
       }
     });
 
+    document.querySelectorAll<HTMLImageElement>("img[data-i18n-alt]").forEach((img) => {
+      const key = img.dataset.i18nAlt as TranslationKey;
+      if (key && key in dict) img.alt = dict[key];
+    });
+    document.querySelectorAll<HTMLElement>("[data-i18n-aria]").forEach((el) => {
+      const key = el.dataset.i18nAria as TranslationKey;
+      if (key && key in dict) el.setAttribute("aria-label", dict[key]);
+    });
+
     // 2. Update Language Switcher trigger button text
     document.querySelectorAll("[data-lang-current]").forEach((el) => {
       el.textContent = lang.toUpperCase();
@@ -62,6 +71,11 @@ export function initI18n() {
       if (impactList) {
         impactList.innerHTML = project.impact[lang].map((item) => `<li>${item}</li>`).join("");
       }
+
+      card.querySelectorAll<HTMLImageElement>("[data-project-img]").forEach((img) => {
+        const shot = project.images?.[Number(img.dataset.projectImg)];
+        if (shot) img.alt = shot.alt[lang];
+      });
 
       card.querySelectorAll<HTMLElement>("[data-project-link]").forEach((linkEl) => {
         const idx = Number(linkEl.dataset.projectLink);
@@ -108,7 +122,7 @@ export function initI18n() {
       if (inst) inst.textContent = bilingualEducation.institution[lang];
 
       const period = card.querySelector<HTMLElement>('[data-edu-field="period"]');
-      if (period) period.textContent = `${bilingualEducation.period[lang]} · Surakarta, Indonesia`;
+      if (period) period.textContent = bilingualEducation.period[lang];
       const desc = card.querySelector<HTMLElement>('[data-edu-field="description"]');
       if (desc) desc.textContent = bilingualEducation.description[lang];
     });

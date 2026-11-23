@@ -1,0 +1,141 @@
+---
+// Background taken from the thesis: a grid of faint "latent" cells. Near the pointer (and under a
+// slow scan line) the noise resolves into the hidden 48-bit message, tiled the way the watermark is
+// embedded redundantly. The message is six ASCII bytes, one byte per row of each 8x6 block.
+---
+
+<canvas id="latent-field" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+
+<script>
+  const MESSAGE = "RIDLO5"; // 6 bytes = 48 bits, the message length used in the thesis
+  const CELL = 14; // css px between cell centres
+  const BLOCK_W = 9; // 8 bit columns + 1 gap
+  const BLOCK_H = 7; // 6 bit rows + 1 gap
+  const RADIUS = 170; // pointer reveal radius, css px
+  const SCAN_EVERY = 9000; // ms between scan sweeps
+  const SCAN_TIME = 3200; // ms for one sweep across the screen
+
+  function start() {
+    const canvas = document.getElementById("latent-field") as HTMLCanvasElement | null;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const bytes = Array.from(MESSAGE, (c) => c.charCodeAt(0));
+
+    let cols = 0, rows = 0, dpr = 1, w = 0, h = 0;
+    let noise = new Float32Array(0);
+    let reveal = new Float32Array(0);
+    let bits = new Int8Array(0);
+    let grain = "#71717a", accent = "#10b981", grainBase = 0.05;
+    let px = -1e4, py = -1e4;
+    let scanStart = performance.now() + 1500;
+    let raf = 0, last = 0;
+
+    const readColours = () => {
+      const css = getComputedStyle(document.documentElement);
+      grain = css.getPropertyValue("--app-text-soft").trim() || grain;
+      accent = css.getPropertyValue("--app-accent").trim() || accent;
+      grainBase = document.documentElement.dataset.theme === "light" ? 0.12 : 0.14;
+    };
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(w / CELL) + 1;
+      rows = Math.ceil(h / CELL) + 1;
+      noise = new Float32Array(cols * rows).map(() => Math.random());
+      reveal = new Float32Array(cols * rows);
+      bits = new Int8Array(cols * rows);
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const bc = c % BLOCK_W, br = r % BLOCK_H;
+          bits[r * cols + c] = bc === 8 || br === 6 ? -1 : (bytes[br] >> (7 - bc)) & 1;
+        }
+      }
+      draw();
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const off = CELL / 2;
+      ctx.fillStyle = grain;
+      for (let i = 0; i < cols * rows; i++) {
+        const rv = reveal[i];
+        if (rv > 0.02 && bits[i] === 1) continue; // drawn in the accent pass
+        const a = (grainBase + noise[i] * 0.16) * (bits[i] === 0 ? 1 - rv * 0.6 : 1);
+        ctx.globalAlpha = a;
+        const x = (i % cols) * CELL + off, y = Math.floor(i / cols) * CELL + off;
+        ctx.fillRect(x - 1, y - 1, 2, 2);
+      }
+      ctx.fillStyle = accent;
+      for (let i = 0; i < cols * rows; i++) {
+        const rv = reveal[i];
+        if (rv <= 0.02 || bits[i] !== 1) continue;
+        const s = 2 + rv * 4;
+        ctx.globalAlpha = 0.08 + rv * 0.34;
+        const x = (i % cols) * CELL + off, y = Math.floor(i / cols) * CELL + off;
+        ctx.fillRect(x - s / 2, y - s / 2, s, s);
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    const step = (now: number) => {
+      raf = requestAnimationFrame(step);
+      if (now - last < 33) return; // ~30 fps is plenty for a background
+      last = now;
+
+      // the scan line: a soft vertical band that crosses the screen every SCAN_EVERY ms
+      const t = (now - scanStart) % SCAN_EVERY;
+      const scanX = t < SCAN_TIME ? (t / SCAN_TIME) * (w + 400) - 200 : -1e4;
+
+      // a little grain shimmer: re-roll about 1% of cells each frame
+      for (let k = 0, n = (cols * rows) / 100; k < n; k++) {
+        noise[(Math.random() * cols * rows) | 0] = Math.random();
+      }
+
+      for (let r = 0; r < rows; r++) {
+        const y = r * CELL + CELL / 2;
+        for (let c = 0; c < cols; c++) {
+          const i = r * cols + c;
+          const x = c * CELL + CELL / 2;
+          const d = Math.hypot(x - px, y - py);
+          let target = d < RADIUS ? 1 - (d / RADIUS) ** 2 : 0;
+          const ds = Math.abs(x - scanX);
+          if (ds < 120) target = Math.max(target, 0.55 * (1 - ds / 120));
+          const rv = reveal[i];
+          reveal[i] = target > rv ? rv + (target - rv) * 0.25 : rv * 0.955; // slow fade = afterimage
+        }
+      }
+      draw();
+    };
+
+    readColours();
+    resize();
+    if (reduced) return; // one still frame of grain, nothing moves
+
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("pointermove", (e) => {
+      if (e.pointerType === "mouse") { px = e.clientX; py = e.clientY; }
+    }, { passive: true });
+    document.documentElement.addEventListener("pointerleave", () => { px = py = -1e4; });
+    new MutationObserver(() => { readColours(); draw(); }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    document.addEventListener("visibilitychange", () => {
+      cancelAnimationFrame(raf);
+      if (!document.hidden) raf = requestAnimationFrame(step);
+    });
+    raf = requestAnimationFrame(step);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+</script>
