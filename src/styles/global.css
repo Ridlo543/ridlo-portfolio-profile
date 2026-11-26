@@ -5,32 +5,6 @@
   --font-mono: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, monospace;
 }
 :root,
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --app-font-sans:
-    "Inter", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Meiryo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  --app-font-mono:
-    "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  --app-bg: #09090b;
-  --app-surface: #111114;
-  --app-surface-raised: #18181b;
-  --app-surface-muted: #27272a;
-  --app-text: #fafafa;
-  --app-text-muted: #a1a1aa;
-  --app-text-soft: #71717a;
-  --app-border: #27272a;
-  --app-border-strong: #3f3f46;
-  --app-primary: #fafafa;
-  --app-primary-soft: rgb(250 250 250 / 0.08);
-  --app-accent: #10b981;
-  --app-accent-soft: rgb(16 185 129 / 0.12);
-  --app-on-primary: #09090b;
-  --app-focus: #10b981;
-  --app-backdrop: rgb(9 9 11 / 0.82);
-  --app-shadow: 0 20px 50px rgb(0 0 0 / 0.45);
-}
-
 :root[data-theme="light"] {
   color-scheme: light;
   --app-font-sans:
@@ -38,23 +12,55 @@
     "Segoe UI", sans-serif;
   --app-font-mono:
     "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  --app-bg: #fafafa;
+  --app-bg: #ffffff;
   --app-surface: #ffffff;
-  --app-surface-raised: #f4f4f5;
-  --app-surface-muted: #e4e4e7;
-  --app-text: #09090b;
-  --app-text-muted: #52525b;
-  --app-text-soft: #71717a;
-  --app-border: #e4e4e7;
-  --app-border-strong: #d4d4d8;
-  --app-primary: #09090b;
-  --app-primary-soft: rgb(9 9 11 / 0.05);
-  --app-accent: #059669;
-  --app-accent-soft: rgb(5 150 105 / 0.08);
+  --app-surface-raised: #f4f3fc;
+  --app-surface-muted: #eceaf9;
+  --app-text: #1d1a4a;
+  --app-text-muted: #5c578a;
+  --app-text-soft: #8580b0;
+  --app-border: #dcdaf0;
+  --app-border-strong: #b8b3ff;
+  --app-primary: #1d1a4a;
+  --app-primary-soft: rgb(29 26 74 / 0.06);
+  --app-accent: #5a4fd8;
+  --app-accent-soft: rgb(90 79 216 / 0.1);
+  --app-pop: #ff5fa8;
+  --app-pop-soft: rgb(255 95 168 / 0.12);
+  --app-shade: #b8b3ff;
   --app-on-primary: #ffffff;
-  --app-focus: #059669;
-  --app-backdrop: rgb(250 250 250 / 0.85);
-  --app-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  --app-focus: #ff5fa8;
+  --app-backdrop: rgb(244 243 252 / 0.86);
+  --app-shadow: 5px 6px 0 #b8b3ff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --app-font-sans:
+    "Inter", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Meiryo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --app-font-mono:
+    "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --app-bg: #110f29;
+  --app-surface: #181538;
+  --app-surface-raised: #211d4a;
+  --app-surface-muted: #2b265e;
+  --app-text: #f4f3fc;
+  --app-text-muted: #b8b3e0;
+  --app-text-soft: #8580b0;
+  --app-border: #322d66;
+  --app-border-strong: #5a4fd8;
+  --app-primary: #f4f3fc;
+  --app-primary-soft: rgb(244 243 252 / 0.08);
+  --app-accent: #9d9bff;
+  --app-accent-soft: rgb(157 155 255 / 0.14);
+  --app-pop: #ff5fa8;
+  --app-pop-soft: rgb(255 95 168 / 0.16);
+  --app-shade: #3b338a;
+  --app-on-primary: #110f29;
+  --app-focus: #ff5fa8;
+  --app-backdrop: rgb(17 15 41 / 0.84);
+  --app-shadow: 5px 6px 0 #3b338a;
 }
 
 html {
@@ -79,10 +85,10 @@ body {
     background-color 0.2s ease,
     color 0.2s ease;
 }
-/* Sleek, ultra-thin dark scrollbar */
+/* Sleek, ultra-thin scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+  scrollbar-color: rgb(133 128 176 / 0.28) transparent;
 }
 ::-webkit-scrollbar {
   width: 4px;
@@ -92,11 +98,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgb(133 128 176 / 0.28);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.5);
+  background: rgb(255 95 168 / 0.55);
 }
 
 button,
@@ -174,10 +180,10 @@ a {
   height: 2rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--app-border);
-  border-radius: 0.5rem;
-  background: var(--app-surface-raised);
-  color: var(--app-text-muted);
+  border: 1.5px solid var(--app-border);
+  border-radius: 9999px;
+  background: var(--app-surface);
+  color: var(--app-text);
   transition:
     border-color 0.15s ease,
     color 0.15s ease,
@@ -185,8 +191,8 @@ a {
 }
 
 .icon-button:hover {
-  border-color: var(--app-accent);
-  color: var(--app-accent);
+  border-color: var(--app-text);
+  color: var(--app-pop);
 }
 
 .icon-button svg {
@@ -664,7 +670,7 @@ a {
 
 /* Screenshot lightbox: a full-screen native dialog over a dark scrim, on both themes. */
 .lightbox::backdrop {
-  background: rgb(5 6 8 / 0.95);
+  background: rgb(17 15 41 / 0.94);
 }
 .lightbox[open] {
   display: block;
@@ -675,6 +681,38 @@ a {
 @keyframes lightbox-in {
   from { opacity: 0; transform: scale(0.985); }
 }
+
+.sakuga-panel {
+  border: 1.5px solid var(--app-border);
+  border-radius: 18px;
+  box-shadow: var(--app-shadow);
+}
+
+.sakuga-btn-primary {
+  border: 2px solid var(--app-text);
+  border-radius: 14px;
+  background: var(--app-pop);
+  color: #ffffff;
+  box-shadow: 4px 4px 0 var(--app-shade);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sakuga-btn-primary:hover {
+  box-shadow: 5px 5px 0 var(--app-shade);
+}
+
+.sakuga-btn-secondary {
+  border: 1.5px solid var(--app-border-strong);
+  border-radius: 14px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  box-shadow: 3px 4px 0 var(--app-shade);
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sakuga-btn-secondary:hover {
+  border-color: var(--app-text);
+  background: var(--app-surface-raised);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lightbox[open] figure { animation: none; }
   .shot img { transition: none; }

@@ -15,9 +15,11 @@ import { Moon, Sun } from "lucide-react";
 </button>
 
 <script>
+  import { attachSquash, playSparkle } from "../../../lib/sakugaFx";
+
   const storageKey = "portfolio-theme";
-  const defaultTheme = "dark";
-  const button = document.querySelector("[data-theme-toggle]");
+  const defaultTheme = "light";
+  const button = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
 
   function getStoredTheme(): "dark" | "light" {
     try {
@@ -40,14 +42,19 @@ import { Moon, Sun } from "lucide-react";
     button?.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
   }
 
-  button?.addEventListener("click", () => {
-    const currentTheme = getStoredTheme();
-    const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    try {
-      localStorage.setItem(storageKey, nextTheme);
-    } catch {}
-    applyTheme(nextTheme);
-  });
+  if (button) {
+    const sq = attachSquash(button, { low: 0.84, popScale: 1.14, tiltDeg: -6 });
+    button.addEventListener("click", () => {
+      const currentTheme = getStoredTheme();
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      try {
+        localStorage.setItem(storageKey, nextTheme);
+      } catch {}
+      applyTheme(nextTheme);
+      sq.triggerPop();
+      playSparkle(button);
+    });
+  }
 
   applyTheme(getStoredTheme());
 </script>

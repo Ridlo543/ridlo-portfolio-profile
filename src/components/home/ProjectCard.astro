@@ -15,7 +15,7 @@ const src = (name: string, size?: 320) => `/assets/portofolio/${name}${size ? `-
 ---
 
 <article
-  class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 hover:border-[var(--app-border-strong)] transition-colors"
+  class="p-4 rounded-[16px] border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface-raised)]/75 hover:border-[var(--app-border-strong)] transition-colors"
   data-project-item={project.id}
   data-shot-group
 >
@@ -44,7 +44,7 @@ const src = (name: string, size?: 320) => `/assets/portofolio/${name}${size ? `-
             data-full={src(img.name)}
             data-w={img.width}
             data-h={img.height}
-            class="shot group relative block w-36 sm:w-full overflow-hidden rounded-md border border-[var(--app-border)] bg-[var(--app-surface-muted)] cursor-zoom-in"
+            class="shot group relative block w-36 sm:w-full overflow-hidden rounded-[10px] border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface-muted)] cursor-zoom-in"
             data-i18n-aria="projects.enlarge"
             aria-label={t["projects.enlarge"]}
           >
@@ -68,7 +68,7 @@ const src = (name: string, size?: 320) => `/assets/portofolio/${name}${size ? `-
   <div class="flex flex-wrap items-center justify-between gap-3 pt-3 mt-3 border-t border-[var(--app-border)]">
     <ul class="flex flex-wrap gap-1 font-mono text-[0.68rem]">
       {project.technologies.map((tech) => (
-        <li class="px-2 py-0.5 rounded bg-[var(--app-surface-muted)] text-[var(--app-text)]">{tech}</li>
+        <li class="px-2.5 py-0.5 rounded-full border border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]">{tech}</li>
       ))}
     </ul>
     <div class="flex flex-wrap items-center gap-1.5">
@@ -77,7 +77,8 @@ const src = (name: string, size?: 320) => `/assets/portofolio/${name}${size ? `-
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 rounded-md border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)] hover:text-[var(--app-on-primary)] text-[var(--app-accent)] font-medium text-xs px-2.5 py-1 transition-colors"
+          data-sakuga-btn="secondary"
+          class="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-[var(--app-border-strong)] bg-[var(--app-surface)] hover:border-[var(--app-text)] hover:bg-[var(--app-pop)] hover:text-white text-[var(--app-accent)] font-semibold text-xs px-3 py-1 transition-colors"
         >
           {link.type === "code" && <FaGithub className="h-3.5 w-3.5" />}
           <span data-project-link={i}>{link.label[lang]}</span>

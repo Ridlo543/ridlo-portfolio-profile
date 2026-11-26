@@ -38,12 +38,12 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     <meta name="author" content="Ridlo Abdullah Ulinnuha" />
     <meta
       name="theme-color"
-      content="#111827"
+      content="#110f29"
       media="(prefers-color-scheme: dark)"
     />
     <meta
       name="theme-color"
-      content="#f6f7fb"
+      content="#ffffff"
       media="(prefers-color-scheme: light)"
     />
     <meta property="og:type" content="website" />
@@ -65,7 +65,7 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
       (() => {
         // Theme init
         const themeKey = "portfolio-theme";
-        const defaultTheme = "dark";
+        const defaultTheme = "light";
         let theme = defaultTheme;
         try {
           const storedTheme = localStorage.getItem(themeKey);
@@ -97,7 +97,7 @@ const socialImageUrl = toAbsoluteUrl(socialImage);
     </script>
     <title>{title}</title>
   </head>
-  <body class="bg-[var(--app-bg)] text-[var(--app-text)] min-h-screen relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300">
+  <body class="bg-[var(--app-bg)] text-[var(--app-text)] min-h-screen relative overflow-x-hidden selection:bg-[var(--app-pop)]/20 selection:text-[var(--app-text)]">
     <LatentField />
     <div class="relative z-10">
       <slot />

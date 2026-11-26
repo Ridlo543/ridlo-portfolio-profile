@@ -5,7 +5,7 @@ import { Check, ChevronDown, Languages } from "lucide-react";
 <div class="relative inline-flex" data-lang-menu>
   <button
     type="button"
-    class="flex h-8 items-center gap-1.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)] px-2.5 text-xs font-bold text-[var(--app-text)] transition-colors hover:border-[var(--app-accent)] hover:text-[var(--app-accent)] cursor-pointer shadow-sm"
+    class="flex h-8 items-center gap-1.5 rounded-full border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface)] px-3 text-xs font-bold text-[var(--app-text)] transition-colors hover:border-[var(--app-text)] cursor-pointer"
     data-lang-toggle
     aria-haspopup="menu"
     aria-expanded="false"
@@ -17,7 +17,7 @@ import { Check, ChevronDown, Languages } from "lucide-react";
   </button>
 
   <div
-    class="absolute right-0 top-[calc(100%+0.35rem)] z-30 hidden w-36 rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)] p-1 shadow-lg backdrop-blur-md"
+    class="absolute right-0 top-[calc(100%+0.35rem)] z-30 hidden w-36 rounded-[14px] border-[1.5px] border-[var(--app-border-strong)] bg-[var(--app-surface)] p-1 shadow-[4px_5px_0_var(--app-shade)]"
     data-lang-panel
     role="menu"
   >
@@ -62,9 +62,9 @@ import { Check, ChevronDown, Languages } from "lucide-react";
 
 <script>
   import { initI18n } from "../../../i18n/store";
+  import { attachSquash, playSparkle } from "../../../lib/sakugaFx";
 
   initI18n();
-
   // Dropdown open/close behavior
   document.querySelectorAll("[data-lang-menu]").forEach((menu) => {
     const toggle = menu.querySelector("[data-lang-toggle]");
@@ -89,10 +89,14 @@ import { Check, ChevronDown, Languages } from "lucide-react";
       setOpen(panelEl.classList.contains("hidden"));
     });
 
+    const sq = attachSquash(toggleEl, { low: 0.88, popScale: 1.08 });
+
     // Close on option click
     menu.querySelectorAll("[data-lang-option]").forEach((btn) => {
       btn.addEventListener("click", () => {
         setOpen(false);
+        sq.triggerPop();
+        playSparkle(toggleEl);
       });
     });
 

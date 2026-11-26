@@ -10,6 +10,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import ProjectCard from "../components/home/ProjectCard.astro";
 import CertCard from "../components/home/CertCard.astro";
 import CloseButton from "../components/home/CloseButton.astro";
+import MiniShinobi from "../components/MiniShinobi.astro";
 
 const t = ui[defaultLang];
 const lang = defaultLang;
@@ -87,8 +88,8 @@ const stack: { key: GroupKey; wide?: boolean; tools: Tool[] }[] = [
       { name: "Git", logo: "git" },
       { name: "GitHub", logo: "github", ink: true },
       { name: "CI/CD" },
-      { name: "Google Cloud", logo: "google-cloud" },
-      { name: "AWS", logo: "aws", ink: true },
+      { name: "Tencent Cloud", logo: "tencent-cloud" },
+      { name: "Oracle Cloud", logo: "oracle-cloud" },
       { name: "Alibaba Cloud", logo: "alibaba-cloud" },
       { name: "Vercel", logo: "vercel", ink: true },
     ],
@@ -108,10 +109,9 @@ const stack: { key: GroupKey; wide?: boolean; tools: Tool[] }[] = [
 ];
 
 const quietBtn =
-  "w-full py-2.5 text-sm font-medium text-[var(--app-accent)] border border-[var(--app-accent)]/30 bg-[var(--app-accent)]/10 hover:bg-[var(--app-accent)]/20 rounded-lg transition-colors cursor-pointer";
+  "sakuga-btn-secondary w-full py-2.5 text-sm font-semibold cursor-pointer";
 const tabBase =
-  "workspace-tab-btn inline-flex items-baseline gap-1.5 pb-2 -mb-px border-b-2 transition-colors cursor-pointer shrink-0";
-
+  "workspace-tab-btn relative z-10 inline-flex items-baseline gap-1.5 pb-2.5 pt-0.5 transition-colors cursor-pointer shrink-0";
 const metrics = [
   { value: "241+", key: "about.metric1.desc" as const },
   { value: t["about.metric4.value"], valueKey: "about.metric4.value" as const, key: "about.metric4.desc" as const },
@@ -124,11 +124,11 @@ const metrics = [
   title="Ridlo Abdullah Ulinnuha - Software Engineer"
   description="Software engineer for web, machine learning and automation. 241+ merged pull requests on Neo Edukasi, a tutoring platform with 20,000+ registered users; AinyStudy, a RAG tutor; and thesis research on latent watermarks."
 >
-  <main class="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 lg:h-screen lg:overflow-hidden relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
-    <aside class="min-w-0 lg:col-span-5 flex flex-col gap-8 lg:overflow-y-auto lg:pr-2">
-      <div class="flex items-center justify-between gap-3 pb-3 border-b border-[var(--app-border)]">
+  <main class="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:px-8 lg:py-5 [@media(min-height:760px)]:lg:py-7 lg:h-screen lg:overflow-hidden relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
+    <aside class="min-w-0 lg:col-span-5 flex flex-col gap-3 [@media(min-height:760px)]:gap-5 lg:overflow-y-auto lg:pr-2">
+      <div class="flex items-center justify-between gap-3 pb-2.5 border-b border-[var(--app-border)] shrink-0">
         <p class="min-w-0 inline-flex items-center gap-2 text-xs text-[var(--app-text-muted)]">
-          <span class="h-1.5 w-1.5 rounded-full bg-[var(--app-accent)]" aria-hidden="true"></span>
+          <span class="h-2 w-2 rounded-full bg-[var(--app-pop)]" aria-hidden="true"></span>
           <span data-i18n="intro.available">{t["intro.available"]}</span>
         </p>
         <div class="flex items-center gap-2">
@@ -137,44 +137,47 @@ const metrics = [
         </div>
       </div>
 
-      <div class="lg:my-auto space-y-7">
-        <div class="space-y-3">
-          <h1 class="text-4xl sm:text-5xl font-extrabold text-[var(--app-text)] tracking-tight leading-[1.05]">
+      <div class="lg:mt-1 [@media(min-height:760px)]:lg:mt-3 lg:mb-auto space-y-3 [@media(min-height:760px)]:space-y-5">
+        <div class="relative pt-12 space-y-1.5 [@media(min-height:760px)]:space-y-2">
+          <MiniShinobi />
+          <h1 class="text-3xl sm:text-4xl [@media(min-height:760px)]:text-[2.65rem] font-extrabold text-[var(--app-text)] tracking-tight leading-[1.06]">
             Ridlo Abdullah Ulinnuha
           </h1>
-          <p class="text-base font-medium text-[var(--app-accent)]" data-i18n="intro.subtitle">
+          <p class="text-sm sm:text-base font-medium text-[var(--app-accent)]" data-i18n="intro.subtitle">
             {t["intro.subtitle"]}
           </p>
-          <p class="text-sm leading-relaxed text-[var(--app-text-muted)] max-w-[52ch]" data-i18n="intro.bio">
+          <p class="text-sm leading-snug [@media(min-height:760px)]:leading-relaxed text-[var(--app-text-muted)] max-w-[52ch]" data-i18n="intro.bio">
             {t["intro.bio"]}
           </p>
         </div>
 
-        <dl class="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[var(--app-border)] pt-6">
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-2.5 [@media(min-height:760px)]:gap-y-4 border-t border-[var(--app-border)] pt-3.5 [@media(min-height:760px)]:pt-5">
           {metrics.map((m) => (
             <div>
               <dt class="sr-only" data-i18n={m.key}>{t[m.key]}</dt>
               <dd>
-                <span class="block font-mono text-3xl font-bold tracking-tight text-[var(--app-text)]" data-i18n={m.valueKey}>{m.value}</span>
-                <span class="block text-xs text-[var(--app-text-muted)] mt-1" aria-hidden="true" data-i18n={m.key}>{t[m.key]}</span>
+                <span class="block font-mono text-2xl [@media(min-height:760px)]:text-3xl font-bold tracking-tight text-[var(--app-text)]" data-i18n={m.valueKey}>{m.value}</span>
+                <span class="block text-xs text-[var(--app-text-muted)] mt-0.5" aria-hidden="true" data-i18n={m.key}>{t[m.key]}</span>
               </dd>
             </div>
           ))}
         </dl>
       </div>
 
-      <div class="space-y-4">
+      <div class="space-y-3 shrink-0">
         <div class="flex flex-wrap items-center gap-2">
           <a
             href="/cv/ridlo-software-engineer-en.pdf"
             download
-            class="flex-1 inline-flex items-center justify-center rounded-lg bg-[var(--app-accent)] hover:opacity-90 active:translate-y-px text-[var(--app-on-primary)] font-semibold px-3 py-2.5 text-sm transition"
+            data-sakuga-btn="primary"
+            class="sakuga-btn-primary flex-1 inline-flex items-center justify-center font-bold px-3 py-2 text-sm"
             data-i18n="cv.en"
           >{t["cv.en"]}</a>
           <a
             href="/cv/ridlo-software-engineer-id.pdf"
             download
-            class="flex-1 inline-flex items-center justify-center rounded-lg border border-[var(--app-border-strong)] bg-[var(--app-surface-raised)] hover:bg-[var(--app-surface-muted)] active:translate-y-px text-[var(--app-text)] font-semibold px-3 py-2.5 text-sm transition"
+            data-sakuga-btn="secondary"
+            class="sakuga-btn-secondary flex-1 inline-flex items-center justify-center font-semibold px-3 py-2 text-sm"
             data-i18n="cv.id"
           >{t["cv.id"]}</a>
         </div>
@@ -196,20 +199,21 @@ const metrics = [
       </div>
     </aside>
 
-    <section class="min-w-0 lg:col-span-7 flex flex-col h-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)]/90 backdrop-blur-md p-4 sm:p-5 lg:overflow-hidden relative shadow-xl">
-      <nav class="flex items-center gap-5 border-b border-[var(--app-border)] text-sm shrink-0 overflow-x-auto overflow-y-hidden" data-i18n-aria="nav.ariaLabel" aria-label={t["nav.ariaLabel"]}>
-        <button type="button" data-tab-btn="projects" aria-pressed="true" class={`${tabBase} font-semibold border-[var(--app-accent)] text-[var(--app-accent)]`}>
+    <section class="sakuga-panel min-w-0 lg:col-span-7 flex flex-col h-full bg-[var(--app-surface)]/95 backdrop-blur-md p-4 sm:p-5 lg:overflow-hidden relative">
+      <nav class="relative flex items-center gap-5 border-b-[1.5px] border-[var(--app-border)] text-sm shrink-0 overflow-x-auto overflow-y-hidden" data-tab-nav data-i18n-aria="nav.ariaLabel" aria-label={t["nav.ariaLabel"]}>
+        <span data-tab-indicator aria-hidden="true" class="pointer-events-none absolute bottom-0 left-0 h-[3px] rounded-full bg-[var(--app-pop)]"></span>
+        <button type="button" data-tab-btn="projects" aria-pressed="true" class={`${tabBase} font-bold text-[var(--app-text)]`}>
           <span data-i18n="nav.projects">{t["nav.projects"]}</span>
-          <span class="font-mono text-xs opacity-60">{bilingualProjects.length}</span>
+          <span class="font-mono text-xs text-[var(--app-pop)]">{bilingualProjects.length}</span>
         </button>
-        <button type="button" data-tab-btn="experience" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
+        <button type="button" data-tab-btn="experience" aria-pressed="false" class={`${tabBase} font-medium text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
           <span data-i18n="nav.experience">{t["nav.experience"]}</span>
         </button>
-        <button type="button" data-tab-btn="credentials" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
+        <button type="button" data-tab-btn="credentials" aria-pressed="false" class={`${tabBase} font-medium text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
           <span data-i18n="nav.credentials">{t["nav.credentials"]}</span>
-          <span class="font-mono text-xs opacity-60">{certificates.length}</span>
+          <span class="font-mono text-xs text-[var(--app-text-soft)]">{certificates.length}</span>
         </button>
-        <button type="button" data-tab-btn="stack" aria-pressed="false" class={`${tabBase} font-medium border-transparent text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
+        <button type="button" data-tab-btn="stack" aria-pressed="false" class={`${tabBase} font-medium text-[var(--app-text-muted)] hover:text-[var(--app-text)]`}>
           <span data-i18n="nav.skills">{t["nav.skills"]}</span>
         </button>
       </nav>
@@ -219,7 +223,7 @@ const metrics = [
           {featuredProjects.map((project) => (
             <ProjectCard project={project} />
           ))}
-          <button id="btn-open-projects-modal" type="button" class={quietBtn} data-i18n="projects.viewAllBtn" data-i18n-count={bilingualProjects.length}>
+          <button id="btn-open-projects-modal" type="button" data-sakuga-btn="secondary" class={quietBtn} data-i18n="projects.viewAllBtn" data-i18n-count={bilingualProjects.length}>
             {t["projects.viewAllBtn"].replace("{count}", String(bilingualProjects.length))}
           </button>
         </div>
@@ -228,7 +232,7 @@ const metrics = [
           <ol class="space-y-5 pl-4 border-l border-[var(--app-border)] ml-1">
             {bilingualExperiences.map((exp) => (
               <li class="relative space-y-1" data-experience-item={exp.id}>
-                <span class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--app-accent)] bg-[var(--app-surface)]" aria-hidden="true"></span>
+                <span class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--app-pop)] bg-[var(--app-surface)]" aria-hidden="true"></span>
                 <div class="flex flex-wrap items-baseline justify-between gap-x-3 text-xs">
                   <span class="font-medium text-[var(--app-accent)]" data-exp-field="badge">{exp.badge[lang]}</span>
                   <span class="font-mono text-[var(--app-text-soft)]" data-exp-field="time">{exp.time[lang]}</span>
@@ -242,7 +246,7 @@ const metrics = [
         </div>
 
         <div id="tab-panel-credentials" class="hidden space-y-5">
-          <div class="p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-1.5" data-education-card>
+          <div class="p-4 rounded-[16px] border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface-raised)]/75 space-y-1.5" data-education-card>
             <div class="flex items-start justify-between gap-3">
               <div>
                 <span class="text-xs font-medium text-[var(--app-accent)]" data-i18n="edu.degree">{t["edu.degree"]}</span>
@@ -266,7 +270,7 @@ const metrics = [
             <div class="grid sm:grid-cols-2 gap-2.5">
               {featuredCerts.map((cert) => <CertCard cert={cert} />)}
             </div>
-            <button id="btn-open-certs-modal" type="button" class={quietBtn} data-i18n="certs.viewAllBtn" data-i18n-count={certificates.length}>
+            <button id="btn-open-certs-modal" type="button" data-sakuga-btn="secondary" class={quietBtn} data-i18n="certs.viewAllBtn" data-i18n-count={certificates.length}>
               {t["certs.viewAllBtn"].replace("{count}", String(certificates.length))}
             </button>
           </div>
@@ -275,7 +279,7 @@ const metrics = [
         <div id="tab-panel-stack" class="hidden">
           <div class="grid sm:grid-cols-2 gap-3">
             {stack.map((group) => (
-              <div class:list={["p-4 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 space-y-3", group.wide && "sm:col-span-2"]}>
+              <div class:list={["p-4 rounded-[16px] border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface-raised)]/75 space-y-3", group.wide && "sm:col-span-2"]}>
                 <h3 class="text-sm font-semibold text-[var(--app-text)]" data-i18n={group.key}>{t[group.key]}</h3>
                 <ul class="flex flex-wrap gap-1.5">
                   {group.tools.map((tool) => {
@@ -287,7 +291,7 @@ const metrics = [
                           target={tool.href ? "_blank" : undefined}
                           rel={tool.href ? "noopener noreferrer" : undefined}
                           class:list={[
-                            "inline-flex items-center gap-1.5 rounded-md border border-[var(--app-border)] bg-[var(--app-surface)] px-2 py-1 text-xs text-[var(--app-text)]",
+                            "inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface)] px-2.5 py-1 text-xs text-[var(--app-text)]",
                             tool.href && "hover:border-[var(--app-accent)] transition-colors",
                           ]}
                         >
@@ -309,7 +313,7 @@ const metrics = [
     </section>
   </main>
 
-  <dialog id="modal-all-projects" aria-labelledby="modal-projects-title" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+  <dialog id="modal-all-projects" aria-labelledby="modal-projects-title" class="modal-shell p-0 rounded-[18px] border-[1.5px] border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-[6px_7px_0_var(--app-shade)] max-w-4xl w-[92vw] max-h-[88vh]">
     <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between gap-4 sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
         <h2 id="modal-projects-title" class="text-lg font-semibold" data-i18n="projects.modalHeaderTitle">{t["projects.modalHeaderTitle"]}</h2>
@@ -322,7 +326,7 @@ const metrics = [
     </div>
   </dialog>
 
-  <dialog id="modal-all-certs" aria-labelledby="modal-certs-title" class="modal-shell p-0 rounded-xl border border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-2xl max-w-4xl w-[92vw] max-h-[88vh]">
+  <dialog id="modal-all-certs" aria-labelledby="modal-certs-title" class="modal-shell p-0 rounded-[18px] border-[1.5px] border-[var(--app-border-strong)] bg-[var(--app-surface)] text-[var(--app-text)] shadow-[6px_7px_0_var(--app-shade)] max-w-4xl w-[92vw] max-h-[88vh]">
     <div class="p-4 sm:p-5 border-b border-[var(--app-border)] flex items-center justify-between gap-4 sticky top-0 bg-[var(--app-surface)] z-10">
       <div>
         <h2 id="modal-certs-title" class="text-lg font-semibold" data-i18n="certs.modalHeaderTitle">{t["certs.modalHeaderTitle"]}</h2>
@@ -353,24 +357,72 @@ const metrics = [
   </dialog>
 
   <script>
-    function initWorkspace() {
-      const tabBtns = document.querySelectorAll<HTMLButtonElement>("[data-tab-btn]");
-      const panels = ["projects", "experience", "credentials", "stack"].map((key) => [key, document.getElementById(`tab-panel-${key}`)] as const);
+    import {
+      animateTabIndicator,
+      attachSquash,
+      playPrimaryImpact,
+      playSecondaryImpact,
+      playSparkle,
+      playTabImpact,
+    } from "../lib/sakugaFx";
 
-      tabBtns.forEach((btn) => {
+    function initWorkspace() {
+      const tabNav = document.querySelector<HTMLElement>("[data-tab-nav]");
+      const tabIndicator = document.querySelector<HTMLElement>("[data-tab-indicator]");
+      const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-tab-btn]"));
+      const panels = ["projects", "experience", "credentials", "stack"].map((key) => [key, document.getElementById(`tab-panel-${key}`)] as const);
+      let activeIndex = 0;
+
+      const syncIndicator = (immediate = false) => {
+        const activeBtn = tabBtns[activeIndex];
+        if (tabNav && tabIndicator && activeBtn) {
+          animateTabIndicator(tabIndicator, activeBtn, tabNav, immediate);
+        }
+      };
+
+      syncIndicator(true);
+      window.addEventListener("resize", () => syncIndicator(true), { passive: true });
+      new MutationObserver(() => syncIndicator(true)).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-lang"],
+      });
+
+      tabBtns.forEach((btn, idx) => {
         btn.addEventListener("click", () => {
           const target = btn.dataset.tabBtn;
+          const dir = idx >= activeIndex ? 1 : -1;
+          const changed = idx !== activeIndex;
+          activeIndex = idx;
+
           tabBtns.forEach((b) => {
             const on = b.dataset.tabBtn === target;
             b.setAttribute("aria-pressed", String(on));
-            b.classList.toggle("text-[var(--app-accent)]", on);
-            b.classList.toggle("border-[var(--app-accent)]", on);
-            b.classList.toggle("font-semibold", on);
+            b.classList.toggle("text-[var(--app-text)]", on);
+            b.classList.toggle("font-bold", on);
             b.classList.toggle("text-[var(--app-text-muted)]", !on);
-            b.classList.toggle("border-transparent", !on);
             b.classList.toggle("font-medium", !on);
           });
           panels.forEach(([key, panel]) => panel?.classList.toggle("hidden", key !== target));
+          syncIndicator(false);
+          if (changed) {
+            playTabImpact(btn, dir);
+            window.dispatchEvent(new CustomEvent("sakuga:tab-change"));
+          }
+        });
+      });
+
+      document.querySelectorAll<HTMLElement>("[data-sakuga-btn]").forEach((el) => {
+        const kind = el.dataset.sakugaBtn;
+        const isPrimary = kind === "primary";
+        const sq = attachSquash(el, {
+          low: isPrimary ? 0.86 : 0.94,
+          popScale: isPrimary ? 1.06 : 1.03,
+          tiltDeg: 0,
+        });
+        el.addEventListener("click", () => {
+          sq.triggerPop();
+          if (isPrimary) playPrimaryImpact(el);
+          else playSecondaryImpact(el);
         });
       });
 
@@ -386,6 +438,11 @@ const metrics = [
       document.getElementById("btn-close-projects-modal")?.addEventListener("click", () => modalProjects?.close());
       document.getElementById("btn-close-certs-modal")?.addEventListener("click", () => modalCerts?.close());
 
+      document.querySelectorAll<HTMLButtonElement>("[data-shot]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          playSparkle(btn);
+        });
+      });
       // Lightbox: every [data-shot] button carries its project group and index.
       const lightbox = document.getElementById("lightbox") as HTMLDialogElement | null;
       const lbImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");

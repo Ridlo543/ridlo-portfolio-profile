@@ -1,0 +1,260 @@
+---
+// Interactive 2-tone Sakuga mini shinobi companion positioned absolutely above the name.
+---
+
+<button
+  type="button"
+  id="mini-shinobi"
+  class="shinobi-btn absolute left-0 top-0 z-20 inline-flex items-end justify-center cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-[var(--app-pop)] rounded-md"
+  aria-label="Mini shinobi companion"
+  title="Click for slash / shuriken / shunshin"
+>
+  <svg
+    viewBox="0 0 48 36"
+    width="52"
+    height="40"
+    class="shinobi-svg overflow-visible block"
+    aria-hidden="true"
+  >
+    <!-- Katana hilt behind left shoulder (facing right) -->
+    <g class="shinobi-katana">
+      <line x1="17" y1="17" x2="8" y2="6" stroke="var(--app-text)" stroke-width="3" stroke-linecap="round" />
+      <line x1="17" y1="17" x2="8" y2="6" stroke="var(--app-accent)" stroke-width="1.4" stroke-linecap="round" />
+      <line x1="15" y1="11" x2="11" y2="14" stroke="var(--app-pop)" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Flowing pink scarf trailing left -->
+    <path
+      class="shinobi-scarf"
+      d="M20 23 C14 21, 9 24, 3 20 C6 25, 11 27, 19 26 Z"
+      fill="var(--app-pop)"
+      stroke="var(--app-text)"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+    />
+
+    <!-- Body -->
+    <g class="shinobi-body">
+      <path
+        d="M19 35 C19 27, 21 24, 26 24 C31 24, 33 27, 33 35 Z"
+        fill="var(--app-text)"
+        stroke="var(--app-text)"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+      />
+      <!-- Scarf collar -->
+      <rect
+        x="19.5"
+        y="22.5"
+        width="13"
+        height="4"
+        rx="2"
+        fill="var(--app-pop)"
+        stroke="var(--app-text)"
+        stroke-width="1.4"
+      />
+
+      <!-- Head / Hood -->
+      <rect
+        x="15"
+        y="6"
+        width="22"
+        height="18"
+        rx="8.5"
+        fill="var(--app-text)"
+        stroke="var(--app-text)"
+        stroke-width="1.6"
+      />
+      <!-- Subtle lavender hood highlight -->
+      <path
+        d="M21 9.5 C24 7.8, 30 7.8, 33 9.2"
+        fill="none"
+        stroke="var(--app-shade)"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        opacity="0.75"
+      />
+
+      <!-- Headband -->
+      <rect
+        x="14.5"
+        y="10.5"
+        width="23"
+        height="3.6"
+        rx="1.8"
+        fill="var(--app-pop)"
+        stroke="var(--app-text)"
+        stroke-width="1.3"
+      />
+      <rect
+        x="22.5"
+        y="10.8"
+        width="7"
+        height="3"
+        rx="1"
+        fill="var(--app-shade)"
+        stroke="var(--app-text)"
+        stroke-width="1.1"
+      />
+
+      <!-- Face slit (shifted slightly right) -->
+      <rect
+        x="18.5"
+        y="14.8"
+        width="16"
+        height="5.8"
+        rx="2.8"
+        fill="var(--app-surface-raised)"
+      />
+
+      <!-- Eyes looking right -->
+      <g class="shinobi-eyes">
+        <ellipse cx="23.2" cy="17.7" rx="1.5" ry="1.9" fill="var(--app-text)" />
+        <ellipse cx="29.8" cy="17.7" rx="1.5" ry="1.9" fill="var(--app-text)" />
+        <circle cx="23.7" cy="17" r="0.55" fill="var(--app-pop)" />
+        <circle cx="30.3" cy="17" r="0.55" fill="var(--app-pop)" />
+      </g>
+    </g>
+  </svg>
+</button>
+
+<style>
+  .shinobi-btn {
+    transform-origin: bottom center;
+    transition: opacity 0.16s ease;
+  }
+
+  .shinobi-btn.is-vanished {
+    opacity: 0;
+  }
+
+  .shinobi-body {
+    transform-origin: 26px 35px;
+    animation: shinobi-bob 1.5s ease-in-out infinite;
+  }
+
+  .shinobi-scarf {
+    transform-origin: 20px 24px;
+    animation: shinobi-scarf 1.05s ease-in-out infinite;
+  }
+
+  .shinobi-eyes {
+    transform-origin: 26.5px 17.7px;
+    animation: shinobi-blink 2.8s ease-in-out infinite;
+  }
+  .shinobi-btn:hover .shinobi-scarf {
+    animation-duration: 0.85s;
+  }
+
+  @keyframes shinobi-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-1.4px); }
+  }
+
+  @keyframes shinobi-scarf {
+    0%, 100% { transform: rotate(0deg) scaleX(1); }
+    50% { transform: rotate(7deg) scaleX(1.06); }
+  }
+
+  @keyframes shinobi-blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    96% { transform: scaleY(0.12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shinobi-body,
+    .shinobi-scarf,
+    .shinobi-eyes {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import {
+    at,
+    attachSquash,
+    kira,
+    playNinjaShunshin,
+    playNinjaSlash,
+    playNinjaThrow,
+    ticks,
+  } from "../lib/sakugaFx";
+
+  function initShinobi() {
+    const btn = document.getElementById("mini-shinobi") as HTMLButtonElement | null;
+    if (!btn) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sq = attachSquash(btn, { low: 0.78, popScale: 1.16, tiltDeg: 6 });
+    let mode = 0;
+    let lastInteraction = performance.now();
+
+    btn.addEventListener("pointerenter", () => {
+      if (reduced) return;
+      lastInteraction = performance.now();
+      sq.triggerPop();
+      const top = at(btn, 0.55, 0.1);
+      ticks(top.x, top.y, { n: 2, r: 8, len: 6, dir: -Math.PI / 2, life: 0.28, fan: 0.5 });
+    });
+
+    btn.addEventListener("click", () => {
+      lastInteraction = performance.now();
+      sq.triggerPop();
+      if (reduced) return;
+
+      mode = (mode + 1) % 3;
+      if (mode === 1) {
+        playNinjaThrow(btn);
+      } else if (mode === 2) {
+        playNinjaSlash(btn);
+      } else {
+        playNinjaShunshin(btn);
+        btn.classList.add("is-vanished");
+        window.setTimeout(() => {
+          btn.classList.remove("is-vanished");
+          sq.triggerPop();
+          const c = at(btn, 0.55, 0.35);
+          kira(c.x, c.y, { r: 9, life: 0.45 });
+        }, 260);
+      }
+    });
+
+    window.addEventListener("sakuga:tab-change", () => {
+      if (reduced || btn.offsetParent === null) return;
+      sq.triggerPop();
+      const c = at(btn, 0.8, 0.25);
+      kira(c.x, c.y, { r: 7, life: 0.4 });
+    });
+
+    if (!reduced) {
+      let idleStep = 0;
+      window.setTimeout(() => {
+        if (document.hidden || btn.offsetParent === null) return;
+        if (performance.now() - lastInteraction < 1200) return;
+        sq.triggerPop();
+        playNinjaThrow(btn);
+      }, 1600);
+
+      window.setInterval(() => {
+        if (document.hidden || btn.offsetParent === null) return;
+        if (performance.now() - lastInteraction < 2400) return;
+        idleStep = (idleStep + 1) % 3;
+        sq.triggerPop();
+        if (idleStep === 0) {
+          playNinjaThrow(btn);
+        } else if (idleStep === 1) {
+          playNinjaSlash(btn);
+        } else {
+          playNinjaShunshin(btn);
+        }
+      }, 4200);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initShinobi);
+  } else {
+    initShinobi();
+  }
+</script>

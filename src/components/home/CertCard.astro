@@ -13,7 +13,7 @@ const picture = cert.title.startsWith("Alibaba Cloud")
   : null;
 ---
 
-<article class="p-3.5 rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-raised)]/70 flex gap-3 hover:border-[var(--app-border-strong)] transition-colors">
+<article class="p-3.5 rounded-[16px] border-[1.5px] border-[var(--app-border)] bg-[var(--app-surface-raised)]/75 flex gap-3 hover:border-[var(--app-border-strong)] transition-colors">
   {picture && (
     <button
       type="button"
@@ -21,7 +21,7 @@ const picture = cert.title.startsWith("Alibaba Cloud")
       data-full={`/assets/portofolio/${picture.name}.webp`}
       data-w={picture.width}
       data-h={picture.height}
-      class="shot group shrink-0 self-start w-20 overflow-hidden rounded border border-[var(--app-border)] cursor-zoom-in"
+      class="shot group shrink-0 self-start w-20 overflow-hidden rounded-[10px] border-[1.5px] border-[var(--app-border)] cursor-zoom-in"
       data-i18n-aria="projects.enlarge"
       aria-label={t["projects.enlarge"]}
     >
@@ -46,7 +46,7 @@ const picture = cert.title.startsWith("Alibaba Cloud")
     </div>
     <div class="flex items-center justify-between text-xs">
       <span class="font-mono text-[var(--app-text-soft)]">{cert.fileType}</span>
-      <a href={cert.href} download class="font-medium text-[var(--app-accent)] hover:underline underline-offset-2" data-i18n="certs.download">{t["certs.download"]}</a>
+      <a href={cert.href} download data-sakuga-btn="secondary" class="font-semibold text-[var(--app-accent)] hover:text-[var(--app-pop)] hover:underline underline-offset-2 transition-colors" data-i18n="certs.download">{t["certs.download"]}</a>
     </div>
   </div>
 </article>
